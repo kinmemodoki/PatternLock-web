@@ -19,15 +19,17 @@
   <script src="passwordMeasure.js"></script>
   <script>
     var measure = new PasswordMeasure();
+    console.log();
 
     var lock = new PatternLock("#patternContainer",{
       onDraw:function(pattern){
         //do something with pattern
-        console.log(pattern);
+        //console.log(pattern);
       },
       onMove:function(pattern){
         //do something with pattern
-        console.log("MOVE!: ",pattern);
+        //console.log("MOVE!: ",pattern);
+        console.log(measure.getStrength(pattern));
       },
     });
   </script>
