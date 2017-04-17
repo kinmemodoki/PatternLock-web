@@ -162,7 +162,7 @@
                 //add initial line
                 iObj.addLine(posObj);
 
-                //
+                //add cell added Listener
                 option.onMove(iObj.patternAry);
 
                 iObj.lastPosObj = posObj;
