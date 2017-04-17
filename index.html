@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="robots" content="noindex,nofollow" />
+    <meta charset="UTF-8">
+    <title>Locker RPG Login Page</title>
+    <link href="patternLock.css"  rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <p>Hello World!</p>
+    <div id="patternContainer"></div>
+  </body>
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+    crossorigin="anonymous">
+  </script>
+  <script src="patternLock.js"></script>
+  <script src="passwordMeasure.js"></script>
+  <script>
+    var measure = new PasswordMeasure();
+
+    var lock = new PatternLock("#patternContainer",{
+      onDraw:function(pattern){
+        //do something with pattern
+        console.log(pattern);
+      },
+      onMove:function(pattern){
+        //do something with pattern
+        console.log("MOVE!: ",pattern);
+      },
+    });
+  </script>
+
+</html>
