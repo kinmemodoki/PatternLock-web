@@ -38,4 +38,11 @@ body{
   transition: .4s ease;
 }
 
+@font-face {
+  font-family: 'dotfont';
+  src: url('font/MPlusFont-JF-DotH10.woff2') format('woff2'),
+       url('font/MPlusFont-JF-DotH10.woff') format('woff'),
+       url('font/MPlusFont-JF-DotH10.ttf') format('truetype');
+}
+
 /*28px*/
