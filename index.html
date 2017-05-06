@@ -4,12 +4,23 @@
     <meta name="robots" content="noindex,nofollow" />
     <meta charset="UTF-8">
     <title>Locker RPG Login Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"> 
+    </script>
     <link href="patternLock.css"  rel="stylesheet" type="text/css" />
+    <link href="lockStyle.css"  rel="stylesheet" type="text/css" />
   </head>
+
   <body>
-    <p>Hello World!</p>
-    <div id="patternContainer"></div>
+    <div id="container">
+      <div id="main-title" class="center-block">鍛冶屋</div>
+      <div id="sub-title" class="center-block">Password Setting</div>
+    </div>
+    <div class="footer">
+      <div id="patternContainer" class="center-block"></div>
+    </div>
   </body>
+
   <script
     src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
@@ -19,15 +30,15 @@
   <script src="passwordMeasure.js"></script>
   <script>
     var measure = new PasswordMeasure();
-    console.log();
 
     var lock = new PatternLock("#patternContainer",{
+      margin:50,
+      radius:70,
       onDraw:function(pattern){
-        //do something with pattern
-        //console.log(pattern);
+        //finish write pattern.
       },
       onMove:function(pattern){
-        //do something with pattern
+        //when add a node to stack.
         //console.log("MOVE!: ",pattern);
         console.log(measure.getStrength(pattern));
       },
