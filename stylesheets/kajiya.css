@@ -1,0 +1,18 @@
+.stage{
+  position:absolute;
+  height: 220px;
+  width: 920px;
+  bottom:220px;
+  margin-left:80px;
+  margin-right:80px;
+  margin-bottom: 50px;
+}
+
+.buki{
+  position:absolute;
+  bottom:400px;
+  padding:20px;
+  width:240px;
+  height:240px;
+}
+

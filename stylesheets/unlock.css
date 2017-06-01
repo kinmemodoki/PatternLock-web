@@ -1,0 +1,29 @@
+.scene{
+  height:960px;
+  padding:24px;
+  background-image:url("../img/desert.png");
+}
+
+.enemy{
+  position:absolute;
+  height: 400px;
+  width: 400px;
+  bottom:300px;
+  padding:100px;
+}
+
+.game-frame{
+  background:#333;
+}
+
+
+@keyframes attack_player {
+  0% {transform:rotate(0deg)scaleX(-1);}
+  100% {transform: rotate(30deg)scaleX(-1);;}
+  
+}
+
+@keyframes attack_enemy {
+  0% {transform:rotate(0deg);}
+  100% {transform: rotate(-30deg);}
+}

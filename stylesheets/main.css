@@ -1,0 +1,95 @@
+html,body{
+    overflow: hidden;
+    height: 100%;
+}
+
+@font-face {
+  font-family: 'dotfont';
+  src: url('../font/MPlusFont-JF-DotH10.woff2') format('woff2'),
+       url('../font/MPlusFont-JF-DotH10.woff') format('woff'),
+       url('../font/MPlusFont-JF-DotH10.ttf') format('truetype');
+}
+
+.character{
+  width:200px;
+  margin:10px;
+}
+
+.flip-horizontal {
+  -webkit-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+
+.center-absolute{
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.bottom{
+  bottom:0;
+}
+
+.container {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 1920px;
+  background-color: #aaa;
+}
+
+.game-frame{
+  border:8px solid #fff;
+  background:#000;
+  margin-bottom:10px;
+}
+
+.scene{
+  position: absolute;
+  bottom:960px;
+  left: 0;
+  right: 0;
+  height:960px;
+  background-image:url("../img/back.jpg");
+}
+
+.textarea{
+  position:absolute;
+  bottom:0;
+  width:800px;
+  height:220px;
+  padding:16px;
+  font:48px 'dotfont';
+  color:#fff;
+}
+
+/*PatternLock.js*/
+.patt-wrap{
+  overflow: hidden;
+}
+
+.patt-dots{
+  height:15%;
+  width:15%;
+  top:45%;
+  left:45%;
+  cursor:pointer;
+}
+
+.patt-circ.hovered{
+  border:8px solid #fff;
+  background:rgba(255,255,255,.5);
+  transition: .4s ease;
+}
+
+.patt-error .patt-circ.hovered{
+  border:8px solid #BA1B26;
+  background:rgba(186,27,38,.5);
+  transition: .4s ease;
+}

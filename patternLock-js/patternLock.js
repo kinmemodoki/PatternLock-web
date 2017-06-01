@@ -341,6 +341,8 @@
             var iObj = objectHolder[this.token],
                 option = iObj.option;
             //for set methods
+            console.log(iObj);
+            
             if (val === undefined) {
                 return option[key];
             }
