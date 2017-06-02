@@ -189,6 +189,7 @@
             if (iObj.rightPattern) {
                 if (pattern == iObj.rightPattern) {
                     iObj.onSuccess();
+                    obj.success();
                 } else {
                     iObj.onError();
                     obj.error();
@@ -423,6 +424,9 @@
         //to display error if pattern is not drawn correct
         error: function() {
             objectHolder[this.token].holder.addClass('patt-error');
+        },
+        success: function() {
+            objectHolder[this.token].holder.addClass('patt-success');
         },
         //to check the drawn pattern against given pattern
         checkForPattern: function(pattern, success, error) {

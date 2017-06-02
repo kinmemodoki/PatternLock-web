@@ -35,12 +35,16 @@ html,body{
   bottom:0;
 }
 
+.front{
+  z-index:1;
+}
+
 .container {
   position: relative;
-  bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 1920px;
+  padding:0;
   background-color: #aaa;
 }
 
@@ -69,6 +73,10 @@ html,body{
   color:#fff;
 }
 
+.dottext{
+  font-family:'dotfont';
+}
+
 /*PatternLock.js*/
 .patt-wrap{
   overflow: hidden;
@@ -92,4 +100,18 @@ html,body{
   border:8px solid #BA1B26;
   background:rgba(186,27,38,.5);
   transition: .4s ease;
+}
+
+.patt-success .patt-circ.hovered{
+  border:8px solid #5c985c;
+  background:rgb(92,184,92);
+  transition: .4s ease;
+}
+
+.patt-error .patt-lines{
+  background:rgba(186,27,38,.7);
+}
+
+.patt-success .patt-lines{
+  background:rgb(92,184,92);
 }

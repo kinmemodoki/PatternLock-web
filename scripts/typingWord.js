@@ -5,7 +5,7 @@ function WordTyping(targetDom){
 WordTyping.prototype.type = function(word,option){
   this._typingStat = 0;
   this._word = word;
-
+  
   option = option || {};
   this._delay = option.speed || 100;
   this._callback = option.callback || function(){};

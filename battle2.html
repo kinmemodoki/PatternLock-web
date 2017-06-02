@@ -4,7 +4,7 @@
     <meta name="robots" content="noindex,nofollow" />
     <meta charset="UTF-8">
     <title>Locker RPG Login Page</title>
-    <meta name="viewport" content="width=1080;height=1920;user-scalable=no">
+    <meta name="viewport" content="width=1080 height=1920 user-scalable=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="patternlock-js/patternLock.css"  rel="stylesheet" type="text/css" />
     <link href="stylesheets/main.css"  rel="stylesheet" type="text/css" />
@@ -12,22 +12,53 @@
   </head>
 
   <body>
+
+
     <div class="container">
-      <div class="scene">
-        <div class="center-absolute game-frame enemy" id="enemy-window">
-          <img src="img/scorpion.png" class="character center-absolute" id="enemy">
-        </div>
-        
+      <div id="patternContainer" class="center-absolute bottom">
       </div>
-      <div id="patternContainer" class="center-absolute bottom"></div>
+    </div>
+    <div class="container front clockscreen anim" id="frontScrreen">
+      <div class="homescreen">
+        <div class="clockDay">
+          <div class="text-center center-absolute clock dottext" id="clock">16<span class="blinking">:</span>00</div>
+          <div class="text-center center-absolute day dottext bold" id="day">6/3(Sat)</div>
+        </div>
+        <div class="enemyWin">
+          <div class="center-absolute game-frame enemy anim" id="enemyWindow">
+            <div class="damage dottext animquick" id="damage">50</div>
+            <img src="img/scorpion.png" class="character center-absolute" id="enemy">
+            <div class="hp"><div class="hpBar" id="hpBar"></div></div>
+          </div>
+          <textarea id="msg-window" class="center-absolute game-frame textarea anim" disabled="true">スコーピオンがあらわれた！</textarea>
+        </div>
+        <div class="buttons">
+          <div class="button attack-btn dottext animquick" id="atkBtn" onclick="command('attack')">
+            <img src="img/attack-icon.png" width="120" height="120">
+            ATTACK
+          </div>
+          <div class="button run-btn dottext animquick" id="runBtn" onclick="command('run')">
+            <img src="img/run-icon.png" width="120" height="120">
+            <span style="margin-left:30px">RUN</span>
+          </div>
+        </div> 
+        <div class="players">
+          <div class="front atkPlayer flip-horizontal anim" id="atkPlayer">
+            <img src="img/yusha.png" class="character center-absolute" id="playerIcon">
+              <img src="img/sword3.png" class="character center-absolute weaponIcon" id="weapon">
+          </div>
+          <div class="front runPlayer anim" id="runPlayer">
+            <img src="img/yusha.png" class="character center-absolute" id="playerIcon">
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 
   <script
     src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-    crossorigin="anonymous">
-  </script>
+    crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"> 
   </script>
   <script src="patternlock-js/patternLock.js"></script>
