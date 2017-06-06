@@ -11,14 +11,22 @@
 }
 
 .clockscreen{
-  top:-1920px;
+  position: absolute;
+  top:-120px;
+}
+
+.holder{
+  position: absolute;
+  bottom:0;
+  width:1080px;
+  height: 1920px;
 }
 
 .homescreen{
   height:100%;
   width:100%;
   background-image:url("../img/desert480.png");
-   background-size:cover;
+  background-size:cover;
 }
 
 .textarea{

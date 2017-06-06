@@ -45,6 +45,7 @@ html,body{
   /* Set the fixed height of the footer here */
   height: 1920px;
   padding:0;
+  bottom:40px;
   background-color: #aaa;
 }
 

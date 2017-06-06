@@ -13,42 +13,43 @@
 
   <body>
 
-
-    <div class="container">
-      <div id="patternContainer" class="center-absolute bottom">
+    <div id="holder" class="holder">
+      <div class="container">
+        <div id="patternContainer" class="center-absolute bottom">
+        </div>
       </div>
-    </div>
-    <div class="container front clockscreen anim" id="frontScrreen">
-      <div class="homescreen">
-        <div class="clockDay">
-          <div class="text-center center-absolute clock dottext" id="clock">16<span class="blinking">:</span>00</div>
-          <div class="text-center center-absolute day dottext bold" id="day">6/3(Sat)</div>
-        </div>
-        <div class="enemyWin">
-          <div class="center-absolute game-frame enemy anim" id="enemyWindow">
-            <div class="damage dottext animquick" id="damage">50</div>
-            <img src="img/scorpion.png" class="character center-absolute" id="enemy">
-            <div class="hp"><div class="hpBar" id="hpBar"></div></div>
+      <div class="container front clockscreen anim" id="frontScrreen">
+        <div class="homescreen">
+          <div class="clockDay">
+            <div class="text-center center-absolute clock dottext" id="clock">**<span class="blinking">:</span>**</div>
+            <div class="text-center center-absolute day dottext bold" id="day">*/*(***)</div>
           </div>
-          <textarea id="msg-window" class="center-absolute game-frame textarea anim" disabled="true">スコーピオンがあらわれた！</textarea>
-        </div>
-        <div class="buttons">
-          <div class="button attack-btn dottext animquick" id="atkBtn" onclick="command('attack')">
-            <img src="img/attack-icon.png" width="120" height="120">
-            ATTACK
+          <div class="enemyWin">
+            <div class="center-absolute game-frame enemy anim" id="enemyWindow">
+              <div class="damage dottext animquick" id="damage">50</div>
+              <img src="img/scorpion.png" class="character center-absolute" id="enemy">
+              <div class="hp"><div class="hpBar" id="hpBar"></div></div>
+            </div>
+            <textarea id="msg-window" class="center-absolute game-frame textarea anim" disabled="true">スコーピオンがあらわれた！</textarea>
           </div>
-          <div class="button run-btn dottext animquick" id="runBtn" onclick="command('run')">
-            <img src="img/run-icon.png" width="120" height="120">
-            <span style="margin-left:30px">RUN</span>
-          </div>
-        </div> 
-        <div class="players">
-          <div class="front atkPlayer flip-horizontal anim" id="atkPlayer">
-            <img src="img/yusha.png" class="character center-absolute" id="playerIcon">
-              <img src="img/sword3.png" class="character center-absolute weaponIcon" id="weapon">
-          </div>
-          <div class="front runPlayer anim" id="runPlayer">
-            <img src="img/yusha.png" class="character center-absolute" id="playerIcon">
+          <div class="buttons">
+            <div class="button attack-btn dottext animquick" id="atkBtn" onclick="command('attack')">
+              <img src="img/attack-icon.png" width="120" height="120">
+              ATTACK
+            </div>
+            <div class="button run-btn dottext animquick" id="runBtn" onclick="command('run')">
+              <img src="img/run-icon.png" width="120" height="120">
+              <span style="margin-left:30px">RUN</span>
+            </div>
+          </div> 
+          <div class="players">
+            <div class="front atkPlayer flip-horizontal anim" id="atkPlayer">
+              <img src="img/yusha.png" class="character center-absolute" id="playerIcon">
+                <img src="img/sword3.png" class="character center-absolute weaponIcon" id="weapon">
+            </div>
+            <div class="front runPlayer anim" id="runPlayer">
+              <img src="img/yusha.png" class="character center-absolute" id="playerIcon">
+            </div>
           </div>
         </div>
       </div>

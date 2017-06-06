@@ -12,6 +12,7 @@ var runPlayer = document.getElementById("runPlayer");
 var clockDom = document.getElementById("clock");
 var dayDom = document.getElementById("day");
 var damage = document.getElementById("damage");
+var holder = document.getElementById("holder");
 
 var enemyHp = 100;
 var password = '7415369';
@@ -26,9 +27,10 @@ var lock = new PatternLock("#patternContainer",{
         addDamage(80);
       else
         runPlayer.style.transform='translate(-2200px, 0)';
+      lock.disable();
       window.setTimeout( ()=>{
-        window.location = "./mypage"
-      }, 2000);
+        window.location = "./mypage.html"
+      }, 1000);
     },function(){
       //alert("Pattern is not correct");
     });
@@ -44,8 +46,11 @@ var lock = new PatternLock("#patternContainer",{
 });
 
 window.onload = function(){
+  window.scrollTo(0,10);
+  var viewHolder = 1920 - window.innerHeight + "px";
+  //holder.style.bottom = viewHolder;
   clock();
-  console.log(lock.error());
+  console.log(viewHolder);
   lock.setPattern('7415369');
   msgCtr.type("スコーピオンがあらわれた！",{speed:20});
 
