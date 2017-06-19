@@ -1,6 +1,31 @@
 var challenge = 0;
-var battleStat;
+var battleStat,cookie;
+var enemy = {};
+enemy.id = docCookies.getItem("enemy.id")||0;
+enemy.hp = docCookies.getItem("enemy.hp")||100;
+var player = {
+  key:docCookies.getItem("player.key"),
+  weapon:docCookies.getItem("player.weapon")
+}
+var voyage = {
+  stage:docCookies.getItem("voyage.stage"),
+  step:docCookies.getItem("voyage.step")
+}
+
+var dataSet = {
+  stage:['city','field','desert','forest','snow','vulcano'],
+  enemy:[
+    ['スライム','ドブネズミ','チンピラ'],
+    ['のうさぎ','オオトカゲ','ゴブリン'],
+    ['ガラガラヘビ','スコーピオン','サンドワーム'],
+    ['スパイダー','まほうつかい','もりのぬし'],
+    ['ゆきんこ','スノーウルフ','イエティ'],
+    ['モール','ファイアゴーレム','ドラゴン']
+  ]
+}
+
 var frontScreen = document.getElementById("frontScrreen");
+var background = document.getElementById("homescreen");
 var enemyWindow = document.getElementById("enemyWindow");
 var enemyDom = document.getElementById("enemy");
 var hpBar = document.getElementById("hpBar");
@@ -12,18 +37,14 @@ var runPlayer = document.getElementById("runPlayer");
 var clockDom = document.getElementById("clock");
 var dayDom = document.getElementById("day");
 var damage = document.getElementById("damage");
-var holder = document.getElementById("holder");
-
-var enemyHp = 100;
-var password = '7415369';
 
 var msgCtr = new WordTyping(textWindow);
 var lock = new PatternLock("#patternContainer",{
   margin:60,
   radius:80,
   onDraw:function(pattern){
-    lock.checkForPattern(password,function(){
-      if(battleStatus=="attack")
+    lock.checkForPattern(player.key,function(){
+      if(battleStatus==="attack")
         addDamage(80);
       else
         runPlayer.style.transform='translate(-2200px, 0)';
@@ -45,38 +66,21 @@ var lock = new PatternLock("#patternContainer",{
   }
 });
 
+//preload HTML data
+background.style.backgroundImage = 'url("../img/stage/'+dataSet.stage[voyage.stage]+'480.png")';
+
 window.onload = function(){
-  window.scrollTo(0,10);
-  var viewHolder = 1920 - window.innerHeight + "px";
-  //holder.style.bottom = viewHolder;
-  clock();
-  console.log(viewHolder);
-  lock.setPattern('7415369');
-  msgCtr.type("スコーピオンがあらわれた！",{speed:20});
-
-  lock.checkForPattern('11111',function(){
-        alert("You unlocked your app");
-    },function(){
-        alert("Pattern is not correct");
-    });
+  
+  if(!player.key){
+    console.log(player.key);
+    window.location.href = "./debug.html";
+  }
+  setClock();
+  msgCtr.type(dataSet.enemy[voyage.stage][enemy.id]+"があらわれた！",{speed:20});
+  hpBar.style.width=enemy.hp+"%";
 }
 
-function addDamage(damageVal){
-  damage.innerHTML = damageVal;
-  damage.style.opacity=1;
-  damage.style.transform='translate(0, -40px)';
-  var bar = enemyHp-damageVal < 0 ? 0 : enemyHp-damageVal;
-  hpBar.style.width=bar+"%";
-  enemyDom.classList.add('shake');
-}
-
-function animHp(){
-
-}
-
-
-
-function clock(){
+function setClock(){
   var myDay = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
   var now  = new Date();
   var month = now.getMonth()+1; // 月
@@ -88,11 +92,10 @@ function clock(){
   if(min < 10) { min = ('00'+min).slice(-2); }
   clockDom.innerHTML = hour+'<span class="blinking">:</span>'+min;
   dayDom.innerHTML = month+"/"+date+"("+day+")";
-  window.setTimeout( "clock()", 10000);
+  window.setTimeout( "setClock()", 10000);
 }
 
 function command(cmd){
-  console.log(cmd);
   battleStatus=cmd;
   if(cmd=="attack"){
     atkPlayer.style.transform='translate(400px, 0) scaleX(-1)';
@@ -107,4 +110,15 @@ function command(cmd){
   atkBtn.style.opacity=0;
   runBtn.style.opacity=0;
   console.log(frontScreen.style)
+}
+
+function addDamage(damageVal){
+  damage.innerHTML = damageVal;
+  damage.style.opacity=1;
+  damage.style.transform='translate(0, -40px)';
+  console.log(enemy.hp-damageVal);
+  var bar = enemy.hp-damageVal < 0 ? 0 : enemy.hp-damageVal;
+  docCookies.setItem("enemy.hp",bar);
+  hpBar.style.width=bar+"%";
+  enemyDom.classList.add('shake');
 }

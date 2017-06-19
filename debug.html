@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="robots" content="noindex,nofollow" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=400">
+  <title>Debug Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="patternlock-js/patternLock.css"  rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div class="container weapon" style="width:100%;margin:10px">
+    <button type="button" class="btn btn-primary" onclick="setCookie('player.weapon','1')">武器１</button>
+    <button type="button" class="btn btn-primary" onclick="setCookie('player.weapon','2')">武器２</button>
+    <button type="button" class="btn btn-primary" onclick="setCookie('player.weapon','3')">武器３</button>
+  </div>
+  <div class="container stage" style="width:100%;margin:10px">
+    <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','0')">ステージ０（街）</button><br>
+    <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','1')">ステージ１（丘）</button><br>
+    <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','2')">ステージ２（砂漠）</button><br>
+    <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','3')">ステージ３（森）</button><br>
+    <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','4')">ステージ４（雪）</button><br>
+    <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','5')">ステージ５（火山）</button>
+  </div>
+  <div class="container enemy" style="width:100%;margin:10px">
+    <button type="button" class="btn btn-warning" onclick="setCookie('enemy.id','1')">敵１</button>
+    <button type="button" class="btn btn-warning" onclick="setCookie('enemy.id','2')">敵２</button>
+    <button type="button" class="btn btn-warning" onclick="setCookie('enemy.id','3')">敵３</button>
+    <br>
+    <span id="val">100</span>
+    <input id="bar" type="range" name="num" min="0" max="100" step="1" value="100"
+ onchange="changeValue('enemy.hp',this.value)"
+    style="height:15px;color: #1f2;">
+  </div>
+  <div class="container cookieManager" style="width:100%;margin:10px">
+  <textarea id="textarea" style="width:100%;"></textarea>
+  <button type="button" class="btn btn-danger" onclick="deleteCookie()">ALL RESET</button>
+  </div>
+  <div id="patternContainer" class="center-absolute bottom"></div>
+</body>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"> 
+</script>
+<script src="patternlock-js/patternLock.js"></script>
+<script src="scripts/cookies.js"></script>
+<script>
+  var lock = new PatternLock("#patternContainer",{
+    onDraw:function(pattern){
+      setCookie("player.key",pattern)
+    },
+    onMove:function(pattern){},
+    success:function(){}
+  });
+
+  window.onload = function(){
+    console.log(docCookies.getItem("player.key"))
+    $("#textarea").val(document.cookie);
+  }
+  
+  function setCookie(key,val){
+    console.log(key,val);
+    //console.log(docCookies);
+    docCookies.setItem(key,val);
+    $("#textarea").val(document.cookie);
+  }
+
+  function deleteCookie(){
+    var keys = docCookies.keys();
+    for(var i=keys.length;i>0;i--)
+      docCookies.removeItem(keys[i-1]);
+    $("#textarea").val(document.cookie);
+  }
+  
+  function changeValue(key,val) {
+    document.getElementById("val").innerHTML = val;
+    setCookie(key,val);
+  }
+</script>
+</html>

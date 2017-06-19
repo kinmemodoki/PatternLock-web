@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="container front clockscreen anim" id="frontScrreen">
-        <div class="homescreen">
+        <div class="homescreen" id="homescreen">
           <div class="clockDay">
             <div class="text-center center-absolute clock dottext" id="clock">**<span class="blinking">:</span>**</div>
             <div class="text-center center-absolute day dottext bold" id="day">*/*(***)</div>
@@ -27,7 +27,7 @@
           <div class="enemyWin">
             <div class="center-absolute game-frame enemy anim" id="enemyWindow">
               <div class="damage dottext animquick" id="damage">50</div>
-              <img src="img/scorpion.png" class="character center-absolute" id="enemy">
+              <img src="img/enemy/scorpion.png" class="character center-absolute" id="enemy">
               <div class="hp"><div class="hpBar" id="hpBar"></div></div>
             </div>
             <textarea id="msg-window" class="center-absolute game-frame textarea anim" disabled="true">スコーピオンがあらわれた！</textarea>
@@ -44,11 +44,11 @@
           </div> 
           <div class="players">
             <div class="front atkPlayer flip-horizontal anim" id="atkPlayer">
-              <img src="img/yusha.png" class="character center-absolute" id="playerIcon">
-                <img src="img/sword3.png" class="character center-absolute weaponIcon" id="weapon">
+              <img src="img/character/yusha.png" class="character center-absolute" id="playerIcon">
+                <img src="img/weapon/sword3.png" class="character center-absolute weaponIcon" id="weapon">
             </div>
             <div class="front runPlayer anim" id="runPlayer">
-              <img src="img/yusha.png" class="character center-absolute" id="playerIcon">
+              <img src="img/character/yusha.png" class="character center-absolute" id="playerIcon">
             </div>
           </div>
         </div>
@@ -63,6 +63,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"> 
   </script>
   <script src="patternlock-js/patternLock.js"></script>
+  <script src="scripts/cookies.js"></script>
   <script src="scripts/typingWord.js"></script>
   <script src="scripts/passwordMeasure.js"></script>
   <script src="scripts/battle.js"></script>
