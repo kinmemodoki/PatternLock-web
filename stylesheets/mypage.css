@@ -1,0 +1,17 @@
+body{
+  background-color: #666;
+}
+
+.start{
+  font-size:40px;
+  width:80%;
+  margin-top:20%;
+}
+
+.start>a{
+  position:relative;
+  display:block;
+  padding:12px;
+  width: 100%;
+  color:#ddd;
+}

@@ -1,43 +1,47 @@
-.clock{
+.front{
+  position:absolute;
+  z-index:1;
+  top:0;
+  background-size:cover;
+  background-position:center bottom;
+}
+
+.clockDay{
   position: absolute;
-  font-size:220px;
-  top:180px;
+  top:6%;
+  z-index: 100;
+}
+
+.clock{
+  position: relative;
+  font-size:98px;
 }
 
 .day{
-  position: absolute;
-  font-size:64px;
-  top:440px;
+  margin-top:-6%;
+  font-size:50px;
 }
 
-.clockscreen{
-  position: absolute;
-  top:-120px;
+.enemy{
+  position:absolute;
+  height: 250px;
+  width: 250px;
+  bottom:40%;
+  max-height:30%;
+  min-height:180px;
 }
-
-.holder{
-  position: absolute;
+.enemy .character{
+  width:50%;
+  height:auto;
   bottom:0;
-  width:1080px;
-  height: 1920px;
-}
-
-.homescreen{
-  height:100%;
-  width:100%;
-  background-size:cover;
-}
-
-.textarea{
-  position: absolute;
-  top:1150px;
+  margin-bottom:20%;
 }
 
 .hp{
   position:absolute;
-  bottom:30px;
-  height:16px;
-  width:180px;
+  bottom:8%;
+  height:5%;
+  width:60%;
   border:2px solid #fff;
 }
 
@@ -47,75 +51,81 @@
   background-color: #D44;
 }
 
+.textarea{
+  position: absolute;
+  padding: 10px;
+  top:60%;
+  width:80%;
+  color:#fff;
+  font-size: 30px;
+}
+
 .button{
-  width:400px;
-  height:160px;
+  position:absolute;
+  bottom:0;
+  width:250px;
+  height:100px;
   border:8px solid #333;
-  padding-top:15px;
-  padding-left:5px;
+  padding:5px;
   margin:30px;
-  font-size:60px;
+  font-size:32px;
   cursor:pointer;
   transition: all .3s;
   background-color: rgba(255,255,255,.5);
 }
-
 .button:hover {
   background-color: #fff;
 }
-
 .attack-btn{
   position: absolute;
   left:0;
-  bottom:40px;
 }
 .run-btn{
   position: absolute;
   right:0;
-  bottom:40px;
 }
-/*
-.scene{
-  height:960px;
-  padding:24px;
-  background-image:url("../img/desert1920.png");
-  background-position: bottom;
-}*/
+.cmdbtn-icon{
+  height:auto;
+  width:30%;
+}
+.button img{
+  position: absolute;
+  top:0;
+  bottom:0; 
+  margin-top:auto;
+  margin-bottom:auto;
+}
+.button span{
+  position: absolute;
+  top:0;
+  bottom:0; 
+  height:40px;
+  margin-top:auto;
+  margin-bottom:auto;
+  margin-left:35%;
+}
 
 .anim{transition: all 0.5s ease-in-out;}
 .animquick{transition: all 0.2s ease-in-out;}
 
-.enemy{
-  position:absolute;
-  height: 400px;
-  width: 400px;
-  bottom:300px;
-  padding:100px;
-}
-
-.front .enemy{
-  position:absolute;
-  height: 400px;
-  width: 400px;
-  bottom:800px;
-  padding:100px;
-}
 
 .atkPlayer{
   position: absolute;
   left:-300px;
-  top:1640px;
+  bottom:6%;
+  z-index:5;
 }
 .runPlayer{
   position: absolute;
   right:-200px;
-  top:1640px;
+  bottom:6%;
+  z-index:5;
 }
 
 .weaponIcon{
   position:relative;
   z-index:-1;
-  left:-100px;
+  left:-45px;
 }
 
 .game-frame{
@@ -148,13 +158,6 @@
   -moz-animation:shake 0.05s linear 8 alternate;
   animation:shake 0.05s linear 8 alternate;
 }
-
-@keyframes blink{
-    0% { opacity: 0; }
-    19.9% { opacity: 0; }
-    20% { opacity: 1; }
-    100% { opacity: 1; }}
-
 
 @keyframes swipe {
   0% {position: absolute;bottom:0px;}

@@ -11,7 +11,7 @@ html,body{
 }
 
 .character{
-  width:200px;
+  width:100px;
   margin:10px;
 }
 
@@ -27,50 +27,27 @@ html,body{
   position: absolute;
   left: 0;
   right: 0;
+  display:block;
   margin-right: auto;
   margin-left: auto;
 }
 
-.bottom{
-  bottom:0;
-}
-
-.front{
-  z-index:1;
-}
-
 .container {
-  position: relative;
   width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 1920px;
+  height: 100%;
   padding:0;
-  bottom:40px;
   background-color: #aaa;
 }
 
 .game-frame{
-  border:8px solid #fff;
+  border:5px solid #fff;
   background:#000;
   margin-bottom:10px;
 }
 
-.scene{
-  position: absolute;
-  bottom:960px;
-  left: 0;
-  right: 0;
-  height:960px;
-  background-image:url("../img/back.jpg");
-}
-
-.textarea{
-  position:absolute;
-  bottom:0;
-  width:800px;
-  height:220px;
+.msg-area{
+  font-size:32px;
   padding:16px;
-  font:48px 'dotfont';
   color:#fff;
 }
 
@@ -78,14 +55,29 @@ html,body{
   font-family:'dotfont';
 }
 
+.blinking{
+  animation:blink 0.5s ease-in-out infinite alternate;
+}
+@keyframes blink{
+    0% {opacity:0;}
+    49% {opacity:0;}
+    50% {opacity:1;}
+    100% {opacity:1;}
+}
+
 /*PatternLock.js*/
+.patternlock{
+  position:absolute;
+  bottom:0;
+}
+
 .patt-wrap{
   overflow: hidden;
 }
 
 .patt-dots{
-  height:15%;
-  width:15%;
+  height:20%;
+  width:20%;
   top:45%;
   left:45%;
   cursor:pointer;

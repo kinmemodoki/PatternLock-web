@@ -1,0 +1,85 @@
+.stage{
+  background-image: url("../img/stage/city480.png");
+  background-position:center bottom;
+  height:30%;
+  width:100%;
+  background-size:cover;
+  z-index: -100;
+}
+
+.textarea{
+  position:absolute;
+  padding:8px;
+  font-size: 28px;
+  height:64px;
+  color:#FFF;
+  bottom:0;
+  width:90%;
+}
+
+.menu-area{
+  position:absolute;
+  bottom:0;
+  padding:4px;
+  height:70%;
+  width: 100%;
+  background-color: #646464;
+  overflow: scroll;
+}
+
+.list-menu .top-msg{
+  width:632px;
+  height: 120px;
+  padding:10px;
+  background-color: #646464;
+  color:#fff;
+  text-align: center;
+  font-size: 48px;
+}
+.list-menu .top-msg p{
+  font-size:24px;
+}
+.voyage-moc{
+  width:632px;
+  height: 200px;
+  padding:20px;
+  margin-bottom:4px;
+  background-color: #fff;
+}
+.voyage-moc .icon{
+  width:160px;
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;  /* IE (非標準プロパティ) */
+}
+.voyage-moc .left{
+  float: left;
+  width:160px;
+  margin-right:20px;
+}
+.voyage-moc .right{
+  margin-left: 180px;
+  padding-top: -12px;
+}
+.voyage-moc .right .treasure-list{
+  margin-top: 12px;
+  font-size: 24px;
+  color:#646464;
+}
+.treasure{
+  width:36px;
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;  /* IE (非標準プロパティ) */
+}
+.treasure.shadow{
+  filter:brightness(0%) contrast(40%);
+  -webkit-filter:brightness(0%) contrast(40%);
+}
+.stage-txt{
+  font-size:20px;
+  color:#646464;
+}
+.voyage-moc .right .stage-name{
+  
+}
+
+

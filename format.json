@@ -4,9 +4,17 @@
   voyage.stage:1,
   voyage.step:1,
   enemy.id:1,
-  enemy.hp:100
+  enemy.hp:100,
+  player.item:[
+    0,0,0,
+    0,0,0,
+    0,0,0,
+    0,0,0,
+    0,0,0
+  ]
 }
 
+var dateset = {
 stage:['city','field','desert','forest','snow','vulcano'],
 enemy:[
   ['スライム','ドブネズミ','チンピラ'],
@@ -15,4 +23,5 @@ enemy:[
   ['スパイダー','まほうつかい','もりのぬし'],
   ['ゆきんこ','スノーウルフ','イエティ'],
   ['モール','ファイアゴーレム','ドラゴン']
-],
+]
+}

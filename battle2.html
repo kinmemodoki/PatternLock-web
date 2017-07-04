@@ -4,7 +4,7 @@
     <meta name="robots" content="noindex,nofollow" />
     <meta charset="UTF-8">
     <title>Locker RPG Login Page</title>
-    <meta name="viewport" content="width=1080 height=1920 user-scalable=no">
+    <meta name="viewport" content="width=640 user-scalable=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="patternlock-js/patternLock.css"  rel="stylesheet" type="text/css" />
     <link href="stylesheets/main.css"  rel="stylesheet" type="text/css" />
@@ -12,45 +12,42 @@
   </head>
 
   <body>
-
-    <div id="holder" class="holder">
-      <div class="container">
-        <div id="patternContainer" class="center-absolute bottom">
-        </div>
+    <div class="container back">
+      <div id="patternContainer" class="center-absolute bottom" style="bottom:0;">
       </div>
-      <div class="container front clockscreen anim" id="frontScrreen">
-        <div class="homescreen" id="homescreen">
-          <div class="clockDay">
-            <div class="text-center center-absolute clock dottext" id="clock">**<span class="blinking">:</span>**</div>
-            <div class="text-center center-absolute day dottext bold" id="day">*/*(***)</div>
+    </div>
+    <div class="front anim container" id="frontScrreen">
+      <div class="clockDay center-absolute">
+        <div class="clock text-center center-absolute dottext" id="clock">**<span class="blinking">:</span>**</div>
+        <div class="text-center center-absolute day dottext bold" id="day">*/*(***)</div>
+      </div>
+      <div class="enemyWin">
+        <div class="center-absolute game-frame enemy anim" id="enemyWindow">
+          <div class="damage dottext animquick" id="damage">50</div>
+          <img src="img/enemy/snowman.png" class="character center-absolute" id="enemy">
+          <div class="hp center-absolute"><div class="hpBar" id="hpBar"></div></div>
+        </div>
+        <textarea id="msg-window" class="center-absolute game-frame textarea dottext anim" disabled="true">AAAAAA</textarea>
+      </div>
+      <div class="buttons">
+        <div class="button attack-btn dottext animquick" id="atkBtn" onclick="command('attack')">
+          <div class="block-center">
+          <img src="img/attack-icon.png" class="cmdbtn-icon">
+          <span>ATTACK</span>
           </div>
-          <div class="enemyWin">
-            <div class="center-absolute game-frame enemy anim" id="enemyWindow">
-              <div class="damage dottext animquick" id="damage">50</div>
-              <img src="img/enemy/scorpion.png" class="character center-absolute" id="enemy">
-              <div class="hp"><div class="hpBar" id="hpBar"></div></div>
-            </div>
-            <textarea id="msg-window" class="center-absolute game-frame textarea anim" disabled="true">スコーピオンがあらわれた！</textarea>
-          </div>
-          <div class="buttons">
-            <div class="button attack-btn dottext animquick" id="atkBtn" onclick="command('attack')">
-              <img src="img/attack-icon.png" width="120" height="120">
-              ATTACK
-            </div>
-            <div class="button run-btn dottext animquick" id="runBtn" onclick="command('run')">
-              <img src="img/run-icon.png" width="120" height="120">
-              <span style="margin-left:30px">RUN</span>
-            </div>
-          </div> 
-          <div class="players">
-            <div class="front atkPlayer flip-horizontal anim" id="atkPlayer">
-              <img src="img/character/yusha.png" class="character center-absolute" id="playerIcon">
-                <img src="img/weapon/sword3.png" class="character center-absolute weaponIcon" id="weapon">
-            </div>
-            <div class="front runPlayer anim" id="runPlayer">
-              <img src="img/character/yusha.png" class="character center-absolute" id="playerIcon">
-            </div>
-          </div>
+        </div>
+        <div class="button run-btn dottext animquick" id="runBtn" onclick="command('run')">
+          <img src="img/run-icon.png" class="cmdbtn-icon" />
+          <span class="block-center">RUN</span>
+        </div>
+      </div> 
+      <div class="players">
+        <div class="atkPlayer flip-horizontal anim" id="atkPlayer">
+          <img src="img/character/yusha.png" class="character center-absolute" id="playerIcon">
+            <img src="img/weapon/sword3.png" class="character center-absolute weaponIcon" id="weapon">
+        </div>
+        <div class="runPlayer anim" id="runPlayer">
+          <img src="img/character/yusha.png" class="character center-absolute" id="playerIcon">
         </div>
       </div>
     </div>

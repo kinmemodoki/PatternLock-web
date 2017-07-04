@@ -1,43 +1,70 @@
-var imgSrc = ["stone1","sword1","sword2","sword3"];
+/*
+TODO: 確認入力をするほど武器のゲージ(#hpbar)が貯まる
+      確認中は「やめる」ボタンを押すとcancelConfirm()発動する。
+*/
+
+const imgSrc = ["stone1","sword1","sword2","sword3"];
 var rank = 0;
 var str = 0.0;
+var ore;
 
 const talk = [
-  "この鉱石で武器をつくるのか？\n\n（パターンの設定を行います）",
+  "この鉱石で武器をつくるのか？",
   "こんな武器じゃ\nモンスターは倒せないぜ",
   "そこそこだな",
   "かなり強くなったな！\nこの鉱石じゃこれが限界だ"
 ];
+const weaponList = [
+  [1,2,3]
+];
 
-var msgFrame = document.getElementById("msg-window");
-var msgCtr = new WordTyping(msgFrame);
-var measure = new PasswordMeasure();
+const msgFrame = document.getElementById("msg-window");
+const confirmBtn = document.getElementById("confirmBtn");
+const confirmYes = document.getElementById("confirmYes");
+const msgCtr = new WordTyping(msgFrame);
+const measure = new PasswordMeasure();
+var isConfirm = false;
+var tempPattern;
 
-var lock = new PatternLock("#patternContainer",{
-  margin:60,
-  radius:80,
+const lock = new PatternLock("#patternContainer",{
+  margin:35,
+  radius:40,
   onDraw:function(pattern){
     //finish write pattern.
-    rank = 0;
+    //rank = 0;
+    if(pattern.length<5){
+      msgCtr.type("これじゃ短すぎるぞ！",{speed:40});
+      lock.error();
+    }else{
+      msgCtr.type("これでいいのか？",{speed:40});
+      tempPattern = pattern;
+      confirmBtn.style.display="block";
+    }
   },
   onMove:function(pattern){
     //when add a node to stack.
-    //console.log("MOVE!: ",pattern);
+    window.navigator.vibrate(50);
+    confirmBtn.style.display="none";
     var newRank = getRank(measure.getStrength(pattern));
     console.log("rank",rank,": new",newRank);
-    if(rank != newRank){
-      rank = newRank;
-      msgFrame.value="";
-      msgCtr.type(talk[rank]);
-      //$('#main-textarea').typetype(talk[rank]);
-      document.getElementById("weapon").src = "img/"+imgSrc[rank]+".png";
+    if(!isConfirm){
+      if(rank != newRank){
+        rank = newRank;
+        msgFrame.value="";
+        msgCtr.type(talk[rank],{speed:40});
+        document.getElementById("weapon").src = "img/weapon/"+imgSrc[rank]+".png";
+      }
+    }else{
+
     }
+
   }
 });
 
-msgCtr.type(talk[0]);
-//$('#main-textarea').typetype(talk[rank]);
-//new TypeSimulate(document.getElementById("main-textarea"),"aaaaaa");
+window.onload = ()=>{
+  msgCtr.type(talk[0],{speed:40});
+  ore=getUrlVars()['ore'];
+}
 
 function getRank(str){
   if(str==0)
@@ -50,3 +77,14 @@ function getRank(str){
     return 3;
 }
 
+function cancelConfirm(){
+  msgCtr.type("どんな武器を作るんだ？",{speed:40});
+  confirmBtn.style.display="none";
+  lock.reset();
+}
+
+function setPattern(){
+  docCookies.setItem("player.key",tempPattern);
+  docCookies.setItem("player.weapon",rank);
+  window.location = "./mypage.html";
+}

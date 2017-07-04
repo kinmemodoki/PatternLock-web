@@ -19,13 +19,12 @@ var dataSet = {
     ['のうさぎ','オオトカゲ','ゴブリン'],
     ['ガラガラヘビ','スコーピオン','サンドワーム'],
     ['スパイダー','まほうつかい','もりのぬし'],
-    ['ゆきんこ','スノーウルフ','イエティ'],
+    ['ゆきんこ','スノーマン','イエティ'],
     ['モール','ファイアゴーレム','ドラゴン']
   ]
 }
 
 var frontScreen = document.getElementById("frontScrreen");
-var background = document.getElementById("homescreen");
 var enemyWindow = document.getElementById("enemyWindow");
 var enemyDom = document.getElementById("enemy");
 var hpBar = document.getElementById("hpBar");
@@ -40,8 +39,8 @@ var damage = document.getElementById("damage");
 
 var msgCtr = new WordTyping(textWindow);
 var lock = new PatternLock("#patternContainer",{
-  margin:60,
-  radius:80,
+  margin:35,
+  radius:40,
   onDraw:function(pattern){
     lock.checkForPattern(player.key,function(){
       if(battleStatus==="attack")
@@ -49,6 +48,7 @@ var lock = new PatternLock("#patternContainer",{
       else
         runPlayer.style.transform='translate(-2200px, 0)';
       lock.disable();
+      saveContext();
       window.setTimeout( ()=>{
         window.location = "./mypage.html"
       }, 1000);
@@ -58,7 +58,7 @@ var lock = new PatternLock("#patternContainer",{
 
   },
   onMove:function(pattern){
-    
+    window.navigator.vibrate(50);
   },
   success:function(){
     console.log("success");
@@ -67,15 +67,27 @@ var lock = new PatternLock("#patternContainer",{
 });
 
 //preload HTML data
-background.style.backgroundImage = 'url("../img/stage/'+dataSet.stage[voyage.stage]+'480.png")';
+frontScreen.style.backgroundImage = 'url("../img/stage/'+dataSet.stage[voyage.stage]+'480.png")';
+if(voyage.stage==3){//forest
+  dayDom.style.color = '#ddd';
+  clockDom.style.color = '#ddd';
+}
 
-window.onload = function(){
+
+window.onload = ()=>{
   
   if(!player.key){
     console.log(player.key);
     window.location.href = "./debug.html";
   }
   setClock();
+  if(voyage.step > 10){
+    //宿屋
+  }
+  if(enemy.hp == 0){
+    enemy.id = getEnemyId();
+    enemy.hp = 100;
+  }
   msgCtr.type(dataSet.enemy[voyage.stage][enemy.id]+"があらわれた！",{speed:20});
   hpBar.style.width=enemy.hp+"%";
 }
@@ -98,18 +110,30 @@ function setClock(){
 function command(cmd){
   battleStatus=cmd;
   if(cmd=="attack"){
-    atkPlayer.style.transform='translate(400px, 0) scaleX(-1)';
+    atkPlayer.style.transform='translate(350px, 0) scaleX(-1)';
   }else{
-    runPlayer.style.transform='translate(-1200px, 0)';
+    runPlayer.style.transform='translate(-800px, 0)';
   }
   //画面変化
-  frontScreen.style.transform='translate(0, -960px)';
-  enemyWindow.style.transform='translate(0, 400px)';
-  textWindow.style.transform='translate(0, 400px)';
+  var value = Math.floor(enemyWindow.getBoundingClientRect().bottom);
+  console.log('translate(0, -520px)    ','translate(0, '+value+'px)');
+  frontScreen.style.transform='translate(0, -520px)';
+  enemyWindow.style.transform='translate(0, 200px)';//bottom:100px;
+  textWindow.style.transform='translate(0, 200px)';
   textWindow.style.opacity=0;
   atkBtn.style.opacity=0;
   runBtn.style.opacity=0;
   console.log(frontScreen.style)
+}
+
+function getEnemyId(){
+  var random = Math.random();
+  if(random < 0.1)
+    return 2;
+  else if(random < 0.4)
+    return 1;
+  return 0;
+
 }
 
 function addDamage(damageVal){
@@ -118,7 +142,17 @@ function addDamage(damageVal){
   damage.style.transform='translate(0, -40px)';
   console.log(enemy.hp-damageVal);
   var bar = enemy.hp-damageVal < 0 ? 0 : enemy.hp-damageVal;
-  docCookies.setItem("enemy.hp",bar);
+  enemy.hp = bar;
   hpBar.style.width=bar+"%";
   enemyDom.classList.add('shake');
+}
+
+function getEnemyImage(stage,id){
+
+}
+
+function saveContext(){
+  docCookies.setItem("enemy.hp",enemy.hp);
+  docCookies.setItem("enemy.id",enemy.id);
+  docCookies.setItem("voyage.step",voyage.step++);
 }

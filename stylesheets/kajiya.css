@@ -1,18 +1,82 @@
 .stage{
   position:absolute;
-  height: 220px;
-  width: 920px;
-  bottom:220px;
-  margin-left:80px;
-  margin-right:80px;
+  height: 14%;
+  width: 100%;
+  bottom:80px;
   margin-bottom: 50px;
 }
 
 .buki{
   position:absolute;
-  bottom:400px;
-  padding:20px;
-  width:240px;
-  height:240px;
+  bottom:20%;
+  padding:10px;
+  width:200px;
+  height:14%;
+  max-height:160px;
+  max-width:160px;
 }
 
+#weapon{
+  position: relative;
+  height:95%;
+  width:auto;
+  margin-top: 5px;
+  padding-left:10px;
+}
+
+.character{ 
+  position: absolute;
+  bottom: 0;
+  width:auto;
+  height:100%;
+  max-height:200px;
+}
+
+.character.right{
+  right:0;
+}
+
+.textarea{
+  position:absolute;
+  bottom:0;
+  height:132px;
+  width:600px;
+}
+
+.scene{
+  position: absolute;
+  height:100%;
+  width:100%;
+  bottom:520px;
+  display:block;
+  background-image:url("../img/back.jpg");
+}
+
+.hp{
+  position:absolute;
+  bottom:12%;
+  height:8%;
+  width:80%;
+  border:2px solid #fff;
+  display:none;
+}
+
+.hpBar{
+  height:100%;
+  width:100%;
+  background-color: #D44;
+}
+
+.confirm-window{
+  position: absolute;
+  bottom:0;
+  right:10px;
+  height:140px;
+  width:160px;
+  display:none;
+}
+
+.confirm-window>hr{
+  margin-top:5px;
+  margin-bottom:5px; 
+}

@@ -21,11 +21,12 @@
     <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','3')">ステージ３（森）</button><br>
     <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','4')">ステージ４（雪）</button><br>
     <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','5')">ステージ５（火山）</button>
+    <input type="number" min="1" max="10" name="step" onchange="changeValue('voyage.step',this.value)" style="border:solid #ff00ff;">
   </div>
   <div class="container enemy" style="width:100%;margin:10px">
-    <button type="button" class="btn btn-warning" onclick="setCookie('enemy.id','1')">敵１</button>
-    <button type="button" class="btn btn-warning" onclick="setCookie('enemy.id','2')">敵２</button>
-    <button type="button" class="btn btn-warning" onclick="setCookie('enemy.id','3')">敵３</button>
+    <button type="button" class="btn btn-warning" onclick="setCookie('enemy.id','0')">敵１</button>
+    <button type="button" class="btn btn-warning" onclick="setCookie('enemy.id','1')">敵２</button>
+    <button type="button" class="btn btn-warning" onclick="setCookie('enemy.id','2')">敵３</button>
     <br>
     <span id="val">100</span>
     <input id="bar" type="range" name="num" min="0" max="100" step="1" value="100"

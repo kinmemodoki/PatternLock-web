@@ -4,7 +4,7 @@
     <meta name="robots" content="noindex,nofollow" />
     <meta charset="UTF-8">
     <title>PassMake Page</title>
-    <meta name="viewport" content="width=640 user-scalable=no">
+    <meta name="viewport" content="width=1080;height=1920;user-scalable=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="patternlock-js/patternLock.css"  rel="stylesheet" type="text/css" />
     <link href="stylesheets/main.css"  rel="stylesheet" type="text/css" />
@@ -13,28 +13,17 @@
 
   <body>
     <div class="container">
-
       <div class="scene">
-        <div class="center-absolute game-frame buki" id="buki-window">
-          <img src="img/weapon/stone1.png" id="weapon" class="center-absolute">
-          <div class="center-absolute hp"><div class="hpBar" id="hpBar"></div></div>
+        <div class="game-frame pull-left" id="buki-window">
+          <img src="img/stone1.png" id="weapon">
         </div>
         <div class="center-absolute stage">
-          <img src="img/character/yusha.png" class="character left flip-horizontal">
-          <img src="img/character/kajiya.png" class="character right">
+          <img src="img/yusha.png" class="character pull-left flip-horizontal">
+          <img src="img/kajiya.png" class="character pull-right">
         </div>
-
-        <textarea id="msg-window" class="center-absolute game-frame textarea dottext msg-area" disabled="true">
-        </textarea>
-        <div id="confirmBtn" class="confirm-window game-frame dottext msg-area">
-          <p id="confirmYes" onclick="setPattern()">はい</p>
-          <hr>
-          <p onclick="cancelConfirm()">いいえ</p>
-        </div>
-
+        <textarea id="msg-window" class="center-absolute game-frame textarea" disabled="true"></textarea>
       </div>
-
-      <div id="patternContainer" class="center-absolute patternlock"></div>
+      <div id="patternContainer" class="center-absolute bottom"></div>
     </div>
   </body>
 
@@ -46,8 +35,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"> 
   </script>
   <script src="patternlock-js/patternLock.js"></script>
+  <script src="scripts/typetype/jquery.typetype.min.js"></script>
   <script src="scripts/typingWord.js"></script>
   <script src="scripts/passwordMeasure.js"></script>
-  <script src="scripts/cookies.js"></script>
   <script src="scripts/kajiya.js"></script>
 </html>

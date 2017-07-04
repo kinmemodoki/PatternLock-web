@@ -1,0 +1,45 @@
+.bg-image{
+  position:absolute;
+  margin-left: auto;
+  margin-right: auto;
+  height:auto;
+  width:100%;
+  bottom:0;
+  image-rendering: pixelated;
+  filter:brightness(30%);
+  display:none;
+  z-index:-1;
+}
+
+.title{
+  margin-top:30%;
+  color:#ddd;
+  font-size:80px;
+}
+
+.start{
+  font-size:40px;
+  width:80%;
+  margin-top:60%;
+}
+
+.start>a{
+  position:relative;
+  display:block;
+  padding:12px;
+  width: 100%;
+  color:#ddd;
+}
+
+.triangle{
+  position:absolute;
+  right:20px;
+}
+
+.credit{
+  position: absolute;
+  bottom:0;
+  color: white;
+  font-size:24px;
+  text-align: center;
+}
