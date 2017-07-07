@@ -12,7 +12,17 @@
 
   <body>
     <div class="center-absolute stage">
-        <textarea id="msg-window" class="center-absolute game-frame textarea dottext" disabled="true">冒険に行くのかい？</textarea>
+      <div class="player" id="player">
+        <img src="img/character/yusha.png" class="character flip-horizontal" id="playerIcon">
+        <img src="img/weapon/sword3.png" class="character weaponIcon flip-horizontal" id="weapon">
+        </div>
+      <img src="img/character/kajiya.png" class="character right">
+      <textarea id="msg-window" class="center-absolute game-frame textarea dottext" disabled="true"></textarea>
+      <div class="confirm-window game-frame dottext msg-area" id="confirm-window">
+        <p id="yesBtn"">はい</p>
+        <hr>
+        <p id="noBtn">いいえ</p>
+      </div>
       </div>
     
     <div class="menu-area">
@@ -21,7 +31,7 @@
           冒険先一覧
           <p>タップして選択</p>
           </div>
-        <div class="voyage-moc">
+        <div class="voyage-moc" id="moc1" value="1">
           <div class="left">
             <img src="img/icons/field_icon.png" class="icon">
           </div>
@@ -36,7 +46,7 @@
             </div>
           </div>
           </div>
-        <div class="voyage-moc">
+        <div class="voyage-moc" id="moc2" value="2">
           <div class="left">
             <img src="img/icons/forest_icon.png" class="icon">
           </div>
@@ -51,7 +61,7 @@
             </div>
           </div>
           </div>
-        <div class="voyage-moc">
+        <div class="voyage-moc" id="moc3" value="3">
           <div class="left">
             <img src="img/icons/snow_icon.png" class="icon">
           </div>
@@ -66,7 +76,7 @@
             </div>
           </div>
           </div>
-        <div class="voyage-moc">
+        <div class="voyage-moc" id="moc4" value="4">
           <div class="left">
             <img src="img/icons/desert_icon.png" class="icon">
           </div>
@@ -82,7 +92,7 @@
             </div>
           </div>
           </div>
-        <div class="voyage-moc">
+        <div class="voyage-moc" id="moc5" value="5">
           <div class="left">
             <img src="img/icons/vulcano_icon.png" class="icon">
           </div>
@@ -99,7 +109,7 @@
           </div>
           </div>
       </div>
-    </div>
+      </div>
   </body>
 
   <script
@@ -111,4 +121,5 @@
   <script src="patternlock-js/patternLock.js"></script>
   <script src="scripts/cookies.js"></script>
   <script src="scripts/typingWord.js"></script>
+  <script src="scripts/select.js"></script>
 </html>

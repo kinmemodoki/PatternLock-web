@@ -111,12 +111,14 @@
 
 .atkPlayer{
   position: absolute;
+  height:120px;
   left:-300px;
   bottom:6%;
   z-index:5;
 }
 .runPlayer{
   position: absolute;
+  height:120px;
   right:-200px;
   bottom:6%;
   z-index:5;
@@ -124,7 +126,7 @@
 
 .weaponIcon{
   position:relative;
-  z-index:-1;
+  z-index:6;
   left:-45px;
 }
 

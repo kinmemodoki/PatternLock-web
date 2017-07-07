@@ -4,7 +4,23 @@
   height:30%;
   width:100%;
   background-size:cover;
-  z-index: -100;
+}
+
+.player{
+  position: absolute;
+  bottom:70px;
+  margin-left:40px;
+  transition: all 0.5s ease-in-out;
+}
+.character.weaponIcon{
+  position: relative;
+  left:-70px;
+}
+.character.right{
+  position: absolute;
+  bottom:70px;
+  right:0;
+  margin-right:40px;
 }
 
 .textarea{
@@ -82,4 +98,17 @@
   
 }
 
+.confirm-window{
+  position: absolute;
+  bottom:0;
+  right:10px;
+  height:135px;
+  width:160px;
+  font-size: 28px;
+  display: none;
+}
+.confirm-window>hr{
+  margin-top:5px;
+  margin-bottom:5px; 
+}
 

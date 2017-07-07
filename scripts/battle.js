@@ -13,9 +13,8 @@ var voyage = {
 }
 
 var dataSet = {
-  stage:['city','field','desert','forest','snow','vulcano'],
+  stage:['field','forest','snow','desert','vulcano'],
   enemy:[
-    ['スライム','ドブネズミ','チンピラ'],
     ['のうさぎ','オオトカゲ','ゴブリン'],
     ['ガラガラヘビ','スコーピオン','サンドワーム'],
     ['スパイダー','まほうつかい','もりのぬし'],
@@ -116,7 +115,6 @@ function command(cmd){
   }
   //画面変化
   var value = Math.floor(enemyWindow.getBoundingClientRect().bottom);
-  console.log('translate(0, -520px)    ','translate(0, '+value+'px)');
   frontScreen.style.transform='translate(0, -520px)';
   enemyWindow.style.transform='translate(0, 200px)';//bottom:100px;
   textWindow.style.transform='translate(0, 200px)';
