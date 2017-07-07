@@ -73,3 +73,12 @@ function getUrlVars()
 
     return vars;
 }
+
+function getUserData(){
+  var data = {};
+  var keys = docCookies.keys();
+  for(var i = 0; i < keys.length; i++){
+    data[keys[i]] = docCookies.getItem(keys[i]);
+  }
+  return data
+}

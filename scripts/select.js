@@ -9,10 +9,12 @@ var stageSelector = (function(){
     },
     setCookie:function(){
       console.log("cookie set ",selectStageId);
-      if(selectStageId != null)
-        docCookies.setItem("voyage.stage",selectStageId-1);
-      else
+      var voyage = {stage:selectStageId-1}
+      if(selectStageId != null){
+        docCookies.setItem("voyage",JSON.stringify(voyage));
+      }else{
         console.log("err");
+      }
     },
     reset:function(){
       selectStageId = null;
@@ -63,7 +65,14 @@ function cancelSelect(){
   stageSelector.reset();
 }
 
+var context = {};
+context = getUserData();
+
 window.onload = function(){
+  if(context["voyage.step"] < 10){
+    console.log("HOI")
+  }
+
   document.getElementById("moc1").addEventListener("click",confirmSelect(1),false);
   document.getElementById("moc2").addEventListener("click",confirmSelect(2),false);
   document.getElementById("moc3").addEventListener("click",confirmSelect(3),false);

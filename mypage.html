@@ -14,5 +14,11 @@
   <div class="start dottext text-center center-block game-frame"><a href="./select.html">関所</a></div>
   <div class="start dottext text-center center-block game-frame"><a href="./kajiya.html">鍛冶屋</a></div>
   <div class="start dottext text-center center-block game-frame"><a href=""><s style="color:#666">　宝物殿　</s></a></div>
+  <script src="scripts/cookies.js"></script>
+  <script> 
+    var context = getUserData()
+    for(key in context)
+      console.log(key," : ",context[key]);
+  </script>
 </body>
 </html>

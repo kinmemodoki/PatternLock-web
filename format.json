@@ -1,27 +1,43 @@
 {
-  player.key:'7415369',
-  player.weapon:3,
-  voyage.stage:1,
-  voyage.step:1,
-  enemy.id:1,
-  enemy.hp:100,
-  player.item:[
-    0,0,0,
-    0,0,0,
-    0,0,0,
-    0,0,0,
-    0,0,0
-  ]
+  player = {
+    key:'7415369',
+    weapon:3, // 0~3,4~6,...
+    item:[ //true or false
+      0,0,0,
+      0,0,0,
+      0,0,0,
+      0,0,0,
+      0,0,0
+    ]
+  },
+  voyage = {
+    stage:1,//0~4
+    step:1,//0~9 ????
+    enemy:{
+      id:1,//0~14
+      hp:100//100 (percent)
+    }
+    drop:{
+      gold:0,
+      tresure:0
+    }
+  }
 }
 
 var dateset = {
-stage:['city','field','desert','forest','snow','vulcano'],
-enemy:[
-  ['スライム','ドブネズミ','チンピラ'],
-  ['のうさぎ','オオトカゲ','ゴブリン'],
-  ['ガラガラヘビ','スコーピオン','サンドワーム'],
-  ['スパイダー','まほうつかい','もりのぬし'],
-  ['ゆきんこ','スノーウルフ','イエティ'],
-  ['モール','ファイアゴーレム','ドラゴン']
-]
+  stage:['field','forest','snow','desert','vulcano'],
+  enemyName:[
+     'のうさぎ','オオトカゲ','ゴブリン',
+     'スパイダー','まほうつかい','もりのぬし',
+     'ゆきんこ','スノーマン','イエティ',
+     'ガラガラヘビ','スコーピオン','サンドワーム',
+     'モール','ファイアゴーレム','ドラゴン'
+  ],
+  enemyFile:[
+    'slime','slime','slime',
+    'slime','slime','slime',
+    'yukinko','snowman','yeti',
+    'snake','scorpion','slime',
+    'slime','slime','slime',
+  ]
 }

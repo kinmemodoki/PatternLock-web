@@ -84,7 +84,11 @@ function cancelConfirm(){
 }
 
 function setPattern(){
-  docCookies.setItem("player.key",tempPattern);
-  docCookies.setItem("player.weapon",rank);
+  var context = getUserData();
+  var user = context.player ? JSON.parse(context.player) : {};
+  user.key = tempPattern;
+  user.weapon = rank;
+  docCookies.setItem("player",JSON.stringify(user));
   window.location = "./mypage.html";
 }
+
