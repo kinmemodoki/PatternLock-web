@@ -2,6 +2,8 @@
   player = {
     key:'7415369',
     weapon:3, // 0~3,4~6,...
+    hp:100,
+    level:1,
     item:[ //true or false
       0,0,0,
       0,0,0,

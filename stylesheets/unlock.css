@@ -127,12 +127,36 @@
 
 .weaponIcon{
   position:relative;
+  width: 70px;
   z-index:6;
-  left:-45px;
+  left:-35px;
+  top:10px;
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;  /* IE (非標準プロパティ) */
 }
 
 .game-frame{
   background:#333;
+}
+
+.drops{
+  position: absolute;
+  bottom:0;
+  right:0;
+  opacity:0;
+}
+.drops>div{
+  display: inline;
+  width:120px;
+}
+.drops img{
+  width:40px;
+  height:auto;
+  margin-right:-15px;
+}
+.drops{
+  color:white;
+  font-size:40px;
 }
 
 .damage{
@@ -161,6 +185,12 @@
   -moz-animation:shake 0.05s linear 8 alternate;
   animation:shake 0.05s linear 8 alternate;
 }
+.drop-item{
+
+  -webkit-animation:drop 0.7s linear 1 normal;
+  -moz-animation:drop 0.7s linear 1 normal;
+  animation:drop 0.7s linear 1 normal;
+}
 
 @keyframes swipe {
   0% {position: absolute;bottom:0px;}
@@ -170,4 +200,12 @@
 @keyframes shake {
   0% {transform:translate(-5px, 0);}
   100% {transform:translate(5px, 0);}
+}
+
+@keyframes drop {
+  0% {opacity: 0;}
+  45%{opacity: 0;}
+  60%{transform:translate(0, -15px);opacity: .5;}
+  75% {transform:translate(0, 0);opacity: 1}
+  100% {transform:translate(0, 0);opacity: 1}
 }

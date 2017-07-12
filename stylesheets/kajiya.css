@@ -22,6 +22,8 @@
   width:auto;
   margin-top: 5px;
   padding-left:10px;
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;  /* IE (非標準プロパティ) */
 }
 
 .character{ 

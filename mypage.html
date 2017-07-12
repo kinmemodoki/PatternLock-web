@@ -10,15 +10,21 @@
     <link href="stylesheets/mypage.css"  rel="stylesheet" type="text/css" />
   </head>
 <body>
-  <div class="start dottext text-center center-block game-frame"><a href="./battle2.html">勇者を見る</a></div>
-  <div class="start dottext text-center center-block game-frame"><a href="./select.html">関所</a></div>
-  <div class="start dottext text-center center-block game-frame"><a href="./kajiya.html">鍛冶屋</a></div>
+  <div class="start dottext text-center center-block game-frame" id="yusha"><a href="./battle.html">勇者を見る</a></div>
+  <div class="start dottext text-center center-block game-frame" id="sekisyo"><a href="./select.html">関所</a></div>
+  <div class="start dottext text-center center-block game-frame" id="kajiya" ><a href="./kajiya.html?ore=1">鍛冶屋</a></div>
   <div class="start dottext text-center center-block game-frame"><a href=""><s style="color:#666">　宝物殿　</s></a></div>
   <script src="scripts/cookies.js"></script>
   <script> 
-    var context = getUserData()
+    var context = getUserData();
+    var user = context.player ? JSON.parse(context.player) : {};
+    var voyage = context.voyage ? JSON.parse(context.voyage) : {};
     for(key in context)
       console.log(key," : ",context[key]);
+    console.log(voyage.stage);
+    if(voyage.stage==undefined){
+      document.getElementById("yusha").innerHTML="<s style=\"color:#666\">　勇者を見る　</s>"
+    }
   </script>
 </body>
 </html>

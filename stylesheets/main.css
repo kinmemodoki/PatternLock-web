@@ -55,6 +55,10 @@ html,body{
   font-family:'dotfont';
 }
 
+.bottom{
+  bottom:0;
+}
+
 .blinking{
   animation:blink 0.5s ease-in-out infinite alternate;
 }

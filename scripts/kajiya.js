@@ -11,7 +11,7 @@ var ore;
 const talk = [
   "この鉱石で武器をつくるのか？",
   "こんな武器じゃ\nモンスターは倒せないぜ",
-  "そこそこだな",
+  "そこそこの強さだな",
   "かなり強くなったな！\nこの鉱石じゃこれが限界だ"
 ];
 const weaponList = [
@@ -21,6 +21,7 @@ const weaponList = [
 const msgFrame = document.getElementById("msg-window");
 const confirmBtn = document.getElementById("confirmBtn");
 const confirmYes = document.getElementById("confirmYes");
+const weapon = document.getElementById("weapon");
 const msgCtr = new WordTyping(msgFrame);
 const measure = new PasswordMeasure();
 var isConfirm = false;
@@ -52,7 +53,12 @@ const lock = new PatternLock("#patternContainer",{
         rank = newRank;
         msgFrame.value="";
         msgCtr.type(talk[rank],{speed:40});
-        document.getElementById("weapon").src = "img/weapon/"+imgSrc[rank]+".png";
+        if(rank==0){
+          weapon.src = "img/weapon/stone"+ore+".png";
+        }else{
+          var weaponId = ore*3 + rank;
+          weapon.src = "img/weapon/weapon"+weaponId+".png";
+        }
       }
     }else{
 
@@ -63,7 +69,7 @@ const lock = new PatternLock("#patternContainer",{
 
 window.onload = ()=>{
   msgCtr.type(talk[0],{speed:40});
-  ore=getUrlVars()['ore'];
+  ore=getUrlVars()['ore']||0;
 }
 
 function getRank(str){

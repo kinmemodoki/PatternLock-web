@@ -1,16 +1,3 @@
-
-var enemy = {};
-enemy.id = docCookies.getItem("enemy.id")||0;
-enemy.hp = docCookies.getItem("enemy.hp")||100;
-var player = {
-  key:docCookies.getItem("player.key"),
-  weapon:docCookies.getItem("player.weapon")
-}
-var voyage = {
-  stage:docCookies.getItem("voyage.stage"),
-  step:docCookies.getItem("voyage.step")
-}
-
 var dataSet = {
   stage:['field','forest','snow','desert','vulcano'],
   enemyName:[
@@ -41,7 +28,7 @@ var enemyController = (function(){
       id = enemyObj.id;
       hp = enemyObj.hp;
     },
-    addDamage:function(damageVal){
+    addDamage:function(atkPow){
       
     }
   }
@@ -55,24 +42,35 @@ var battleController = (function(){
   var voyage = context.voyage ? JSON.parse(context.voyage) : {};
   var enemy = voyage.enemy ? JSON.parse(voyage.enemy) : {};
   var drop = voyage.drop ? JSON.parse(voyage.drop) : {};
-  if(enemy.hp < 0 || !enemy.id){ //get new Enemy
-    var random = Math.random();
-    console.log(voyage);
-    if(random < 0.2){
-      enemy.id=2+voyage.stage*3;
-    }else if(random < 0.4){
-      enemy.id=1+voyage.stage*3;
-    }else{
-      enemy.id=0+voyage.stage*3;
+  if(drop.gold==undefined)
+    drop.gold=0;
+  if(drop.tresure==undefined)
+    drop.tresure=0;
+
+  console.log(drop);
+
+  (function getNewEnemy(){
+    if(enemy.hp <= 0 || enemy.id==undefined){ //get new Enemy
+      var random = Math.random();
+      console.log(enemy);
+      if(random < 0.2){
+        enemy.id=2+voyage.stage*3;
+      }else if(random < 0.4){
+        enemy.id=1+voyage.stage*3;
+      }else{
+        enemy.id=0+voyage.stage*3;
+      }
+      console.log(enemy.id);
+      enemy.hp = 100;
     }
-    console.log(enemy.id);
-    enemy.hp = 100;
-  }
+  }());
 
   return {
     initialize:function(){
       viewController.msgType(dataSet.enemyName[enemy.id]+"があらわれた！");
       viewController.showEnemy(enemy.id,enemy.hp);
+      viewController.showWeapon(user.weapon);
+      viewController.setDrops(drop.gold,drop.tresure);
       battleController.commit();
     },
     isVoyage:function(){
@@ -97,24 +95,32 @@ var battleController = (function(){
       }
     },
     attackEnemy:function(){
-      damageVal = 80;
+      damageVal = 893;
       enemy.hp = enemy.hp-damageVal;
-      var percent = enemy.hp < 0 ? 0 : enemy.hp;
+      var percent = enemy.hp <= 0 ? 0 : enemy.hp;
       viewController.damegeEnemy(damageVal,percent);
-      if(enemy.hp<=0){
-        var dropObj = battleController.dropItem();
-        viewController.dropItem(dropObj.item);
-        if(dropObj.item=="gold"){
-          viewController.addGold(dropObj.amount);
-        }else{
-          viewController.addTresure(dropObj.amount);
+      window.setTimeout( ()=>{
+        if(enemy.hp<=0){
+          viewController.hideEnemy();
+          var dropObj = battleController.dropItem();
+          viewController.dropItem(dropObj.item);
+          if(dropObj.item=="gold"){
+            viewController.addGold(drop.gold+dropObj.amount);
+            drop.gold = drop.gold + dropObj.amount;
+            console.log(typeof drop.gold);
+            console.log(dropObj.amount , drop.gold);
+          }else{
+            viewController.addTresure(drop.tresure+dropObj.amount);
+            drop.tresure += dropObj.amount;
+          }
         }
-      }
+      }, 300);
+      
     },
     dropItem:function(){
-      drop = {item:"gold",amount:100};
+      my_drop = {item:"gold",amount:1};
       battleController.commit();
-      return drop
+      return my_drop
     },
     getVoyageStep:function(){
       return voyage.step || 0
@@ -152,6 +158,11 @@ var viewController = (function(){
   var clockDom = document.getElementById("clock");
   var dayDom = document.getElementById("day");
   var damage = document.getElementById("damage");
+  var gold = document.getElementById("gold");
+  var tresure = document.getElementById("tresure");
+  var drops = document.getElementById("drops");
+  var goldAmount = document.getElementById("goldAmount");
+  var tresureAmount = document.getElementById("tresureAmount");
   var msgCtr = new WordTyping(textWindow);
   var lock = new PatternLock("#patternContainer",{
     margin:35,
@@ -179,10 +190,14 @@ var viewController = (function(){
   });
 
   //preload HTML data
-  frontScreen.style.backgroundImage = 'url("../img/stage/'+dataSet.stage[battleController.getStage()]+'480.png")';
-  if(voyage.stage==1){//forest
+  var stageId = battleController.getStage();
+  frontScreen.style.backgroundImage = 'url("../img/stage/'+dataSet.stage[stageId]+'480.png")';
+  if(stageId==1){//forest
     dayDom.style.color = '#ddd';
     clockDom.style.color = '#ddd';
+  }
+  if(stageId==2||stageId==3){
+    drops.style.color="#333"
   }
 
   return {
@@ -193,11 +208,22 @@ var viewController = (function(){
       clockDom.innerHTML = hour+'<span class="blinking">:</span>'+min;
       dayDom.innerHTML = month+"/"+date+"("+day+")";
     },
+    setDrops:function(gold,tresure){
+      console.log(tresure);
+      goldAmount.innerText="x"+( '00' + gold ).slice( -2 );
+      tresureAmount.innerText="x"+( '00' + tresure ).slice( -2 );
+    },
     showEnemy:function(id,hp){
       hpBar.style.width=hp+"%";
       enemyDom.setAttribute('src','img/enemy/'+dataSet.enemyFile[id]+'.png');
       enemyDom.style.display = 'block';
 
+    },
+    showWeapon:function(weaponId){
+      if(weaponId)
+        weapon.src = "img/weapon/weapon"+weaponId+".png";
+      else
+        weapon.style.display="none";
     },
     showLocker:function(){
       //画面変化
@@ -206,7 +232,10 @@ var viewController = (function(){
       textWindow.style.transform='translate(0, 200px)';
       textWindow.style.opacity=0;
       atkBtn.style.opacity=0;
+      atkBtn.style["z-index"]=-1;
       runBtn.style.opacity=0;
+      runBtn.style.display="none";
+      drops.style.opacity=1;
     },
     comePlayer:function(cmd){
       if(cmd==='attack'){
@@ -228,17 +257,24 @@ var viewController = (function(){
       enemyDom.classList.add('shake');
       hpBar.style.width=percent+"%";
     },
-    defeatEnemy:function(){
-
+    hideEnemy:function(){
+      enemyDom.style.opacity=0;
+      damage.style.opacity=0;
+      hpBar.parentNode.style.opacity=0;
     },
-    dropItem:function(itemId){
+    dropItem:function(dropItem){
+      console.log(dropItem);
+      if(dropItem=="gold"){
+        gold.style.display="block";
+        gold.style.opacity=1;
+      }
 
     },
     addTresure:function(){
 
     },
     addGold:function(amount){
-
+      goldAmount.innerText="x"+('00'+amount).slice(-2);;
     }
   }
 
