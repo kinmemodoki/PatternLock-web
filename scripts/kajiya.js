@@ -93,7 +93,7 @@ function setPattern(){
   var context = getUserData();
   var user = context.player ? JSON.parse(context.player) : {};
   user.key = tempPattern;
-  user.weapon = rank;
+  user.weapon = ore*3 + rank;
   docCookies.setItem("player",JSON.stringify(user));
   window.location = "./mypage.html";
 }

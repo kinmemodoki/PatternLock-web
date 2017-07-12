@@ -26,20 +26,35 @@
   }
 }
 
-var dateset = {
-  stage:['field','forest','snow','desert','vulcano'],
-  enemyName:[
-     'のうさぎ','オオトカゲ','ゴブリン',
-     'スパイダー','まほうつかい','もりのぬし',
-     'ゆきんこ','スノーマン','イエティ',
-     'ガラガラヘビ','スコーピオン','サンドワーム',
-     'モール','ファイアゴーレム','ドラゴン'
+var dataSet = {
+  stage:[
+    {name:'始まりの平原',file:'field',step:10},
+    {name:'迷いの森',file:'forest',step:10},
+    {name:'白銀の雪原',file:'snow',step:20},
+    {name:'不毛の砂漠',file:'desert',step:30},
+    {name:'灼熱の火山',file:'vulcano',step:40}
   ],
-  enemyFile:[
-    'slime','slime','slime',
-    'slime','slime','slime',
-    'yukinko','snowman','yeti',
-    'snake','scorpion','slime',
-    'slime','slime','slime',
-  ]
+  enemy:[
+    {name:'のうさぎ',file:'slime',hp:100},
+    {name:'オオトカゲ',file:'slime',hp:180},
+    {name:'ゴブリン',file:'slime',hp:400},
+    {name:'スパイダー',file:'slime',hp:200},
+    {name:'まほうつかい',file:'slime',hp:300},
+    {name:'もりのぬし',file:'slime',hp:1000},
+    {name:'ゆきんこ',file:'yukinko',hp:300},
+    {name:'スノーマン',file:'snowman',hp:500},
+    {name:'イエティ',file:'yeti',hp:3000},
+    {name:'ガラガラヘビ',file:'snake',hp:500},
+    {name:'スコーピオン',file:'scorpion',hp:1000},
+    {name:'サンドワーム',file:'slime',hp:6000},
+    {name:'モール',file:'slime',hp:100},
+    {name:'ファイアゴーレム',file:'slime',hp:100},
+    {name:'ドラゴン',file:'slime',hp:100},
+  ],
+  weaponPow:
+  [50,70,90,
+   80,100,120,
+   100,150,200,
+   150,200,250,
+   200,250,300]
 }
