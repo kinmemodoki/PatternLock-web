@@ -61,6 +61,55 @@
   font-size: 30px;
 }
 
+.progressGage>.bar{
+  position: absolute;
+  top:82%;
+  height:10px;
+  width:500px;
+  border-bottom: 4px solid #333;
+}
+.bar>.scale{
+  float:left;
+  width:50px;
+  height:100%;
+  margin:0;
+  border-left: 4px solid #333;
+}
+.bar>.scale.end1{
+  width:46px;
+}
+.bar>.scale.end2{
+  width:4px;
+}
+.bar>.now{
+  position: absolute;
+  margin-left: -10px;
+  margin-top: -24px;
+  width: 0;
+  height: 0;
+  border-top: 24px solid #333;
+  border-right: 12px solid transparent;
+  border-bottom: 24px solid transparent;
+  border-left: 12px solid transparent;
+}
+.bar>img{
+  position: absolute;
+  display:block;
+  width:48px;
+  height:48px;
+  right:0;
+  margin-right:-48px;
+  margin-top:-48px; 
+}
+.bar>.boss{
+  position: absolute;
+  right:0;
+  bottom:0;
+  width:20%;
+  border-bottom: 4px solid #C33;
+  z-index: -1;
+}
+
 .button{
   position:absolute;
   bottom:0;

@@ -1,21 +1,4 @@
-/*var dataSet = {
-  stage:['field','forest','snow','desert','vulcano'],
-  enemyName:[
-     'のうさぎ','オオトカゲ','ゴブリン',
-     'スパイダー','まほうつかい','もりのぬし',
-     'ゆきんこ','スノーマン','イエティ',
-     'ガラガラヘビ','スコーピオン','サンドワーム',
-     'モール','ファイアゴーレム','ドラゴン'
-  ],
-  enemyFile:[
-    'slime','slime','slime',
-    'slime','slime','slime',
-    'yukinko','snowman','yeti',
-    'snake','scorpion','slime',
-    'slime','slime','slime',
-  ]
-}*/
-var dataSet = {
+const dataSet = {
   stage:[
     {name:'始まりの平原',file:'field',step:10},
     {name:'迷いの森',file:'forest',step:10},
@@ -47,55 +30,35 @@ var dataSet = {
    150,200,250,
    200,250,300]
 }
-
-/*
-var Enemy = (function(){
-  var id,hp,name,file;
-  function calcDamage(atkPow){
-    var damage = atkPow;
-    return damage
-  }
-  return {
-    setEnemy:function(palamAry){
-      id=palamAry[0];
-      hp=palamAry[1];
-    },
-    addDamage:function(atkPow){
-      var damage = calcDamage(atkPow);
-      hp = hp - damage;
-    },
-    getHp:()=>{return hp},
-    getId:()=>{return id}
-  }
-})();
-*/
+const enemyMidEncount = 0.4;
 
 var battleController = (function(){
-  var battleStatus;// isAtk or isRun
 
+  var battleStatus;// isAtk or isRun
   var context = getUserData();
   var user = context.player ? JSON.parse(context.player) : {};
   var voyage = context.voyage ? JSON.parse(context.voyage) : {};
+  var drop = voyage.drop ? JSON.parse(voyage.drop) : {};
+  var progress = voyage.step*100/dataSet.stage[voyage.stage].step;
   var enemy = (voyage.enemy==undefined) ? getNewEnemy():JSON.parse(voyage.enemy);
+  
   if(enemy.hp <= 0)
     enemy =getNewEnemy();
-  console.log(enemy.hp);
-  var drop = voyage.drop ? JSON.parse(voyage.drop) : {};
+
   if(drop.gold==undefined)
     drop.gold=0;
-  if(drop.tresure==undefined)
-    drop.tresure=0;
-
+  if(drop.treasure==undefined)
+    drop.treasure=0;
 
   function getNewEnemy(){
     var id,hp;
     var random = Math.random();
-    console.log("random : ",random);
-    if(random < 0.1){
+    console.log(progress);
+    if(80<=progress && progress<=100){//ボス
       id=2+voyage.stage*3;
-    }else if(random < 0.4){
+    }else if(random < enemyMidEncount){//ザコ中
       id=1+voyage.stage*3;
-    }else{
+    }else{//ザコ弱
       id=0+voyage.stage*3;
     }
     return {id:id,hp:dataSet.enemy[id].hp}
@@ -103,10 +66,20 @@ var battleController = (function(){
 
   return {
     initialize:function(){
-      viewController.msgType(dataSet.enemy[enemy.id].name+"があらわれた！");
-      viewController.showEnemy(enemy.id,enemy.hp);
+      if(progress<=100){
+        viewController.msgType(dataSet.enemy[enemy.id].name+"があらわれた！");
+        viewController.showEnemy(enemy.id,enemy.hp);
+      }else{//宿屋
+        viewController.msgType("勇者は休んでいる...");
+        viewController.showRestPlayer();
+        viewController.hidePlayer();
+        viewController.damegeEnemy = ()=>{};
+        viewController.dropItem = ()=>{};
+        viewController.hideEnemy = ()=>{};
+      }
       viewController.showWeapon(user.weapon);
-      viewController.setDrops(drop.gold,drop.tresure);
+      viewController.showProgress(progress);
+      viewController.setDrops(drop.gold,drop.treasure);
       battleController.commit();
     },
     isVoyage:function(){
@@ -116,6 +89,7 @@ var battleController = (function(){
         return false
     },
     action:function(){
+      voyage.step++;
       if(battleStatus==="attack"){
         battleController.attackEnemy();
         viewController.atk();
@@ -126,36 +100,53 @@ var battleController = (function(){
     },
     attackEnemy:function(){
       var max = 1.00, min = 0.85;
-      var ransuu =((Math.random()*((max+0.01)-min))+min)
-      damageVal = Math.floor(dataSet.weaponPow[user.weapon] * ransuu);
-      console.log(dataSet.weaponPow[user.weapon])
-      enemy.hp = enemy.hp-damageVal;
-      var percent = enemy.hp <= 0 ? 0 : enemy.hp*100 / dataSet.enemy[enemy.id].hp;
 
-      viewController.damegeEnemy(percent);
-      //viewController.showDamageVal(damageVal);
-      window.setTimeout( ()=>{
-        if(enemy.hp<=0){
-          viewController.hideEnemy();
-          var dropObj = battleController.dropItem();
-          viewController.dropItem(dropObj.item);
-          if(dropObj.item=="gold"){
-            viewController.addGold(drop.gold+dropObj.amount);
-            drop.gold = drop.gold + dropObj.amount;
-            console.log(typeof drop.gold);
-            console.log(dropObj.amount , drop.gold);
-          }else{
-            viewController.addTresure(drop.tresure+dropObj.amount);
-            drop.tresure += dropObj.amount;
-          }
-        }
-      }, 300);
+      var ransuu =((Math.random()*((max+0.01)-min))+min);
+      var damageVal = Math.floor(dataSet.weaponPow[user.weapon] * ransuu);
       
+      enemy.hp = enemy.hp-damageVal;
+      viewController.damegeEnemy(enemy.hp <= 0 ? 0 : enemy.hp*100 / dataSet.enemy[enemy.id].hp);
+      //viewController.showDamageVal(damageVal);
+      if(enemy.hp<=0)
+        battleController.defeatEnemy();
     },
-    dropItem:function(){
-      my_drop = {item:"gold",amount:1};
+    defeatEnemy:function(){
+      window.setTimeout( ()=>{
+        viewController.hideEnemy();
+        var dropObj = battleController.getDropItem();
+        console.log(dropObj);
+        viewController.dropItem(dropObj.item);
+        if(dropObj.item=="gold"){
+          viewController.addGold(drop.gold+dropObj.amount);
+          drop.gold = drop.gold + dropObj.amount;
+        }else{
+          viewController.addtreasure(drop.treasure+dropObj.amount);
+          drop.treasure += dropObj.amount;
+        }
+        
+      }, 300);
+    },
+    getDropItem:()=>{
+      var myDrop,treasureRate;
+      var enemyRarity = enemy.id % 3;
+      var ransuu =Math.random()*100;
+      console.log("ransuu : ",ransuu);
+      if(enemyRarity==0)//ザコ敵
+        treasureRate=10;
+      if(enemyRarity==1)//中敵
+        treasureRate=30;
+      if(enemyRarity==2)//ボス
+        treasureRate=90;
+      treasureRate=100;
+
+      if(ransuu<treasureRate)
+        myDrop = {item:"treasure",amount:1};
+      else
+        myDrop = {item:"gold",amount:1};
+
       battleController.commit();
-      return my_drop
+      return myDrop
+      
     },
     getPattern:()=>{
       return user.key
@@ -176,7 +167,8 @@ var battleController = (function(){
       enemy = undefined;
     },
     setBattleStatus:(cmd)=>{
-      battleStatus = cmd;
+      if(!battleStatus)
+        battleStatus = cmd;
     },
     commit:function(){
       voyage.enemy = JSON.stringify(enemy);
@@ -200,10 +192,11 @@ var viewController = (function(){
   var dayDom = document.getElementById("day");
   var damage = document.getElementById("damage");
   var gold = document.getElementById("gold");
-  var tresure = document.getElementById("tresure");
+  var treasure = document.getElementById("treasure");
   var drops = document.getElementById("drops");
   var goldAmount = document.getElementById("goldAmount");
-  var tresureAmount = document.getElementById("tresureAmount");
+  var treasureAmount = document.getElementById("treasureAmount");
+  var progressMarker = document.getElementById("progressMarker");
   var msgCtr = new WordTyping(textWindow);
   var lock = new PatternLock("#patternContainer",{
     margin:35,
@@ -214,7 +207,7 @@ var viewController = (function(){
         lock.disable();
         window.setTimeout( ()=>{
           battleController.commit();
-          window.location = "./mypage.html"
+          //window.location = "./mypage.html"
         }, 1000);
       },function(){
         //alert("Pattern is not correct");
@@ -249,18 +242,29 @@ var viewController = (function(){
       clockDom.innerHTML = hour+'<span class="blinking">:</span>'+min;
       dayDom.innerHTML = month+"/"+date+"("+day+")";
     },
-    setDrops:function(gold,tresure){
-      console.log(tresure);
+    setDrops:function(gold,treasure){
+      console.log(treasure);
       goldAmount.innerText="x"+( '00' + gold ).slice( -2 );
-      tresureAmount.innerText="x"+( '00' + tresure ).slice( -2 );
+      treasureAmount.innerText="x"+( '00' + treasure ).slice( -2 );
     },
     showEnemy:function(id,hp){
-      console.log(hp , dataSet.enemy[id].hp);
       var hpPercent = hp*100 / dataSet.enemy[id].hp;
       hpBar.style.width=hpPercent+"%";
       enemyDom.setAttribute('src','img/enemy/'+dataSet.enemy[id].file+'.png');
       enemyDom.style.display = 'block';
-
+    },
+    showRestPlayer:function(){
+      document.getElementById("hpGage").style.display = 'none';
+      enemyDom.setAttribute('src','img/character/resting.png');
+      enemyDom.style.display = 'block';
+    },
+    hidePlayer:function(){
+      atkPlayer.style.display = 'none';
+      runPlayer.style.display = 'none';
+    },
+    showProgress:function(progress){
+      //%で渡す
+      progressMarker.style.left = progress+"%";
     },
     showWeapon:function(weaponId){
       if(weaponId)
@@ -314,19 +318,18 @@ var viewController = (function(){
         gold.style.display="block";
         gold.style.opacity=1;
       }else{
-
-
+        treasure.style.display="block";
+        treasure.style.opacity=1;
       }
 
     },
-    addTresure:function(){
+    addtreasure:function(){
 
     },
     addGold:function(amount){
       goldAmount.innerText="x"+('00'+amount).slice(-2);;
     }
   }
-
 }());
 
 window.onload = ()=>{
@@ -335,9 +338,6 @@ window.onload = ()=>{
     window.location.href = "./debug.html";
   }
   reloadClock();
-  if(step > 10){
-    //宿屋
-  }
   battleController.initialize();
 }
 

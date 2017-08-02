@@ -21,17 +21,35 @@
       <div class="clockDay center-absolute">
         <div class="clock text-center center-absolute dottext" id="clock">**<span class="blinking">:</span>**</div>
         <div class="text-center center-absolute day dottext bold" id="day">*/*(***)</div>
-      </div>
+        </div>
       <div class="enemyWin">
         <div class="center-absolute game-frame enemy anim" id="enemyWindow">
           <div class="damage dottext animquick anim" id="damage">50</div>
           <img src="" class="character center-absolute anim" id="enemy">
-          <img src="img/gold_bag.png" class="character center-absolute drop-item" id="tresure">
+          <img src="img/treasure_bag.png" class="character center-absolute drop-item" id="treasure">
           <img src="img/golds.png" class="character center-absolute drop-item" id="gold">
-          <div class="hp center-absolute anim"><div class="hpBar" id="hpBar"></div></div>
+          <div class="hp center-absolute anim" id="hpGage"><div class="hpBar" id="hpBar"></div></div>
         </div>
         <textarea id="msg-window" class="center-absolute game-frame textarea dottext anim" disabled="true"></textarea>
-      </div>
+        </div>
+      <div class="progressGage" id="progress">
+        <div class="bar center-absolute">
+          <div class="scale"></div>
+          <div class="scale"></div>
+          <div class="scale"></div>
+          <div class="scale"></div>
+          <div class="scale"></div>
+          <div class="scale"></div>
+          <div class="scale"></div>
+          <div class="scale"></div>
+          <div class="scale"></div>
+          <div class="scale end1"></div>
+          <div class="scale end2"></div>
+          <div class="boss"></div>
+          <div class="now" id="progressMarker"></div>
+          <img src="img/goal_flag.png"/>
+        </div>
+        </div>
       <div class="buttons">
         <div class="button attack-btn dottext animquick" id="atkBtn" onclick="command('attack')">
           <div class="block-center">
@@ -43,7 +61,7 @@
           <img src="img/run-icon.png" class="cmdbtn-icon" />
           <span class="block-center">RUN</span>
         </div>
-      </div> 
+        </div> 
       <div class="players">
         <div class="atkPlayer anim" id="atkPlayer">
           <img src="img/character/yusha.png" class="character center-absolute" id="playerIcon">
@@ -52,17 +70,17 @@
         <div class="runPlayer flip-horizontal anim" id="runPlayer">
           <img src="img/character/yusha.png" class="character center-absolute" id="playerIcon">
         </div>
-      </div>
+        </div>
       <div class="drops anim" id="drops">
         <div class="gold dottext">
           <img src="img/golds.png"/>
-          <span id="goldAmount">x01</span>
+          <span id="goldAmount">x00</span>
         </div>
-        <div class="tresure dottext">
-          <img src="img/gold_bag.png"/>
-          <span id="tresureAmount">x01</span>
+        <div class="treasure dottext">
+          <img src="img/treasure_bag.png"/>
+          <span id="treasureAmount">x00</span>
         </div>
-      </div>
+        </div>
     </div>
   </body>
 
