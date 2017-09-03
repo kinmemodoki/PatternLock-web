@@ -91,7 +91,6 @@
 }
 .treasure{
   width:36px;
-  image-rendering: pixelated;
   -ms-interpolation-mode: nearest-neighbor;  /* IE (非標準プロパティ) */
 }
 .treasure.shadow{

@@ -14,6 +14,25 @@
     <button type="button" class="btn btn-primary" onclick="setCookie('player.weapon','2')">武器２</button>
     <button type="button" class="btn btn-primary" onclick="setCookie('player.weapon','3')">武器３</button>
   </div>
+  <div>
+    <input type="checkbox" value="0" class="chbox">1
+    <input type="checkbox" value="1" class="chbox">2
+    <input type="checkbox" value="2" class="chbox">3<br>
+    <input type="checkbox" value="3" class="chbox">4
+    <input type="checkbox" value="4" class="chbox">5
+    <input type="checkbox" value="5" class="chbox">6<br>
+    <input type="checkbox" value="6" class="chbox">7
+    <input type="checkbox" value="7" class="chbox">8
+    <input type="checkbox" value="8" class="chbox">9<br>
+    <input type="checkbox" value="9" class="chbox">10
+    <input type="checkbox" value="10" class="chbox">11
+    <input type="checkbox" value="11" class="chbox">12<br>
+    <input type="checkbox" value="12" class="chbox">13
+    <input type="checkbox" value="13" class="chbox">14
+    <input type="checkbox" value="14" class="chbox">15<br>
+    <button type="button" class="btn btn-primary" onclick="boxCheck()">set</button>
+    </div>
+
   <div class="container stage" style="width:100%;margin:10px">
     <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','0')">ステージ０（街）</button><br>
     <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','1')">ステージ１（丘）</button><br>
@@ -56,10 +75,11 @@
     success:function(){}
   });
 
-  window.onload = function(){
-    console.log(docCookies.getItem("player.key"))
+    var context = getUserData();
+    var user = context.player ? JSON.parse(context.player) : {};
+    var voyage = context.voyage ? JSON.parse(context.voyage) : {};
+    console.log(user)
     $("#textarea").val(document.cookie);
-  }
   
   function setCookie(key,val){
     console.log(key,val);
@@ -78,6 +98,19 @@
   function changeValue(key,val) {
     document.getElementById("val").innerHTML = val;
     setCookie(key,val);
+  }
+
+  function boxCheck(){
+    var result = [];
+    var chboxes = document.getElementsByClassName('chbox');
+    for( var i=0; i<chboxes.length; i++){
+      if(chboxes[i].checked)
+        result[i] = 1;
+      else
+        result[i] = 0;
+    }
+    user.item = result;
+    setCookie('player',JSON.stringify(user));
   }
 </script>
 </html>

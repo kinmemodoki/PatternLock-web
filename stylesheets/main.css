@@ -10,6 +10,10 @@ html,body{
        url('../font/MPlusFont-JF-DotH10.ttf') format('truetype');
 }
 
+.hiddenItem{
+  display: none;
+}
+
 .character{
   width:100px;
   margin:10px;

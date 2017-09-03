@@ -121,7 +121,7 @@ var battleController = (function(){
           drop.gold = drop.gold + dropObj.amount;
         }else{
           viewController.addtreasure(drop.treasure+dropObj.amount);
-          drop.treasure += dropObj.amount;
+          drop["treasure"] += dropObj.amount;
         }
         
       }, 300);
@@ -137,7 +137,7 @@ var battleController = (function(){
         treasureRate=30;
       if(enemyRarity==2)//ボス
         treasureRate=90;
-      treasureRate=100;
+      //treasureRate=100;
 
       if(ransuu<treasureRate)
         myDrop = {item:"treasure",amount:1};
@@ -207,7 +207,7 @@ var viewController = (function(){
         lock.disable();
         window.setTimeout( ()=>{
           battleController.commit();
-          //window.location = "./mypage.html"
+          window.location = "./mypage.html"
         }, 1000);
       },function(){
         //alert("Pattern is not correct");
@@ -264,6 +264,8 @@ var viewController = (function(){
     },
     showProgress:function(progress){
       //%で渡す
+      if(progress>100)
+          progress=100;
       progressMarker.style.left = progress+"%";
     },
     showWeapon:function(weaponId){

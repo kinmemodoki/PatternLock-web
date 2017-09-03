@@ -4,9 +4,6 @@ TODO: 確認入力をするほど武器のゲージ(#hpbar)が貯まる
 */
 
 const imgSrc = ["stone1","sword1","sword2","sword3"];
-var rank = 0;
-var str = 0.0;
-var ore;
 
 const talk = [
   "この鉱石で武器をつくるのか？",
@@ -47,16 +44,16 @@ const lock = new PatternLock("#patternContainer",{
     window.navigator.vibrate(50);
     confirmBtn.style.display="none";
     var newRank = getRank(measure.getStrength(pattern));
-    console.log("rank",rank,": new",newRank);
+    console.log("rank",this.rank,": new",newRank);
     if(!isConfirm){
-      if(rank != newRank){
-        rank = newRank;
+      if(this.rank != newRank){
+        this.rank = newRank;
         msgFrame.value="";
-        msgCtr.type(talk[rank],{speed:40});
-        if(rank==0){
+        msgCtr.type(talk[this.rank],{speed:40});
+        if(this.rank==0){
           weapon.src = "img/weapon/stone"+ore+".png";
         }else{
-          var weaponId = ore*3 + rank;
+          var weaponId = ore*3 + this.rank;
           weapon.src = "img/weapon/weapon"+weaponId+".png";
         }
       }
@@ -66,6 +63,11 @@ const lock = new PatternLock("#patternContainer",{
 
   }
 });
+
+var mainCtr = function(){
+  var rank = 0;
+  var str = 0.0;
+}
 
 window.onload = ()=>{
   msgCtr.type(talk[0],{speed:40});

@@ -29,6 +29,23 @@ var viewController = (function(){
   const weapon = document.getElementById("weapon");
   const list = document.getElementById("list");
   const fade = document.getElementById("fade");
+  const treasures = [
+    document.getElementById("tre0"),
+    document.getElementById("tre1"),
+    document.getElementById("tre2"),
+    document.getElementById("tre3"),
+    document.getElementById("tre4"),
+    document.getElementById("tre5"),
+    document.getElementById("tre6"),
+    document.getElementById("tre7"),
+    document.getElementById("tre8"),
+    document.getElementById("tre9"),
+    document.getElementById("tre10"),
+    document.getElementById("tre11"),
+    document.getElementById("tre12"),
+    document.getElementById("tre13"),
+    document.getElementById("tre14")
+  ];
 
   const msgCtr = new WordTyping(msgFrame);
   return {
@@ -54,6 +71,17 @@ var viewController = (function(){
     disableSelect:function(){
       list.style.overflow="hidden"
       fade.style["z-index"]="100";
+    },
+    showTreasure:(itemAry)=>{
+      console.log(itemAry.length);
+      itemAry[0] = 1;
+      console.log("item :",itemAry);
+      for(var i = 0; i<itemAry.length; i++){
+        if(itemAry[i]){
+          console.log("tre"+i);
+          document.getElementById("tre"+i).className = "treasure";
+        }
+      }
     }
   }
 }());
@@ -81,11 +109,14 @@ function cancelSelect(){
 
 window.onload = function(){
   var context = getUserData();
+  console.log(context.player);
   var user = context.player ? JSON.parse(context.player) : {};
   var voyage = context.voyage ? JSON.parse(context.voyage) : {};
   console.log(user.weapon);
   if(user.weapon != undefined){
     viewController.showWeapon(user.weapon);
+    if(user.item)
+      viewController.showTreasure(user.item);
     viewController.msgType("冒険に行くのかい？");
     document.getElementById("moc1").addEventListener("click",confirmSelect(0),false);
     document.getElementById("moc2").addEventListener("click",confirmSelect(1),false);

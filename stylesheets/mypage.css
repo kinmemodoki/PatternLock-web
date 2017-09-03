@@ -1,17 +1,103 @@
 body{
-  background-color: #666;
+  background-color: #000;
 }
 
-.start{
-  font-size:40px;
-  width:80%;
-  margin-top:20%;
+#stage{
+  background-image: url("../img/stage/city480.png");
+  background-position:center bottom;
+  height:30%;
+  width:100%;
+  background-size:cover;
 }
 
-.start>a{
-  position:relative;
-  display:block;
-  padding:12px;
+.player{
+  position: absolute;
+  bottom:70px;
+  margin-left:40px;
+  transition: all 0.5s ease-in-out;
+}
+#playerIcon{
+  position: relative;
+  z-index:1;
+}
+.character.weaponIcon{
+  width:70px;
+  position: relative;
+  z-index:1;
+  left:-65px;/*
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;  /* IE (非標準プロパティ) */
+}
+
+.textarea{
+  padding:8px;
+  font-size: 28px;
+  height:64px;
+  color:#FFF;
+  width:90%;
+}
+.maintext{
+  bottom:0;
+}
+
+.menu-area{
+  position: absolute;
+  bottom:0;
+  height:70%;
+}
+.menu-item{
+  float:left;
+  position: relative;
+  margin:10px;
+  width:300px;
+  height:30%;
+  text-align: center;
+  padding:0;
+  overflow: auto;
+  cursor:pointer;
+}
+.menu-item-warapper{
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
   width: 100%;
-  color:#ddd;
 }
+#fade{
+  position: relative;
+  width:100%;
+  height:100%;
+  background-image: linear-gradient(
+    -45deg,
+    rgba(255,255,255,0) 25%,
+    #F89406 25%, #F89406 50%,
+    rgba(255,255,255,0) 50%, rgba(255,255,255,0) 75%,
+    #F89406 75%, #F89406
+  );
+  background-size: 60px 60px;
+  opacity: 0.8;
+}
+
+.menu-item .main{
+  font-size: 32px;
+}
+.menu-item .sub{
+  font-size: 24px;
+  color:#999;
+}
+
+span.text-icon {
+  position: absolute;
+  left:5%;
+  display: inline-block;
+  background: #df002c;
+  padding: 1px 5px;
+  margin-left: 5px;       /* 先行する文字列との間隔 */
+  vertical-align: middle; /* 先行する文字列と上下中央揃え */
+  font-size: 0.6em;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 3px;     /* アイコンの角を丸める */
+}
+
