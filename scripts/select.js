@@ -9,7 +9,7 @@ var stageSelector = (function(){
     },
     setCookie:function(){
       console.log("cookie set ",selectStageId);
-      var voyage = {stage:selectStageId,step:0}
+      var voyage = {stage:selectStageId+1,step:0}
       if(selectStageId != null){
         docCookies.setItem("voyage",JSON.stringify(voyage));
       }else{

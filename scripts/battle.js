@@ -1,5 +1,6 @@
 const dataSet = {
   stage:[
+    {name:'街',file:'city',step:100000},
     {name:'始まりの平原',file:'field',step:10},
     {name:'迷いの森',file:'forest',step:10},
     {name:'白銀の雪原',file:'snow',step:20},
@@ -7,6 +8,9 @@ const dataSet = {
     {name:'灼熱の火山',file:'vulcano',step:40}
   ],
   enemy:[
+    {name:'掃除',file:'baito1',hp:500},
+    {name:'お使い',file:'baito2',hp:800},
+    {name:'警備',file:'baito3',hp:1000},
     {name:'のうさぎ',file:'slime',hp:100},
     {name:'オオトカゲ',file:'slime',hp:180},
     {name:'ゴブリン',file:'slime',hp:400},
@@ -37,9 +41,10 @@ var battleController = (function(){
   var battleStatus;// isAtk or isRun
   var context = getUserData();
   var user = context.player ? JSON.parse(context.player) : {};
-  var voyage = context.voyage ? JSON.parse(context.voyage) : {};
+  var voyage = context.voyage ? JSON.parse(context.voyage) : {stage:0};
   var drop = voyage.drop ? JSON.parse(voyage.drop) : {};
-  var progress = voyage.step*100/dataSet.stage[voyage.stage].step;
+  var progress = voyage.step ? voyage.step*100/dataSet.stage[voyage.stage].step : null;
+  console.log(voyage.enemy);
   var enemy = (voyage.enemy==undefined) ? getNewEnemy():JSON.parse(voyage.enemy);
   
   if(enemy.hp <= 0)
@@ -67,7 +72,10 @@ var battleController = (function(){
   return {
     initialize:function(){
       if(progress<=100){
-        viewController.msgType(dataSet.enemy[enemy.id].name+"があらわれた！");
+        if(enemy.id<4)
+          viewController.msgType("勇者は"+dataSet.enemy[enemy.id].name+"のバイトをしている");
+        else
+          viewController.msgType(dataSet.enemy[enemy.id].name+"があらわれた！");
         viewController.showEnemy(enemy.id,enemy.hp);
       }else{//宿屋
         viewController.msgType("勇者は休んでいる...");
@@ -226,11 +234,11 @@ var viewController = (function(){
   //preload HTML data
   var stageId = battleController.getStage();
   frontScreen.style.backgroundImage = 'url("../img/stage/'+dataSet.stage[stageId]["file"]+'480.png")';
-  if(stageId==1){//forest
+  if(stageId==2){//forest
     dayDom.style.color = '#ddd';
     clockDom.style.color = '#ddd';
   }
-  if(stageId==2||stageId==3){
+  if(stageId==3||stageId==4){
     drops.style.color="#333"
   }
 

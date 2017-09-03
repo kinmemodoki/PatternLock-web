@@ -1,5 +1,6 @@
 const dataSet = {
   stage:[
+    {name:'街',file:'city',step:100000},
     {name:'始まりの平原',file:'field',step:10},
     {name:'迷いの森',file:'forest',step:10},
     {name:'白銀の雪原',file:'snow',step:20},
@@ -61,7 +62,7 @@ window.onload = function(){
     viewController.msgType("鍛冶屋で武器を作ってくるんだ");
   }else{
     document.getElementById("toYusha").addEventListener("click",()=>{location.href="./battle.html";},false);
-    if(voyage.stage === undefined){
+    if(voyage.stage === undefined || voyage.stage===0){
       //冒険未設定 && パスワード設定後
       console.log("not set voyage : ",voyage.stage);
       viewController.msgType("関所で冒険先を選んでみよう");
