@@ -15,21 +15,25 @@
     <div class="container">
 
       <div class="scene">
-        <div class="center-absolute game-frame buki" id="buki-window">
-          <img src="img/weapon/stone1.png" id="weapon" class="center-absolute">
-          <div class="center-absolute hp"><div class="hpBar" id="hpBar"></div></div>
-        </div>
         <div class="center-absolute stage">
           <img src="img/character/yusha.png" class="character left flip-horizontal">
           <img src="img/character/kajiya.png" class="character right">
         </div>
+        <div class="center-absolute game-frame buki" id="buki-window">
+          <img src="" id="weapon" class="center-absolute">
+          <div class="center-absolute hp"><div class="hpBar" id="hpBar"></div></div>
+          <div class="center-absolute dottext" id="change-button">
+            ↓タップで素材変更↓
+          </div>
+        </div>
+        
 
         <textarea id="msg-window" class="center-absolute game-frame textarea dottext msg-area" disabled="true">
         </textarea>
         <div id="confirmBtn" class="confirm-window game-frame dottext msg-area">
-          <p id="confirmYes" onclick="setPattern()">はい</p>
+          <p id="confirmYes" onclick="gameCtr.setPattern()">はい</p>
           <hr>
-          <p onclick="cancelConfirm()">いいえ</p>
+          <p onclick="gameCtr.cancelConfirm()">いいえ</p>
         </div>
 
       </div>

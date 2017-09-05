@@ -16,7 +16,7 @@ class PasswordMeasure{
   }
 
   //internal functions
-  idx2cell(pattern){
+  _idx2cell(pattern){
     var coordTable = [
       {row:0,column:1},
       {row:0,column:2},
@@ -34,7 +34,7 @@ class PasswordMeasure{
     return cellPattern;
   }
 
-  isIntersect(p1,p2,p3,p4) {
+  _isIntersect(p1,p2,p3,p4) {
     //（p1,p2）と（p3,p4）が交わるか。
     // from http://www5d.biglobe.ne.jp/~tomoya03/shtml/algorithm/Intersection.html
     if(((p1.column - p2.column) * (p3.row - p1.row) + (p1.row - p2.row) * (p1.column - p3.column)) *  ((p1.column - p2.column) * (p4.row - p1.row) + (p1.row - p2.row) * (p1.column - p4.column)) < 0) {
@@ -45,7 +45,7 @@ class PasswordMeasure{
     return false;
   }
 
-  calcLp(pattern){
+  _calcLp(pattern){
     var Lp = 0;
     var c1,c2;
     for(var i = 1; i < pattern.length; i++){
@@ -59,7 +59,7 @@ class PasswordMeasure{
     return Lp;
   }
 
-  calcIp(pattern){
+  _calcIp(pattern){
     var Ip = 0;
     var c1,c2,c3,c4;
     for(var i = 3; i < pattern.length; i++){
@@ -68,14 +68,14 @@ class PasswordMeasure{
       for(var j = 1; j < pattern.length-2; j++){
         c2 = pattern[j];
         c1 = pattern[j-1];
-        if(this.isIntersect(c1,c2,c3,c4))
+        if(this._isIntersect(c1,c2,c3,c4))
           Ip++;
       }
     }
     return Ip;
   }
 
-  calcNp(pattern){
+  _calcNp(pattern){
     var Np = 0;
     var Sp = pattern.length - 1; //セグメントの合計
     var Rp = 0; //連続で入力された同じ向きのセグメント数
@@ -92,16 +92,16 @@ class PasswordMeasure{
     return Np;
   }
 
-  calcStrength(pattern){
-    var mLp = this.calcLp(pattern);
-    var mIp = this.calcIp(pattern);
-    var mNp = this.calcNp(pattern);
+  _calcStrength(pattern){
+    var mLp = this._calcLp(pattern);
+    var mIp = this._calcIp(pattern);
+    var mNp = this._calcNp(pattern);
     return this.w_L*(mLp/15) + this.w_N*mNp +this.w_I*Math.min(mIp,5)/5;
   }
 
   getStrength(mPattern){
-    var pattern = this.idx2cell(mPattern);
-    var strength = this.calcStrength(pattern) || 0;
+    var pattern = this._idx2cell(mPattern);
+    var strength = this._calcStrength(pattern) || 0;
     return strength;
   }
 }

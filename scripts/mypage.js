@@ -59,12 +59,14 @@ window.onload = function(){
     console.log("not set password");
     viewController.disableButton();
     viewController.showOssan();
+    viewController.changeBGI(0);
     viewController.msgType("鍛冶屋で武器を作ってくるんだ");
   }else{
     document.getElementById("toYusha").addEventListener("click",()=>{location.href="./battle.html";},false);
     if(voyage.stage === undefined || voyage.stage===0){
       //冒険未設定 && パスワード設定後
       console.log("not set voyage : ",voyage.stage);
+      viewController.changeBGI(0);
       viewController.msgType("関所で冒険先を選んでみよう");
     }else{
       //冒険設定後()

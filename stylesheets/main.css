@@ -35,6 +35,14 @@ html,body{
   margin-right: auto;
   margin-left: auto;
 }
+.center-relative{
+  position: relative;
+  left: 0;
+  right: 0;
+  display:block;
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .container {
   width: 100%;

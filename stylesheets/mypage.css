@@ -3,7 +3,6 @@ body{
 }
 
 #stage{
-  background-image: url("../img/stage/city480.png");
   background-position:center bottom;
   height:30%;
   width:100%;

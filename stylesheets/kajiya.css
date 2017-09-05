@@ -1,6 +1,6 @@
 .stage{
   position:absolute;
-  height: 14%;
+  height: 30%;
   width: 100%;
   bottom:80px;
   margin-bottom: 50px;
@@ -8,10 +8,10 @@
 
 .buki{
   position:absolute;
-  bottom:20%;
+  bottom:40%;
   padding:10px;
-  width:200px;
-  height:14%;
+  width:180px;
+  height:180px;
   max-height:160px;
   max-width:160px;
 }
@@ -21,7 +21,6 @@
   height:95%;
   width:auto;
   margin-top: 5px;
-  padding-left:10px;
   image-rendering: pixelated;
   -ms-interpolation-mode: nearest-neighbor;  /* IE (非標準プロパティ) */
 }
@@ -41,17 +40,18 @@
 .textarea{
   position:absolute;
   bottom:0;
-  height:132px;
+  height:124px;
   width:600px;
 }
 
 .scene{
   position: absolute;
-  height:100%;
+  top:0;
   width:100%;
   bottom:520px;
   display:block;
-  background-image:url("../img/back.jpg");
+  background-color: #666;
+  /*background-image:url("../img/back.jpg");*/
 }
 
 .hp{
@@ -81,4 +81,13 @@
 .confirm-window>hr{
   margin-top:5px;
   margin-bottom:5px; 
+}
+
+#change-button{
+  top:-44px;
+  left:-78px;
+  color: white;
+  text-align: center;
+  width:300px;
+  font-size: 28px;
 }

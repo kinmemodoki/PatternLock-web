@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="robots" content="noindex,nofollow" />
+    <meta charset="UTF-8">
+    <title>PassMake Page</title>
+    <meta name="viewport" content="width=640 user-scalable=no">
+    <link href="stylesheets/bootstrap.css"  rel="stylesheet" type="text/css" />
+    <link href="patternlock-js/patternLock.css"  rel="stylesheet" type="text/css" />
+    <link href="stylesheets/main.css"  rel="stylesheet" type="text/css" />
+    <link href="stylesheets/oreSelect.css"  rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="container">
+      
+  <div id="carousel-example-generic" class="carousel slide"  data-interval="false">
+    <!-- Indicators -->
+    <ol class="carousel-indicators" id="carousel-indicators">
+      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+    </ol>
+   
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="img/ingot/ingot1.png" class="center-absolute">
+        <div class="carousel-caption dottext" id="ingot1">
+          <h1>鉄</h1>
+          <p>Iron</p>
+        </div>
+      </div>
+      <div class="item" id="item2">
+        <img src="img/ingot/ingot2.png" class="center-absolute shadow">
+        <div class="carousel-caption dottext" id="ingot2">
+          <h1>??</h1>
+          <p>?????</p>
+        </div>
+        <div class="center-absolute game-frame dottext msg-area purchase-window" id="purchase2">
+          <div class="center-relative ingot-money">
+            <img src="img/golds.png" class=""><span>500</span>
+          </div>
+          <div class="center-relative purchase-msg">
+            購入する
+          </div>
+          <div class="mymoney">
+            所持金：<span id="mymoney2"></span>
+          </div>
+        </div>
+      </div>
+      <div class="item" id="item3">
+        <img src="img/ingot/ingot3.png" class="center-absolute shadow">
+        <div class="carousel-caption dottext" id="ingot3">
+          <h1>??</h1>
+          <p>?????</p>
+        </div>
+        <div class="center-absolute game-frame dottext msg-area purchase-window" id="purchase3">
+          <div class="center-relative ingot-money">
+            <img src="img/golds.png" class=""><span>x3000</span>
+          </div>
+          <div class="center-relative purchase-msg">
+            購入する
+          </div>
+          <div class="mymoney">
+            所持金：<span id="mymoney3"></span>
+          </div>
+        </div>
+      </div>
+      <div class="item" id="item4">
+        <img src="img/ingot/ingot4.png" class="center-absolute shadow">
+        <div class="carousel-caption dottext" id="ingot4">
+          <h1>??</h1>
+          <p>?????</p>
+        </div>
+        <div class="center-absolute game-frame dottext msg-area purchase-window" id="purchase4">
+          <div class="center-relative ingot-money">
+            <img src="img/golds.png" class=""><span>x10000</span>
+          </div>
+          <div class="center-relative purchase-msg">
+            購入する
+          </div>
+          <div class="mymoney">
+            所持金：<span id="mymoney4"></span>
+          </div>
+        </div>
+      </div>
+      <div class="item" id="item5">
+        <img src="img/ingot/ingot5.png" class="center-absolute shadow">
+        <div class="carousel-caption dottext" id="ingot5">
+          <h1>??</h1>
+          <p>?????</p>
+        </div>
+        <div class="center-absolute game-frame dottext msg-area purchase-window" id="purchase5">
+          <div class="center-relative ingot-money">
+            <img src="img/golds.png" class=""><span>x30000</span>
+          </div>
+          <div class="center-relative purchase-msg">
+            購入する
+          </div>
+          <div class="mymoney">
+            所持金：<span id="mymoney5"></span>
+          </div>
+        </div>
+      </div>
+      <div class="item" id="item6">
+        <img src="img/ingot/ingot6.png" class="center-absolute shadow">
+        <div class="carousel-caption dottext" id="ingot6">
+          <h1>??</h1>
+          <p>?????</p>
+        </div>
+        <div class="center-absolute game-frame dottext msg-area purchase-window" id="purchase6">
+          <div class="center-relative ingot-money">
+            <img src="img/golds.png" class=""><span>x60000</span>
+          </div>
+          <div class="center-relative purchase-msg">
+            購入する
+          </div>
+          <div class="mymoney">
+            所持金：<span id="mymoney6">100000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+      <span class="sankaku" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+      <span class="sankaku" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+
+  </div>
+  <div class="warapper">
+  <div class="game-frame dottext msg-area decide-button" id="decide-button">
+    これにする！
+  </div>
+  </div>
+
+  <textarea id="msg-window" class="center-absolute game-frame textarea dottext msg-area" disabled="true">
+  </textarea>
+
+    </div>
+  </body>
+
+  <script src="scripts/jquery-3.2.1.slim.min.js"></script>
+  <script src="scripts/bootstrap.min.js"> </script>
+  <script src="patternlock-js/patternLock.js"></script>
+  <script src="scripts/typingWord.js"></script>
+  <script src="scripts/cookies.js"></script>
+  <script src="scripts/oreSelect.js"></script>
+</html>

@@ -14,6 +14,7 @@
     <button type="button" class="btn btn-primary" onclick="setCookie('player.weapon','2')">武器２</button>
     <button type="button" class="btn btn-primary" onclick="setCookie('player.weapon','3')">武器３</button>
   </div>
+  <div>money<input type="text" name="text" value="100" onchange="changeUserValue('money',this.value)"></div>
   <div>
     <input type="checkbox" value="0" class="chbox">1
     <input type="checkbox" value="1" class="chbox">2
@@ -47,10 +48,6 @@
     <button type="button" class="btn btn-warning" onclick="setCookie('enemy.id','1')">敵２</button>
     <button type="button" class="btn btn-warning" onclick="setCookie('enemy.id','2')">敵３</button>
     <br>
-    <span id="val">100</span>
-    <input id="bar" type="range" name="num" min="0" max="100" step="1" value="100"
- onchange="changeValue('enemy.hp',this.value)"
-    style="height:15px;color: #1f2;">
   </div>
   <div class="container cookieManager" style="width:100%;margin:10px">
   <textarea id="textarea" style="width:100%;"></textarea>
@@ -83,7 +80,6 @@
   
   function setCookie(key,val){
     console.log(key,val);
-    //console.log(docCookies);
     docCookies.setItem(key,val);
     $("#textarea").val(document.cookie);
   }
@@ -95,9 +91,9 @@
     $("#textarea").val(document.cookie);
   }
   
-  function changeValue(key,val) {
-    document.getElementById("val").innerHTML = val;
-    setCookie(key,val);
+  function changeUserValue(key,val) {
+    user[key] = val;
+    setCookie('player',JSON.stringify(user));
   }
 
   function boxCheck(){

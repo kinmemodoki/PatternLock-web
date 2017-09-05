@@ -1,0 +1,93 @@
+.textarea{
+  position:absolute;
+  bottom:0;
+  height:160px;
+  width:600px;
+}
+.decide-button{
+  margin:20px;
+  height:84px;
+  display:inline-block;
+  cursor:pointer;
+}
+.warapper{
+  text-align: center;
+}
+
+.carousel-indicators{
+  bottom:90px;
+}
+
+.carousel{
+  height: 500px;
+}
+.carousel-inner{
+  width: 640px;
+  height: 100%;
+}
+.item{
+  width: 640px;
+  height: 100%;
+}
+
+.item>img{
+  margin-top:-10%;
+  width: 480px;
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;  /* IE (非標準プロパティ) */
+
+}
+
+.carousel-caption{
+  padding-bottom: 0;
+}
+.carousel-caption>*{
+  margin-bottom: 0;
+}
+.carousel-caption>p{
+  font-size: 24px;
+}
+
+.sankaku{
+  width: 0px;
+  height: 0px;
+  border: 30px solid transparent;
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+}
+.right>.sankaku{
+  border-left: 30px solid #fff;
+}
+.left>.sankaku{
+  border-right: 30px solid #fff;
+  left:0;
+}
+
+.purchase-window{
+  top:30%;
+  width:300px;
+  height:200px;
+  float:left;
+}
+.purchase-window>div{
+  text-align:center;
+}
+.ingot-money>img{
+  margin-top: -10px;
+  width:70px;
+}
+.ingot-money>span{
+  font-size:42px;
+}
+.center-relative{
+  margin-bottom: 10px;
+}
+.mymoney{
+  font-size:26px;
+}
+
+.shadow{
+  filter:brightness(0%) contrast(40%);
+  -webkit-filter:brightness(0%) contrast(40%);
+}

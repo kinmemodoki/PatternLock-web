@@ -72,9 +72,10 @@ var battleController = (function(){
   return {
     initialize:function(){
       if(progress<=100){
-        if(enemy.id<4)
+        if(enemy.id<4){
           viewController.msgType("勇者は"+dataSet.enemy[enemy.id].name+"のバイトをしている");
-        else
+          viewController.hidePlayer();
+        }else
           viewController.msgType(dataSet.enemy[enemy.id].name+"があらわれた！");
         viewController.showEnemy(enemy.id,enemy.hp);
       }else{//宿屋

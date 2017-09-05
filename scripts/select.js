@@ -28,34 +28,16 @@ var viewController = (function(){
   const msgFrame = document.getElementById("msg-window");
   const weapon = document.getElementById("weapon");
   const list = document.getElementById("list");
-  const fade = document.getElementById("fade");
-  const treasures = [
-    document.getElementById("tre0"),
-    document.getElementById("tre1"),
-    document.getElementById("tre2"),
-    document.getElementById("tre3"),
-    document.getElementById("tre4"),
-    document.getElementById("tre5"),
-    document.getElementById("tre6"),
-    document.getElementById("tre7"),
-    document.getElementById("tre8"),
-    document.getElementById("tre9"),
-    document.getElementById("tre10"),
-    document.getElementById("tre11"),
-    document.getElementById("tre12"),
-    document.getElementById("tre13"),
-    document.getElementById("tre14")
-  ];
 
   const msgCtr = new WordTyping(msgFrame);
   return {
     msgType:function(msg){
       msgCtr.type(msg,{speed:40});
     },
-    showConfirm(){
+    showConfirm:()=>{
       confirmFrame.style.display = "block";
     },
-    hideConfirm(){
+    hideConfirm:()=>{
       confirmFrame.style.display = "none";
     },
     showWeapon:function(weaponId){
@@ -69,18 +51,15 @@ var viewController = (function(){
       player.style.transform='translate(640px, 0)';
     },
     disableSelect:function(){
+      const fade = document.getElementById("fade");
       list.style.overflow="hidden"
       fade.style["z-index"]="100";
     },
     showTreasure:(itemAry)=>{
-      console.log(itemAry.length);
-      itemAry[0] = 1;
       console.log("item :",itemAry);
       for(var i = 0; i<itemAry.length; i++){
-        if(itemAry[i]){
-          console.log("tre"+i);
+        if(itemAry[i])
           document.getElementById("tre"+i).className = "treasure";
-        }
       }
     }
   }
@@ -101,13 +80,14 @@ function desideSelect(){
     window.location = "./mypage.html"
   }, 500);
 }
-function cancelSelect(){
+function initSelect(){
   viewController.msgType("どこにいくんだ？");
   viewController.hideConfirm();
   stageSelector.reset();
 }
 
 window.onload = function(){
+  initSelect();
   var context = getUserData();
   console.log(context.player);
   var user = context.player ? JSON.parse(context.player) : {};
@@ -117,14 +97,13 @@ window.onload = function(){
     viewController.showWeapon(user.weapon);
     if(user.item)
       viewController.showTreasure(user.item);
-    viewController.msgType("冒険に行くのかい？");
+    document.getElementById("yesBtn").addEventListener("click",desideSelect,false);
+    document.getElementById("noBtn").addEventListener("click",initSelect,false);
     document.getElementById("moc1").addEventListener("click",confirmSelect(0),false);
     document.getElementById("moc2").addEventListener("click",confirmSelect(1),false);
     document.getElementById("moc3").addEventListener("click",confirmSelect(2),false);
     document.getElementById("moc4").addEventListener("click",confirmSelect(3),false);
     document.getElementById("moc5").addEventListener("click",confirmSelect(4),false);
-    document.getElementById("yesBtn").addEventListener("click",desideSelect,false);
-    document.getElementById("noBtn").addEventListener("click",cancelSelect,false);
   }else{
     viewController.msgType("武器を作ってからきてね");
     viewController.disableSelect();
