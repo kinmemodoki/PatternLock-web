@@ -1,10 +1,10 @@
 var ingots = [
-    {name:"鉄",eng:"iron",money:0,sub:""},
-    {name:"銅",eng:"copper",money:500,sub:""},
-    {name:"金",eng:"gold",money:3000,sub:""},
-    {name:"アメジスト",eng:"amethyst",money:10000,sub:""},
-    {name:"ブラックチタン",eng:"black-titan",money:30000,sub:""},
-    {name:"アダマンチウム",eng:"adamantium",money:60000,sub:""},
+    {name:"鉄",eng:"iron",money:0,sub:"大昔から人々に使われていた金属\n邪悪なものを取り除く力があるらしい"},
+    {name:"銅",eng:"copper",money:500,sub:"鉄と同じく大昔から人々に使われていた金属\n鉄と比べ加工がしやすいため武器の幅がひろがった"},
+    {name:"金",eng:"gold",money:3000,sub:"現代でも変わらず高い価値をもつ金属\n電気を通しやすい不思議な力をもつ"},
+    {name:"ダイヤモンド",eng:"Diamond",money:10000,sub:"めっちゃ希少な宝石\nめっちゃ硬いしめっちゃキレイ"},
+    {name:"ブラックチタン",eng:"black-titan",money:30000,sub:"とても硬い金属\nかっこいい"},
+    {name:"アダマンチウム",eng:"adamantium",money:60000,sub:"この世でイチバン硬い伝説の金属\nこの金属を加工できる匠は数人しかいない"},
     ];
 
 var gameCtr = (function(){
@@ -45,6 +45,7 @@ var gameCtr = (function(){
 var viewCtr = (function(){
   const moneyDomId = ["empty","mymoney2","mymoney3","mymoney4","mymoney5","mymoney6"];
   const purchaseDomId = ["empty","mymoney2","mymoney3","mymoney4","mymoney5","mymoney6"];
+
   var moneyDom = [];
   
   console.log(moneyDom);
@@ -58,9 +59,11 @@ var viewCtr = (function(){
     },
     setMyMoney:(money)=>{
       var haveIngots = gameCtr.getHaveIngot();
-      for(var i = 2; i<haveIngots.length+1;i++){
+      for(var i = 1; i<haveIngots.length;i++){
+        //haveIngots:[1,0,1,0,0,0]
+        var a = moneyDomId[i+1];
         if(!haveIngots[i])
-          moneyDom.push(document.getElementById("mymoney"+i));
+          moneyDom.push(document.getElementById(moneyDomId[i]));
       }
       for(i in moneyDom)
         moneyDom[i].innerText = money;

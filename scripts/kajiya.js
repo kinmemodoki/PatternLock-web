@@ -83,6 +83,7 @@ var gameCtr = (function(){
     },
     chagePattern:(pattern)=>{
       var newRank = getRank(pattern);
+      tempPattern = pattern;
       console.log("rank",tempRank,": new",newRank);
       if(tempRank != newRank && pattern.length>=5){
         tempRank = newRank;
@@ -103,7 +104,7 @@ var gameCtr = (function(){
       viewCtr.showIngot(ingotPow);
     },
     setPattern:()=>{
-      user.key = tempPattern;
+      user.key = tempPattern.join("");
       user.weapon = weaponId;
       docCookies.setItem("player",JSON.stringify(user));
       window.location = "./mypage.html";
