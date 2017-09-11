@@ -3,13 +3,16 @@ const voyage = ["始まりの平原","迷いの森","白銀の雪原","不毛の
 
 var stageSelector = (function(){
   var selectStageId = null;
+  var context = getUserData();
+  var voyage = context.voyage ? JSON.parse(context.voyage) : {stage:0};
+  var drop = voyage.drop ? JSON.parse(voyage.drop) : {gold:[0,0,0,0,0,0],treasure:[0,0,0,0,0,0]};
   return {
     select:function(id){
       selectStageId = id;
     },
     setCookie:function(){
       console.log("cookie set ",selectStageId);
-      var voyage = {stage:selectStageId+1,step:0}
+      var voyage = {stage:selectStageId+1,step:0,drop:JSON.stringify(drop)}
       if(selectStageId != null){
         docCookies.setItem("voyage",JSON.stringify(voyage));
       }else{
@@ -59,7 +62,7 @@ var viewController = (function(){
       console.log("item :",itemAry);
       for(var i = 0; i<itemAry.length; i++){
         if(itemAry[i])
-          document.getElementById("tre"+i).className = "treasure";
+          document.getElementById("tre"+(i-3)).className = "treasure";
       }
     }
   }

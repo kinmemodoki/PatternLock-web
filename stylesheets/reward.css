@@ -1,5 +1,10 @@
+body{
+  margin:0;
+}
+
+
 .top{
-  height:15%;
+  height:10%;
   padding-top:5%;
   background-color: #666;
   color: white;
@@ -37,11 +42,11 @@
   display: inline-block;
   vertical-align: middle;
   font-size: 50px;
-  left: 128px;
+  margin-left: 20px;
 }
 
 .bottom{
-  height:15%;
+  height:20%;
   background-color: #333;
 }
 .flex-center{
@@ -53,7 +58,7 @@
   align-items:         center;
 }
 .square_btn {
-    height:60%;
+    height:40%;
     color: #FFF;
     background: #fd9535;/*背景色*/
     font-weight: bold;

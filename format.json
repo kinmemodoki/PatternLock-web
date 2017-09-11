@@ -10,6 +10,7 @@ Cookie
       0,0,0,
       0,0,0,
       0,0,0,
+      0,0,0,
       0,0,0
     ],
     ore:[1,0,0,0,0,0],
@@ -23,12 +24,8 @@ Cookie
       hp:100//100 (percent)
     }
     drop:{
-      gold:0,
-      tresure0:0,
-      tresure1:0,
-      tresure2:0,
-      tresure3:0,
-      tresure4:0
+      gold:[0/*ダミー*/,0,0,0,0,0],
+      tresure:[0/*ダミー*/,0,0,0,0,0]
     }
   }
 }

@@ -24,14 +24,17 @@
 
 .enemy{
   position:absolute;
-  height: 250px;
-  width: 250px;
+  height: 280px;
+  width: 280px;
   bottom:40%;
   max-height:30%;
   min-height:180px;
+  
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;  /* IE (非標準プロパティ) */
 }
 .enemy .character{
-  width:50%;
+  width:60%;
   height:auto;
   bottom:0;
   margin-bottom:20%;

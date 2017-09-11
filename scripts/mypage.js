@@ -82,5 +82,6 @@ window.onload = function(){
   document.getElementById("toKajiya").addEventListener("click",()=>{location.href="./kajiya.html";},false);
   document.getElementById("toSekisyo").addEventListener("click",()=>{location.href="./select.html";},false);
   document.getElementById("toHoumotsu").addEventListener("click",()=>{location.href="./treasury.html";},false);
+  document.getElementById("toUketori").addEventListener("click",()=>{location.href="./reward.html";},false);
 
 }

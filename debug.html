@@ -9,11 +9,6 @@
   <link href="patternlock-js/patternLock.css"  rel="stylesheet" type="text/css" />
 </head>
 <body>
-  <div class="container weapon" style="width:100%;margin:10px">
-    <button type="button" class="btn btn-primary" onclick="setCookie('player.weapon','1')">武器１</button>
-    <button type="button" class="btn btn-primary" onclick="setCookie('player.weapon','2')">武器２</button>
-    <button type="button" class="btn btn-primary" onclick="setCookie('player.weapon','3')">武器３</button>
-  </div>
   <div>money<input type="text" name="text" value="100" onchange="changeUserValue('money',this.value)"></div>
   <div>
     <input type="checkbox" value="0" class="chbox">1
@@ -35,18 +30,16 @@
     </div>
 
   <div class="container stage" style="width:100%;margin:10px">
-    <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','0')">ステージ０（街）</button><br>
+    <!--<button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','0')">ステージ０（街）</button><br>
     <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','1')">ステージ１（丘）</button><br>
     <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','2')">ステージ２（砂漠）</button><br>
     <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','3')">ステージ３（森）</button><br>
     <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','4')">ステージ４（雪）</button><br>
     <button type="button" class="btn btn-info" onclick="setCookie('voyage.stage','5')">ステージ５（火山）</button>
-    <input type="number" min="1" max="10" name="step" onchange="changeValue('voyage.step',this.value)" style="border:solid #ff00ff;">
+    <input type="number" min="1" max="10" name="step" onchange="changeValue('voyage.step',this.value)" style="border:solid #ff00ff;">-->
   </div>
   <div class="container enemy" style="width:100%;margin:10px">
-    <button type="button" class="btn btn-warning" onclick="setCookie('enemy.id','0')">敵１</button>
-    <button type="button" class="btn btn-warning" onclick="setCookie('enemy.id','1')">敵２</button>
-    <button type="button" class="btn btn-warning" onclick="setCookie('enemy.id','2')">敵３</button>
+    <div>enemyId<input type="text" name="text" value="" onchange="setEnemy(this.value)"></div>
     <br>
   </div>
   <div class="container cookieManager" style="width:100%;margin:10px">
@@ -82,6 +75,11 @@
     console.log(key,val);
     docCookies.setItem(key,val);
     $("#textarea").val(document.cookie);
+  }
+
+  function setEnemy(id){
+    voyage.enemy = JSON.stringify({id:id,hp:100});
+    setCookie("voyage",JSON.stringify(voyage))
   }
 
   function deleteCookie(){

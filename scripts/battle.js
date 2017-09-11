@@ -11,28 +11,29 @@ const dataSet = {
     {name:'掃除',file:'baito1',hp:500},
     {name:'お使い',file:'baito2',hp:800},
     {name:'警備',file:'baito3',hp:1000},
-    {name:'のうさぎ',file:'slime',hp:100},
-    {name:'オオトカゲ',file:'slime',hp:180},
-    {name:'ゴブリン',file:'slime',hp:400},
-    {name:'スパイダー',file:'slime',hp:200},
-    {name:'まほうつかい',file:'slime',hp:300},
-    {name:'もりのぬし',file:'slime',hp:1000},
+    {name:'スライム',file:'slime',hp:100},
+    {name:'オオコウモリ',file:'bat',hp:180},
+    {name:'オーガ',file:'ogre',hp:400},
+    {name:'スパイダー',file:'spider',hp:200},
+    {name:'まほうつかい',file:'mage',hp:300},
+    {name:'もりのぬし',file:'haunted',hp:1000},
     {name:'ゆきんこ',file:'yukinko',hp:300},
     {name:'スノーマン',file:'snowman',hp:500},
     {name:'イエティ',file:'yeti',hp:3000},
     {name:'ガラガラヘビ',file:'snake',hp:500},
     {name:'スコーピオン',file:'scorpion',hp:1000},
-    {name:'サンドワーム',file:'slime',hp:6000},
-    {name:'モール',file:'slime',hp:100},
-    {name:'ファイアゴーレム',file:'slime',hp:100},
-    {name:'ドラゴン',file:'slime',hp:100},
+    {name:'サンドワーム',file:'sandworm',hp:6000},
+    {name:'ひのたま',file:'fireboy',hp:100},
+    {name:'マグマボール',file:'magman',hp:100},
+    {name:'ドラゴン',file:'dragon',hp:100},
   ],
   weaponPow:
   [50,70,90,
    80,100,120,
    100,150,200,
    150,200,250,
-   200,250,300]
+   200,250,300,
+   400,500,600]
 }
 const enemyMidEncount = 0.4;
 
@@ -51,9 +52,9 @@ var battleController = (function(){
     enemy =getNewEnemy();
 
   if(drop.gold==undefined)
-    drop.gold=0;
+    drop.gold=[0,0,0,0,0,0];
   if(drop.treasure==undefined)
-    drop.treasure=0;
+    drop.treasure=[0,0,0,0,0,0];
 
   function getNewEnemy(){
     var id,hp;
@@ -72,7 +73,7 @@ var battleController = (function(){
   return {
     initialize:function(){
       if(progress<=100){
-        if(enemy.id<4){
+        if(enemy.id<3){
           viewController.msgType("勇者は"+dataSet.enemy[enemy.id].name+"のバイトをしている");
           viewController.hidePlayer();
         }else
@@ -88,7 +89,7 @@ var battleController = (function(){
       }
       viewController.showWeapon(user.weapon);
       viewController.showProgress(progress);
-      viewController.setDrops(drop.gold,drop.treasure);
+      viewController.setDrops(drop.gold[voyage.stage],drop.treasure[voyage.stage]);
       battleController.commit();
     },
     isVoyage:function(){
@@ -126,12 +127,11 @@ var battleController = (function(){
         console.log(dropObj);
         viewController.dropItem(dropObj.item);
         if(dropObj.item=="gold"){
-          viewController.addGold(drop.gold+dropObj.amount);
-          drop.gold = drop.gold + dropObj.amount;
+          drop.gold[voyage.stage] += dropObj.amount;
         }else{
-          viewController.addtreasure(drop.treasure+dropObj.amount);
-          drop["treasure"] += dropObj.amount;
+          drop.treasure[voyage.stage] += dropObj.amount;
         }
+        viewController.setDrops(drop.gold[voyage.stage],drop.treasure[voyage.stage])
         
       }, 300);
     },
@@ -333,12 +333,6 @@ var viewController = (function(){
         treasure.style.opacity=1;
       }
 
-    },
-    addtreasure:function(){
-
-    },
-    addGold:function(amount){
-      goldAmount.innerText="x"+('00'+amount).slice(-2);;
     }
   }
 }());
