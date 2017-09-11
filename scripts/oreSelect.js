@@ -33,9 +33,14 @@ var gameCtr = (function(){
     },
     decideIngot:()=>{
       var elm = document.querySelector("#carousel-indicators>.active");
-      user.ore = elm.getAttribute("data-slide-to")-0+1;
-      gameCtr.setCookie();
-      location.href = "./kajiya.html"
+      var oreId = elm.getAttribute("data-slide-to");
+      if(haveIngot[oreId]){
+        user.ore = oreId-0+1;
+        gameCtr.setCookie();
+        location.href = "./kajiya.html"
+      }else{
+        window.alert("Please purchase Ingot!!")
+      }
     },
     setCookie:()=>{console.log("user");docCookies.setItem("player",JSON.stringify(user));},
     getHaveIngot:()=>{ return haveIngot }
