@@ -3,37 +3,42 @@ const dataSet = {
     {name:'街',file:'city',step:100000},
     {name:'始まりの平原',file:'field',step:10},
     {name:'迷いの森',file:'forest',step:10},
-    {name:'白銀の雪原',file:'snow',step:20},
-    {name:'不毛の砂漠',file:'desert',step:30},
-    {name:'灼熱の火山',file:'vulcano',step:40}
+    {name:'白銀の雪原',file:'snow',step:10},
+    {name:'不毛の砂漠',file:'desert',step:10},
+    {name:'灼熱の火山',file:'vulcano',step:10}
   ],
   enemy:[
     {name:'掃除',file:'baito1',hp:500},
     {name:'お使い',file:'baito2',hp:800},
     {name:'警備',file:'baito3',hp:1000},
-    {name:'スライム',file:'slime',hp:100},
-    {name:'オオコウモリ',file:'bat',hp:180},
-    {name:'オーガ',file:'ogre',hp:400},
-    {name:'スパイダー',file:'spider',hp:200},
-    {name:'まほうつかい',file:'mage',hp:300},
-    {name:'もりのぬし',file:'haunted',hp:1000},
-    {name:'ゆきんこ',file:'yukinko',hp:300},
-    {name:'スノーマン',file:'snowman',hp:500},
-    {name:'イエティ',file:'yeti',hp:3000},
+
+    {name:'スライム',file:'slime',hp:90},
+    {name:'オオコウモリ',file:'bat',hp:150},
+    {name:'オーガ',file:'ogre',hp:250},
+
+    {name:'スパイダー',file:'spider',hp:120},
+    {name:'まほうつかい',file:'mage',hp:220},
+    {name:'もりのぬし',file:'haunted',hp:350},
+
+    {name:'ゆきんこ',file:'yukinko',hp:290},
+    {name:'スノーマン',file:'snowman',hp:450},
+    {name:'イエティ',file:'yeti',hp:600},
+
     {name:'ガラガラヘビ',file:'snake',hp:500},
-    {name:'スコーピオン',file:'scorpion',hp:1000},
-    {name:'サンドワーム',file:'sandworm',hp:6000},
-    {name:'ひのたま',file:'fireboy',hp:100},
-    {name:'マグマボール',file:'magman',hp:100},
-    {name:'ドラゴン',file:'dragon',hp:100},
+    {name:'スコーピオン',file:'scorpion',hp:600},
+    {name:'サンドワーム',file:'sandworm',hp:950},
+
+    {name:'ひのたま',file:'fireboy',hp:1200},
+    {name:'マグマボール',file:'magman',hp:1400},
+    {name:'ドラゴン',file:'dragon',hp:1750},
   ],
   weaponPow:
-  [50,70,90,
-   80,100,120,
-   100,150,200,
-   150,200,250,
-   200,250,300,
-   400,500,600]
+  [20,70,110,
+   40,100,130,
+   60,120,150,
+   70,230,260,
+   80,340,380,
+   90,400,600]
 }
 const enemyMidEncount = 0.4;
 
@@ -44,7 +49,19 @@ var battleController = (function(){
   var user = context.player ? JSON.parse(context.player) : {};
   var voyage = context.voyage ? JSON.parse(context.voyage) : {stage:0};
   var drop = voyage.drop ? JSON.parse(voyage.drop) : {};
-  var progress = voyage.step ? voyage.step*100/dataSet.stage[voyage.stage].step : null;
+
+  var progress;
+  if(voyage.step){
+    if(voyage.step===0)
+      progress = 0;
+    else{
+      progress = (voyage.step*100/dataSet.stage[voyage.stage].step)%100;
+      if(progress === 0)
+        progress = 100;
+    }
+  }else{
+    progress = null;
+  }
   console.log(voyage.enemy);
   var enemy = (voyage.enemy==undefined) ? getNewEnemy():JSON.parse(voyage.enemy);
   
@@ -72,12 +89,13 @@ var battleController = (function(){
 
   return {
     initialize:function(){
-      if(progress<=100){
+      if(progress<=101){
         if(enemy.id<3){
           viewController.msgType("勇者は"+dataSet.enemy[enemy.id].name+"のバイトをしている");
           viewController.hidePlayer();
-        }else
+        }else{
           viewController.msgType(dataSet.enemy[enemy.id].name+"があらわれた！");
+        }
         viewController.showEnemy(enemy.id,enemy.hp);
       }else{//宿屋
         viewController.msgType("勇者は休んでいる...");
