@@ -3,6 +3,7 @@ html,body{
     height: 100%;
 }
 
+
 @font-face {
   font-family: 'dotfont';
   src: url('../font/MPlusFont-JF-DotH10.woff2') format('woff2'),
@@ -12,6 +13,11 @@ html,body{
 
 .hiddenItem{
   display: none;
+}
+
+.textarea{
+  opacity: 1.0;
+
 }
 
 .character{

@@ -5,53 +5,60 @@
   <meta charset="UTF-8">
   <title>Locker RPG Login Page</title>
   <meta name="viewport" content="width=640 user-scalable=no">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="stylesheets/sanitize.css"  rel="stylesheet" type="text/css" />
+    <link href="stylesheets/bootstrap.min.css"  rel="stylesheet" type="text/css" />
   <link href="patternlock-js/patternLock.css"  rel="stylesheet" type="text/css" />
   <link href="stylesheets/main.css"  rel="stylesheet" type="text/css" />
   <link href="stylesheets/treasury.css"  rel="stylesheet" type="text/css" />
 </head>
 <body>
+
   <div class="top">
-    <div class="center-absolute dottext">おたから鑑定所</div>
+    <div class="center-absolute item-str game-frame dottext" id="name">宝物殿</div>
+    <div class="center-absolute icon-frame">
+      <img src="img/character/kajiya.png" id="icon">
+    </div>
+    <textarea id="msg-window" class="center-absolute game-frame textarea msg-area dottext" disabled="true"></textarea>
   </div>
-  <div class="middle" id="item-list">
-
-    <div class="cell">
-      <img src="img/treasure_bag.png"/>
-      <span class="dottext item-name ">鑑定前のお宝</span>
+  
+  <div class="bottom">
+    <div class="stage-box center-relative">
+      <img src="img/treasure/slimeDQ.png" class="shadow" id="tre3">
+      <img src="img/treasure/smallMedal.png" class="shadow" id="tre4">
+      <img src="img/treasure/roto.png" class="shadow" id="tre5">
+    </div>
+    <div class="stage-box center-relative">
+      <img src="img/treasure/masterSword.png" class="shadow" id="tre6">
+      <img src="img/treasure/fairyBin.png" class="shadow" id="tre7">
+      <img src="img/treasure/heartVessel.png" class="shadow" id="tre8">
+      
+    </div>
+    <div class="stage-box center-relative">
+      <img src="img/treasure/posion.png" class="shadow" id="tre9">
+      <img src="img/treasure/mithril.png" class="shadow" id="tre10">
+      <img src="img/treasure/kote.png" class="shadow" id="tre11">
+      
+    </div>
+    <div class="stage-box center-relative">
+      <img src="img/treasure/grandrion.png" class="shadow" id="tre12">
+      <img src="img/treasure/ravosCore.png" class="shadow" id="tre13">
+      <img src="img/treasure/robo.png" class="shadow" id="tre14">
+      
+    </div>
+    <div class="stage-box center-relative">
+      <img src="img/treasure/Mhat.png" class="shadow" id="tre15">
+      <img src="img/treasure/pata.png" class="shadow" id="tre16">
+      <img src="img/treasure/frogCoin.png" class="shadow" id="tre17">
+      
     </div>
 
-    <div class="cell">
-      <img src="img/treasure_bag.png"/>
-      <span class="dottext item-name">鑑定前のお宝</span>
-    </div>
-    <div class="cell">
-      <img src="img/treasure_bag.png"/>
-      <span class="dottext item-name">鑑定前のお宝</span>
-    </div>
-    <div class="cell">
-      <img src="img/treasure_bag.png"/>
-      <span class="dottext item-name">鑑定前のお宝</span>
-    </div>
-    <div class="cell">
-      <img src="img/treasure_bag.png"/>
-      <span class="dottext item-name">鑑定前のお宝</span>
-    </div>
-    <div class="cell">
-      <img src="img/treasure_bag.png"/>
-      <span class="dottext item-name">鑑定前のお宝</span>
-    </div>
-    <div class="cell">
-      <img src="img/treasure_bag.png"/>
-      <span class="dottext item-name">鑑定前のお宝</span>
-    </div>
 
   </div>
-  <div class="bottom flex-center">
-    <div class="square_btn dottext warapper flex-center">
-      <div class="">お宝を鑑定する</div>
-    </div>
-  </div>
+
+  <div class="rate-box game-frame msg-area dottext" id="rate">収集率:0%</div>
+
 </body>
+<script src="scripts/typingWord.js"></script>
+<script src="scripts/cookies.js"></script>
 <script src="scripts/treasury.js"></script>
 </html>

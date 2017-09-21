@@ -21,7 +21,7 @@ body{
   overflow: scroll;
 }
 .middle>.cell{
-  width: 600px;
+  width: 560px;
   height:128px;
   margin-top:4px;
   margin-left: 20px;

@@ -36,9 +36,10 @@
   padding:8px;
   font-size: 28px;
   height:64px;
-  color:#FFF;
+  color:rgba(255,255,255,1.0);
   bottom:0;
   width:90%;
+  opacity:1.0;
 }
 
 .menu-area{

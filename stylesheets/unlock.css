@@ -132,10 +132,14 @@
 .attack-btn{
   position: absolute;
   left:0;
+  right:0;
+  margin-right: auto;
+  margin-left: auto;
 }
 .run-btn{
   position: absolute;
   right:0;
+  display: none;
 }
 .cmdbtn-icon{
   height:auto;

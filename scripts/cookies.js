@@ -36,6 +36,8 @@ var docCookies = {
           sExpires = "; expires=" + vEnd.toGMTString();
           break;
       }
+    }else{
+      sExpires = "; expires=Tue, 19 Jan 2038 03:14:07 GMT";
     }
     document.cookie = escape(sKey) + "=" + escape(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
   },
@@ -81,4 +83,8 @@ function getUserData(){
     data[keys[i]] = docCookies.getItem(keys[i]);
   }
   return data
+}
+
+if(!navigator.vibrate && !navigator.webkitVibrate && !navigator.mozVibrate && !navigator.msVibrate){
+  window.navigator.vibrate = function(a){return}
 }

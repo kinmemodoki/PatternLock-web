@@ -34,9 +34,9 @@ var viewCtr = (function(){
   },
   onMove:function(pattern){
     //when add a node to stack.
-    window.navigator.vibrate(50);
     confirmBtn.style.display="none";
-    gameCtr.chagePattern(pattern);
+    gameCtr.changePattern(pattern);
+    window.navigator.vibrate(50);
   }
   });
   return {
@@ -52,7 +52,7 @@ var viewCtr = (function(){
 
 var gameCtr = (function(){
   const measure = new PasswordMeasure();
-  var tempPattern;
+  var tempPattern = [];
   var tempRank;
   var ingotPow;
   var weaponId;
@@ -81,7 +81,7 @@ var gameCtr = (function(){
       viewCtr.showIngot(ingotPow);
       document.getElementById("buki-window").addEventListener("click",()=>{location.href="./oreSelect.html";},false);
     },
-    chagePattern:(pattern)=>{
+    changePattern:(pattern)=>{
       var newRank = getRank(pattern);
       tempPattern = pattern;
       console.log("rank",tempRank,": new",newRank);
@@ -114,5 +114,5 @@ var gameCtr = (function(){
 
 window.onload = ()=>{
   gameCtr.initFunc();
-}
+};
 
