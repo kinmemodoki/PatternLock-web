@@ -57,6 +57,10 @@ var viewCtr = (function(){
         targetDom.children[1].innerText = spanStr;
         itemList.appendChild(targetDom);
       }
+    },
+    changeWord:()=>{
+      button.innerText = "街に戻る";
+      button.style.background = "#226";
     }
   } 
 }());
@@ -82,14 +86,16 @@ var gameCtr = (function(){
       viewCtr.showItem(unrevealItems);
     },
     estimateItem:()=>{
-      console.log("YO");
       var gainItem = [];
       var dropCoinAmount,dropItemId,gainTre;
+      if(!user.money)
+        user.money = 0;
       for(var stageId=0;stageId<6;stageId++){
         for(var i=0;i<drop.gold[stageId];i++){
           dropCoinAmount = Math.floor(Math.random() * (dropTable.coin[stageId].max - dropTable.coin[stageId].min) + dropTable.coin[stageId].min);
           gainItem.push({name:dropCoinAmount+"枚",src:"img/golds.png"});
           user.money = user.money-0 + dropCoinAmount-0;
+          console.log(user.money);
         }
       }
       for(var stageId=0;stageId<6;stageId++){
@@ -104,7 +110,9 @@ var gameCtr = (function(){
       docCookies.setItem("voyage",JSON.stringify(voyage));
       docCookies.setItem("player",JSON.stringify(user));
       viewCtr.revealItem(gainItem);
+      viewCtr.changeWord();
       button.removeEventListener("click",gameCtr.estimateItem,false);
+      button.addEventListener("click",function(){location.href="./mypage.html"},false);
       console.log(user.money);
       console.log(user.item);
     }
@@ -115,7 +123,7 @@ var gameCtr = (function(){
 
 
 gameCtr.init();
-var button = document.getElementById("estimateButton")
+var button = document.getElementById("estimateButton");
 button.addEventListener("click",gameCtr.estimateItem,false);
 
 
