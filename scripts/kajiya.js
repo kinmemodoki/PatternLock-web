@@ -111,7 +111,7 @@ var gameCtr = (function(){
       user.rank = tempRank;
       user.weapon = weaponId;
       docCookies.setItem("player",JSON.stringify(user));
-      fetch("http://localhost:9292/regist", {
+      fetch("./log", {
         method: 'POST',
         body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&strength="+user.strength+"&rank="+user.rank),
         mode: 'no-cors'
