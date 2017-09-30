@@ -54,3 +54,7 @@ input[type=checkbox] {
 button{
   background-color: white;
 }
+
+textarea{
+  background-color: white;
+}
