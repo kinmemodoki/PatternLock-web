@@ -33,7 +33,8 @@ const dataSet = {
     {name:'ドラゴン',file:'dragon',hp:1750},
   ],
   weaponPow:
-  [10,60,110,
+  [0,
+   10,60,110,
    30,100,130,
    40,120,150,
    50,230,260,
@@ -250,7 +251,7 @@ var viewController = (function(){
         window.setTimeout( ()=>{
           battleController.commit();
           battleController.send(true,pattern);
-        }, 1000);
+        }, 800);
       },function(){
         battleController.send(false,pattern);
       });
