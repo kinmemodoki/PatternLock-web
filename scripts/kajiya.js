@@ -59,9 +59,11 @@ var gameCtr = (function(){
 
   var context = getUserData();
   var user = context.player ? JSON.parse(context.player) : {};
+  var playerId = context.id ? JSON.parse(context.id) : null;
 
-  function getRank(str){
-    str = measure.getStrength(str);
+  function getRank(patt){
+    var str = measure.getStrength(patt);
+    console.log(patt);
     if(str==0)
       return 0;
     else if(str<0.40)
@@ -105,9 +107,21 @@ var gameCtr = (function(){
     },
     setPattern:()=>{
       user.key = tempPattern.join("");
+      user.strength = measure.getStrength(tempPattern);
+      user.rank = tempRank;
       user.weapon = weaponId;
       docCookies.setItem("player",JSON.stringify(user));
-      window.location = "./mypage.html";
+      fetch("http://localhost:9292/regist", {
+        method: 'POST',
+        body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&strength="+user.strength+"&rank="+user.rank),
+        mode: 'no-cors'
+      }).then(function(response,err) {
+        window.location = "./mypage.html";
+      }).catch(function(err){
+        alert("データ収集エラー\n何度も発生する場合，管理者に一報ください @kinmemodoki");
+        gameCtr.cancelConfirm();
+        window.location = "./mypage.html";
+      });
     }
   }
 }());

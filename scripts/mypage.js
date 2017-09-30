@@ -54,6 +54,8 @@ window.onload = function(){
   var voyage = context.voyage ? JSON.parse(context.voyage) : {};
   var drop = context.drop ? JSON.parse(context.drop) : {};
   console.log(context);
+  if(!user.id)
+    location.href = "./description.html"
   if(user.weapon === undefined){
     //パスワード未設定
     console.log("not set password");
@@ -83,5 +85,6 @@ window.onload = function(){
   document.getElementById("toSekisyo").addEventListener("click",()=>{location.href="./select.html";},false);
   document.getElementById("toHoumotsu").addEventListener("click",()=>{location.href="./treasury.html";},false);
   document.getElementById("toUketori").addEventListener("click",()=>{location.href="./reward.html";},false);
+  document.getElementById("toDesc").addEventListener("click",()=>{location.href="./description.html";},false);
 
 }

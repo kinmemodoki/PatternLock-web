@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="robots" content="noindex,nofollow" />
+    <meta charset="UTF-8">
+    <title>説明ページ</title>
+    <meta name="viewport" content="width=640 user-scalable=no">
+    <link href="stylesheets/sanitize.css"  rel="stylesheet" type="text/css" />
+    <link href="stylesheets/bootstrap.min.css"  rel="stylesheet" type="text/css" />
+    <link href="stylesheets/main.css"  rel="stylesheet" type="text/css" />
+    <link href="stylesheets/description.css"  rel="stylesheet" type="text/css" />
+  </head>
+<body>
+  <!--
+  <div class="header">
+    <div class="left">ゲーム説明</div>
+    <div class="right">実験説明</div>
+  </div>
+  -->
+
+  <div class="section">
+    <div class="title dottext">Caution</div>
+    <div class="text game-frame">
+      このゲームで使われるパターンは実験用サーバに送信されます．<br>
+      <span style="color:#D22">個人の携帯端末で使用しているパターンは設定しないでください．</span>
+    </div>
+  </div>
+
+
+  <div class="section">
+    <div class="title dottext">ゲーム説明</div>
+    <div class="text game-frame">
+      <img src="img/sample1.jpg">
+      <div class="catch">パターンロック解除で冒険を進めよう</div>
+      このゲームはあなたがパターンロックを解除するごとにゲームが進行します．
+      パターンロックを表示するとモンスターが出現し，ロックを解除することでプレイヤーがモンスターに攻撃します．
+      モンスターを倒して，ドロップするお金やお宝をゲットし．新しい武器素材を購入したり，各ステージのお宝を集めよう．
+    </div>
+    <div class="text game-frame">
+      <img src="img/sample2.jpg">
+      <div class="catch">「パターンの安全さ」＝「武器の強さ」</div>
+      モンスターを攻撃する武器は，あなたが設定するパターンの安全さに応じて強くなります．
+      また，武器を作るための素材も良いものを使えば使うほど強くなります．
+      あなただけのオリジナルパターンで武器を作り，最強の武器を目指しましょう．
+    </div>
+  </div>
+
+  <div class="title dottext">実験説明</div>
+
+  <div class="section">
+    
+    <div class="text game-frame">
+      <div class="catch">実験内容</div>
+      <ul>
+        <li>1日3回以上，認証(敵への攻撃)を行ってください．</li>
+        <li>ゲームからの通知許可(朝昼晩に認証をお願いする通知を行います)</li>
+        <li>ゲーム開始14日後にアンケート(約30分)に回答してください．</li>
+      </ul>
+      　（ゲーム開始14日後にアンケート用URLがゲーム内で表示されます）
+      <br>
+      <br>
+      <div class="catch">収集されるデータ</div>
+      <ol>
+        <li>設定されたパターン</li>
+        <li>パターンを新しく設定した日時</li>
+        <li>認証した日時(敵を攻撃した日時)</li>
+      </ol>
+        <br>
+      <div class="catch">注意事項</div>
+        <ul>
+          <li>ここで収集されるデータは論文及び，今後の研究で使用されます</li>
+          <li>報酬は基本的にでません．ごめんね．</li>
+          <li>よくわかんないけど諸々の責任は負えません．ごめんね．</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <div id="form">
+      <input type="checkbox" id="chkbox">上記の説明を理解した．</input><br><br>
+      <button onclick="agree()">実験説明を理解した上で同意する</button>
+    </div>
+    <button onclick="back()" id="back">マイページに戻る</button>
+  </div>
+</body>
+  <script src="scripts/cookies.js"></script>
+  <script type="text/javascript">
+    var context = getUserData();
+    var user = context.player ? JSON.parse(context.player) : {};
+
+    if(user.id){
+      document.getElementById("form").style = "display:none;";
+    }else{
+      document.getElementById("back").style = "display:none;";
+    }
+
+    function create_privateid( n ){
+      var CODE_TABLE = "0123456789"
+          + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+          + "abcdefghijklmnopqrstuvwxyz";
+      var r = "";
+      for (var i = 0, k = CODE_TABLE.length; i < n; i++){
+          r += CODE_TABLE.charAt(Math.floor(k * Math.random()));
+      }
+      return r;
+    }
+
+    function agree(){
+      var checked = document.getElementById("chkbox").checked;
+      if(checked){
+        if(!user.id){
+          user.id = create_privateid(24);
+          docCookies.setItem("player",JSON.stringify(user));
+        }
+        back();
+      }else{
+        alert("チェックボックスをチェックして同意してね");
+      }
+    }
+
+    function back(){
+      location.href="./mypage.html" 
+    }
+  </script>
+</html>
