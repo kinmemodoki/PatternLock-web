@@ -63,11 +63,13 @@ var battleController = (function(){
   }else{
     progress = null;
   }
-  console.log(voyage.enemy);
+  console.log("enemy:",voyage.enemy);
   var enemy = (voyage.enemy==undefined) ? getNewEnemy():JSON.parse(voyage.enemy);
   
-  if(enemy.hp <= 0)
+  console.log("progress:",progress);
+  if(enemy.hp <= 0 || progress===null){
     enemy =getNewEnemy();
+  }
 
   if(drop.gold==undefined)
     drop.gold=[0,0,0,0,0,0];
@@ -77,8 +79,7 @@ var battleController = (function(){
   function getNewEnemy(){
     var id,hp;
     var random = Math.random();
-    console.log(progress);
-    if(80<=progress && progress<=100){//ボス
+    if(70<=progress && progress<=100){//ボス
       id=2+voyage.stage*3;
     }else if(random < enemyMidEncount){//ザコ中
       id=1+voyage.stage*3;
@@ -95,17 +96,21 @@ var battleController = (function(){
           viewController.msgType("勇者は"+dataSet.enemy[enemy.id].name+"のバイトをしている");
           viewController.hidePlayer();
         }else{
-          viewController.msgType(dataSet.enemy[enemy.id].name+"があらわれた！");
+          if(progress>=90){
+            viewController.msgType(dataSet.enemy[enemy.id].name+"が逃げそうだ...");
+          }else{
+            viewController.msgType(dataSet.enemy[enemy.id].name+"があらわれた！");
+          }
         }
         viewController.showEnemy(enemy.id,enemy.hp);
-      }else{//宿屋
+      }/*else{//宿屋
         viewController.msgType("勇者は休んでいる...");
         viewController.showRestPlayer();
         viewController.hidePlayer();
         viewController.damegeEnemy = ()=>{};
         viewController.dropItem = ()=>{};
         viewController.hideEnemy = ()=>{};
-      }
+      }*/
       viewController.showWeapon(user.weapon);
       viewController.showProgress(progress);
       viewController.setDrops(drop.gold[voyage.stage],drop.treasure[voyage.stage]);
@@ -119,6 +124,9 @@ var battleController = (function(){
     },
     action:function(){
       voyage.step++;
+      if(voyage.step>dataSet.stage[voyage.stage].step)
+        voyage.step = 0;
+      console.log(voyage.step);
       if(battleStatus==="attack"){
         battleController.attackEnemy();
         viewController.atk();
@@ -286,7 +294,6 @@ var viewController = (function(){
       dayDom.innerHTML = month+"/"+date+"("+day+")";
     },
     setDrops:function(gold,treasure){
-      console.log(treasure);
       goldAmount.innerText="x"+( '00' + gold ).slice( -2 );
       treasureAmount.innerText="x"+( '00' + treasure ).slice( -2 );
     },
@@ -373,9 +380,9 @@ var viewController = (function(){
 
 window.onload = ()=>{
   var step = battleController.getVoyageStep();
-  if(!battleController.isVoyage){
-    window.location.href = "./debug.html";
-  }
+  //if(!battleController.isVoyage){
+    //window.location.href = "./debug.html";
+  //}
   reloadClock();
   battleController.initialize();
 }
