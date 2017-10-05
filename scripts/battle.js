@@ -93,7 +93,7 @@ var battleController = (function(){
     initialize:function(){
       if(progress<=101){
         if(enemy.id<3){
-          viewController.msgType("勇者は"+dataSet.enemy[enemy.id].name+"のバイトをしている");
+          viewController.msgType("勇者は街でぶらついている\nマイページから冒険先を選んで見よう");
           viewController.hidePlayer();
         }else{
           if(progress>=90){
