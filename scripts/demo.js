@@ -25,6 +25,7 @@ function getRank(patt){
     return 3;
 }
 
+
 const pageCtr = (function(){
   var context = getUserData();
   var user = context.player ? JSON.parse(context.player) : {};
@@ -62,7 +63,7 @@ const pageCtr = (function(){
         }).catch(function(err){
           alert("データ収集エラー\n何度も発生する場合，管理者に一報ください @kinmemodoki");
           gameCtr.cancelConfirm();
-          window.location = "./mypage.html";
+          window.location = "https://docs.google.com/forms/d/e/1FAIpQLScoZxGO5nMAkyTgwoC3bG9OqOcxe4wbLlwfYSK_9RAqRwQpHQ/viewform?usp=pp_url&entry.1435948606="+user.id;
         });
 
       }else{
@@ -87,8 +88,12 @@ const viewCtr = (function(){
   nextbtn.addEventListener("click",pageCtr.confirm);
   resetbtn.addEventListener("click",pageCtr.reset);
   console.log(getUrlVars())
-  if(getUrlVars().show==1)
+  if(getUrlVars().show==1){
+    desc.innerText = "アンケートにしたがって\nパターンの強度を確認してね";
     document.getElementById("meter").style.display = "block";
+    nextbtn.style.display = "none";
+    resetbtn.style.display = "none";
+  }
 
   return {
     setNextFunc:()=>{
