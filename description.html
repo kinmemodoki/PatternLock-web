@@ -81,6 +81,7 @@
       実験識別id：<textarea id="text" placeholder="無記入でも可" rows="1" cols="16" maxlength="16"></textarea><br><br>
       <input type="checkbox" id="chkbox">上記の説明を理解した．</input><br><br>
       <button onclick="agree()">上記説明を理解したうえでゲームを始める</button>
+      <button onclick="notAgree()">実験せずにゲームを始める</button>
     </div>
     <button onclick="back()" id="back">マイページに戻る</button>
   </div>
@@ -115,10 +116,16 @@
           user.id = create_privateid(24);
           docCookies.setItem("player",JSON.stringify(user));
         }
-        back();
+      location.href="./demo.html" 
       }else{
         alert("チェックボックスをチェックして同意してね");
       }
+    }
+
+    function notAgree(){
+      user.id = "notTrace";
+      docCookies.setItem("player",JSON.stringify(user));
+      back();
     }
 
     function back(){

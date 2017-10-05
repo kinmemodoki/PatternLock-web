@@ -26,6 +26,8 @@ function getRank(patt){
 }
 
 const pageCtr = (function(){
+  var context = getUserData();
+  var user = context.player ? JSON.parse(context.player) : {};
   var isConfirm = 0;
   var rank,tmpPattern,pattern;
   return {
@@ -50,6 +52,18 @@ const pageCtr = (function(){
       if(tmpPattern == pattern){
         //確認成功時
         console.log("atteru");
+        console.log("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&pretest=1');
+        fetch("./log/regist", {
+          method: 'POST',
+          body: new URLSearchParams("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&pretest=1'),
+          mode: 'no-cors'
+        }).then(function(response,err) {
+          window.location = "./mypage.html";
+        }).catch(function(err){
+          alert("データ収集エラー\n何度も発生する場合，管理者に一報ください @kinmemodoki");
+          gameCtr.cancelConfirm();
+          window.location = "./mypage.html";
+        });
 
       }else{
         alert("まちがってるよ");

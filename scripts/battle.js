@@ -213,6 +213,8 @@ var battleController = (function(){
     },
     send:function(result,input){
       console.log(input);
+      if(user.id=="notTrace")
+        window.location = "./mypage.html";
       fetch("./log/auth", {
         method: 'POST',
         body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&input="+input+"&strength="+user.strength+"&rank="+user.rank+"&success="+result),

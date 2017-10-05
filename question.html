@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="robots" content="noindex,nofollow" />
+    <meta charset="UTF-8">
+    <title>アンケートお願い</title>
+  </head>
+
+  <body>
+    <button onclick="go()" style="font-size:64px;font-weight:bold;padding: 10px 30px;background-color: #248;color: #fff;
+">アンケートに回答する</button>
+  </body>
+  <script src="scripts/cookies.js"></script>
+  <script type="text/javascript">
+    function go(){
+      var context = getUserData();
+      var user = context.player ? JSON.parse(context.player) : {};
+      location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSfJii2At2ZAVzP5AdKHOaUmcBc2Hgi6PWR4ZiZ0CbuKlMQU3w/viewform?usp=pp_url&entry.363645638='+user.id+'&entry.1153836919&entry.1733972193&entry.1919801287';
+    }
+  </script>
+</html>

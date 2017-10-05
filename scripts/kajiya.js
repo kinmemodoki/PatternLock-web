@@ -111,9 +111,11 @@ var gameCtr = (function(){
       user.rank = tempRank;
       user.weapon = weaponId;
       docCookies.setItem("player",JSON.stringify(user));
+      if(user.id=="notTrace")
+        window.location = "./mypage.html";
       fetch("./log/regist", {
         method: 'POST',
-        body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&strength="+user.strength+"&rank="+user.rank),
+        body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&strength="+user.strength+"&rank="+user.rank+'&pretest=0'),
         mode: 'no-cors'
       }).then(function(response,err) {
         window.location = "./mypage.html";
