@@ -83,7 +83,10 @@
       <button onclick="agree()">上記説明を理解したうえでゲームを始める</button>
       <button onclick="notAgree()">実験せずにゲームを始める</button>
     </div>
-    <button onclick="back()" id="back">マイページに戻る</button>
+    <div id="back">
+      <button onclick="back()" id="">マイページに戻る</button>
+      <button onclick="allReset()" id="">データ全消し</button>
+    </div>
   </div>
 </body>
   <script src="scripts/cookies.js"></script>
@@ -126,6 +129,15 @@
       user.id = "notTrace";
       docCookies.setItem("player",JSON.stringify(user));
       back();
+    }
+
+    function allReset(){
+      if(window.confirm('この操作は取り消せません．\n本当にデータを削除しますか？')){
+        docCookies.setItem("player",JSON.stringify({}));
+        docCookies.setItem("vpyage",JSON.stringify({}));
+        location.href="./index.html" 
+
+      }
     }
 
     function back(){
