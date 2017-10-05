@@ -30,3 +30,6 @@ var dataSet = {
    150,200,250,
    200,250,300]
 }
+
+var ankertId = "kinme";
+var url = 'https://docs.google.com/forms/d/e/1FAIpQLSfJii2At2ZAVzP5AdKHOaUmcBc2Hgi6PWR4ZiZ0CbuKlMQU3w/viewform?usp=pp_url&entry.363645638='+id+'&entry.1153836919&entry.1733972193&entry.1919801287';

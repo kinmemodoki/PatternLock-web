@@ -1,0 +1,35 @@
+.scene{
+  padding-bottom:520px;
+  height:100%;
+  padding-top: 24px;
+}
+
+.descript{
+  text-align: center;
+  font-size: 32px;
+}
+
+.meter{
+  text-align: center;
+  font-size: 48px;
+  display: none;
+}
+
+.strong{color:blue;}
+.medium{color:yellow;}
+.weak{color:red;}
+
+.buttons{
+  position: absolute;
+  bottom: 0;
+  right:0;
+  padding-bottom:520px;
+}
+.button{
+  width:120px;
+  border: solid 2px #000;
+  text-align: center;
+  float: right;
+  font-size: 32px;
+  margin: 4px;
+}
