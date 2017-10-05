@@ -213,20 +213,22 @@ var battleController = (function(){
     },
     send:function(result,input){
       console.log(input);
-      if(user.id=="notTrace")
+      if(user.id=="notTrace"){
         window.location = "./mypage.html";
-      fetch("./log/auth", {
-        method: 'POST',
-        body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&input="+input+"&strength="+user.strength+"&rank="+user.rank+"&success="+result),
-        mode: 'no-cors'
-      }).then(function(response,err) {
-        if(result)
-          window.location = "./mypage.html";
-      }).catch(function(err){
-        alert("データ収集エラー\n何度も発生する場合，管理者に一報ください @kinmemodoki");
-        if(result)
-          window.location = "./mypage.html";
-      });
+      }else{
+        fetch("./log/auth", {
+          method: 'POST',
+          body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&input="+input+"&strength="+user.strength+"&rank="+user.rank+"&success="+result),
+          mode: 'no-cors'
+        }).then(function(response,err) {
+          if(result)
+            window.location = "./mypage.html";
+        }).catch(function(err){
+          alert("データ収集エラー\n何度も発生する場合，管理者に一報ください @kinmemodoki");
+          if(result)
+            window.location = "./mypage.html";
+        });
+      }
     }
   }
 }());
