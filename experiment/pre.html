@@ -33,10 +33,13 @@
     </form>
 
     <div class="topic">通知設定</div>
-    iOSは設定できません><
+    LINEbot友達登録 or PUSH通知許可してね！<br>
+    iOSはPUSH通知を設定できません><
     <div class="sample">
       <input type="button" name="edu" id="push">
       <label id="pushBtn" for="push" class="oneline btn" onclick="requestPermission()">PUSH通知を許可</label>
+      <label href="" id="pushBtn" for="line" class="oneline btn" onclick="line()">LINEbot友達登録</label>
+      
     </div>
     希望ID設定
     <div><input type="text" id="text" placeholder="空白でも可"></div>
@@ -59,8 +62,12 @@
 </body>
 <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
 <script type="text/javascript" src="/scripts/cookies.js"></script>
 <script type="text/javascript">
+function line() {
+  window.open('https://line.me/R/ti/p/-fqe4ImbNv', '_blank');
+}
   
 // get Cookie data
 var context = getUserData();  
@@ -70,6 +77,7 @@ var user = context.player ? JSON.parse(context.player) : {};
 var config = {
   apiKey: "AIzaSyDS8ZSgmRIWZ6fEZCIIWiXCG4OjbMlSp1M",
   authDomain: "css-pre-exp.firebaseapp.com",
+  databaseURL: "https://css-pre-exp.firebaseio.com",
   projectId: "css-pre-exp",
   messagingSenderId: "842556271550"
 };
@@ -159,6 +167,9 @@ async function sendData(){
 
     //token取得
     var myToken = await messaging.getToken();
+    firebase.database().ref('push/'+myToken).set({userId: myToken});
+
+    console.log(res);
     if(!myToken){
       if(window.confirm('PUSH通知が許可されてませんが良いですか？\n(iOSは設定できません＞＜)')){
         myToken = "";
@@ -186,7 +197,7 @@ async function sendData(){
       user.group = "b";
       docCookies.setItem("player",JSON.stringify(user));
     }
-    window.location = "redirect.html?status=Desc&term=1"
+    //window.location = "redirect.html?status=Desc&term=1"
   } catch(err){
     alert(err);
   }

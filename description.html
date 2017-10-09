@@ -166,8 +166,9 @@
     }
 
     function allReset(){
-      if(window.confirm('この操作は取り消せません．\n本当にデータを削除しますか？')){
-        docCookies.setItem("player",JSON.stringify({}));
+      if(window.confirm('この操作は取り消せません．\n本当にデータを削除しますか？') && window.confirm('本当に削除しますか？')){
+        var initUser = {id:user.id, group:user.group};
+        docCookies.setItem("player",JSON.stringify(initUser));
         docCookies.setItem("vpyage",JSON.stringify({}));
         location.href="./index.html" 
 
