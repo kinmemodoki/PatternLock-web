@@ -156,7 +156,7 @@ async function sendData(){
       throw new Error("アンケートが選択されてないよ");
     var res = await fetch("/log/user/"+isSpec);
     if(res.status==200){}else{
-      if(window.confirm("サーバ接続失敗．\n実験を記録せずにつづけますか？")){
+      if(!window.confirm("サーバ接続失敗．\n実験を記録せずにつづけますか？")){
         throw new Error("実験グループ取得失敗\nすみません！サーバエラーです...");
       }
     }
@@ -169,7 +169,9 @@ async function sendData(){
 
     //token取得
     var myToken = await messaging.getToken();
-    firebase.database().ref('push/'+myToken).set({userId: myToken});
+    if(myToken){
+      await firebase.database().ref('push/'+myToken).set({userId: myToken});
+    }
 
     console.log(res);
     if(!myToken){
