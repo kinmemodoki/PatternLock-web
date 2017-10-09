@@ -21,7 +21,7 @@
   <div class="section">
     <div class="title dottext">Caution</div>
     <div class="text game-frame">
-      このゲームで使われるパターンは実験用サーバに送信されます．<br>
+      このゲームで使われるパターンは実験用サーバに送信されます．
       <span style="color:#D22">個人の携帯端末で使用しているパターンは設定しないでください．</span>
     </div>
   </div>
@@ -43,25 +43,58 @@
       また，武器を作るための素材も良いものを使えば使うほど強くなります．
       あなただけのオリジナルパターンで武器を作り，最強の武器を目指しましょう．
     </div>
-  </div>
 
-  <div class="title dottext">実験説明</div>
+    <div class="text game-frame">
+      <img src="img/sample3.jpg">
+      <div class="catch">ゲームの流れ</div>
+      まず通常のパターンロックと同じようにロックパターンを設定し武器を作りましょう．
+      次に勇者の冒険先を決めましょう．
+      勇者が冒険に行っていなくてもロック解除はできますが，
+      お宝をゲットしたいなら，冒険先を設定することをおすすめします．
+      冒険先の勇者が戦闘している際にロック解除を行うと勇者が敵に攻撃します．
+      ここで敵を倒すとお宝がゲットできます．
+      ゲットしたお宝は鑑定所で鑑定してもらいましょう．
+      手に入れた金貨で新しい武器素材を買ってより強い武器を作りましょう．
+    </div>
+  </div>
+  <div class="section">
+    <div class="title dottext">Q&A</div>
+    <div class="text game-frame">
+      <div class="catch">パターンを忘れた！</div>
+      鍛冶屋に行くことでパターンの再設定ができます．
+      パターンを再設定することによるデメリットはありません．<br><br>
+
+      <div class="catch">敵が強すぎる！</div>
+      砂漠や火山の冒険先を選んでいませんか？
+      冒険先選択ページでは下にいくほど強い敵が出現するようになっています．
+      まずは平原や森で金貨を集めて，武器を強化してみましょう．<br><br>
+
+      <div class="catch">オーガが消えた...</div>
+      「オーガ」は最初のボス敵です．
+      ボス敵は認証画面の下部分の進行ゲージが赤いときにだけ出現します．
+      最初は倒せないかもしれませんが，
+      ボス敵はレアな報酬を落としやすいので武器を強化して再挑戦してみよう．
+    </div>
+  </div>
 
   <div class="section">
     
     <div class="text game-frame">
+    <div class="title dottext">実験説明</div>
       <div class="catch">実験内容</div>
       <ul>
         <li>1日3回以上，認証(敵への攻撃)を行ってください．</li>
-        <li>ゲームからの通知許可(朝昼晩に認証をお願いする通知を行います)</li>
-        <li>ゲーム開始14日後にアンケート(約30分)に回答してください．</li>
+        <li>ゲームからの通知許可(朝昼晩にリマインド通知を送ります)<br>
+            LINE botのリマインドでも可能</li>
+        <li>ゲーム開始3日後にアンケート(約30分)に回答してください．</li>
       </ul>
-      　（ゲーム開始14日後にアンケート用URLがゲーム内で表示されます）
+      　（ゲーム開始3日後にアンケート用URLのリマインドをします）
       <br>
       <br>
       <div class="catch">収集されるデータ</div>
       <ol>
         <li>設定されたパターン</li>
+        <li>パターンの強度</li>
         <li>パターンを新しく設定した日時</li>
         <li>認証した日時(敵を攻撃した日時)</li>
       </ol>
@@ -69,14 +102,13 @@
       <div class="catch">注意事項</div>
         <ul>
           <li>ここで収集されるデータは論文及び，今後の研究で使用されます</li>
-          <li>報酬は基本的にでません．ごめんね．</li>
-          <li>よくわかんないけど諸々の責任は負えません．ごめんね．</li>
+          <li>報酬はでません．ごめんね．</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <div class="buttons">
+  <div class="buttons" id="btns">
     <div id="form">
       実験識別id：<textarea id="text" placeholder="無記入でも可" rows="1" cols="16" maxlength="16"></textarea><br><br>
       <input type="checkbox" id="chkbox">上記の説明を理解した．</input><br><br>
@@ -84,7 +116,7 @@
       <button onclick="notAgree()">実験せずにゲームを始める</button>
     </div>
     <div id="back">
-      <button onclick="back()" id="">マイページに戻る</button>
+      <button onclick="back()" id="">マイページに戻る</button><br>
       <button onclick="allReset()" id="">データ全消し</button>
     </div>
   </div>
@@ -115,11 +147,13 @@
     function agree(){
       var checked = document.getElementById("chkbox").checked;
       if(checked){
-        if(!user.id){
-          user.id = create_privateid(24);
-          docCookies.setItem("player",JSON.stringify(user));
+        if(confirm("実験データを送信しながらプレイをします．\nよろしいですか？")){
+          if(!user.id){
+            user.id = create_privateid(24);
+            docCookies.setItem("player",JSON.stringify(user));
+          }
+          location.href="./demo.html"
         }
-      location.href="./demo.html" 
       }else{
         alert("チェックボックスをチェックして同意してね");
       }

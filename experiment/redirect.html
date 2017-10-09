@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>redirect</title>
+</head>
+<body>
+  実験ページに移動します
+</body>
+<script type="text/javascript" src="/scripts/cookies.js"></script>
+<script type="text/javascript">
+  //status = "Desc" or "Exp"
+  // Descで実験説明(アンケート後や実験説明後)，
+  // Expで認証実験（毎日の通知 or botで）
+
+  //status = "1" or "2"
+  // 前3日は1，それ以外は2(もしくはnull)
+
+  if(getUrlVars().status==="Desc"){
+    //解説ページ
+    var normal = "/experiment/normal.html"
+    var game = "/experiment/game.html"
+    if(getUrlVars().term=="1"){
+      var a = normal; var b = game;
+    }else{ //term = "2"
+      var a = game; var b = normal;
+    }
+  }else if(getUrlVars().status==="Exp"){
+    //実験ページ
+    var normal = "/demo.html"
+    var game = "/battle.html"
+    if(getUrlVars().term=="1"){
+      var a = normal; var b = game;
+    }else{ //term = "2"
+      var a = game; var b = normal;
+    }
+  }
+  // get Cookie data
+  var context = getUserData();  
+  var user = context.player ? JSON.parse(context.player) : {};
+  console.log(user);
+  if(user.group=="a"){
+    window.location = a;
+  }else if(user.group=="b"){
+    window.location = b;
+  }
+</script>
+</html>

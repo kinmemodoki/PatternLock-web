@@ -48,7 +48,3 @@ function sendToken(currentToken) {
   var tokenElement = document.querySelector('#txt');
   tokenElement.textContent = currentToken;
 }
-
-messaging.onMessage(function(payload) {
-  console.log("Message received. ", payload);
-});

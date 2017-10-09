@@ -22,7 +22,7 @@ body{
   margin-bottom: 12px;
 }
 .text{
-  font-size: 16px;
+  font-size: 20px;
   letter-spacing:0.8pt;
   line-height:1.8em;
   padding:16px;
@@ -53,6 +53,7 @@ input[type=checkbox] {
 
 button{
   background-color: white;
+  margin:10px;
 }
 
 textarea{
