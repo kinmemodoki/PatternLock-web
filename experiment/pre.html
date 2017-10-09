@@ -155,7 +155,7 @@ async function sendData(){
     if(!isSpec)
       throw new Error("アンケートが選択されてないよ");
     var res = await fetch("/log/user/"+isSpec);
-    if(res.status!=200){}else{
+    if(res.status==200){}else{
       if(window.confirm("サーバ接続失敗．\n実験を記録せずにつづけますか？")){
         throw new Error("実験グループ取得失敗\nすみません！サーバエラーです...");
       }
