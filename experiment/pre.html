@@ -142,6 +142,7 @@ function create_privateid( n ){
 
 async function sendData(){
   try{
+    document.getElementById("load-container").style.display = "block";
     //user.id設定
     if(!user.id){
       user.id = create_privateid(24);
@@ -180,10 +181,9 @@ async function sendData(){
     }
 
     //送信処理
-    document.getElementById("load-container").style.display = "block";
     console.log("username="+user.id+"&edu="+education+"&specialist="+specialist+"&group="+group+"&pid="+myToken);
 
-    await fetch("/log/user/", {
+    await fetch("/log/user", {
       method: 'POST',
       body: new URLSearchParams("username="+user.id+"&edu="+user.key+"&specialist="+specialist+"&group="+group+"&pid="+myToken)
     }).then((res,err)=>{
@@ -198,9 +198,10 @@ async function sendData(){
       user.group = "b";
       docCookies.setItem("player",JSON.stringify(user));
     }
-    //window.location = "redirect.html?status=Desc&term=1"
+    window.location = "redirect.html?status=Desc&term=1"
   } catch(err){
     alert(err);
+    document.getElementById("load-container").style.display = "none";
   }
 }
 </script>
