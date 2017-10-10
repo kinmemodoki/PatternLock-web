@@ -159,9 +159,9 @@ async function sendData(){
       return response.text();
     });
     if(!res){
-      if(!window.confirm("サーバ接続失敗．\n実験を記録せずにつづけますか？")){
-        throw new Error("実験グループ取得失敗\nすみません！サーバエラーです...");
-      }
+      //if(!window.confirm("サーバ接続失敗．\n実験を記録せずにつづけますか？")){
+        //throw new Error("実験グループ取得失敗\nすみません！サーバエラーです...");
+      //}
     }
 
     if(res%2==0){

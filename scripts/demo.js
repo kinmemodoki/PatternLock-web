@@ -57,7 +57,8 @@ const pageCtr = (function(){
             body: new URLSearchParams("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&pretest=1'),
             mode: 'no-cors'
           }).then(function(response,err) {
-            window.location = "https://docs.google.com/forms/d/e/1FAIpQLScoZxGO5nMAkyTgwoC3bG9OqOcxe4wbLlwfYSK_9RAqRwQpHQ/viewform?usp=pp_url&entry.1435948606="+user.id;
+            viewCtr.setMsg("ページを閉じても大丈夫です");
+            //window.location = "https://docs.google.com/forms/d/e/1FAIpQLScoZxGO5nMAkyTgwoC3bG9OqOcxe4wbLlwfYSK_9RAqRwQpHQ/viewform?usp=pp_url&entry.1435948606="+user.id;
           }).catch(function(err){
             alert("データ収集エラー\n何度も発生する場合，管理者に一報ください @kinmemodoki");
             gameCtr.cancelConfirm();
