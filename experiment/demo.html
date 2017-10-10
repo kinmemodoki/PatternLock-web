@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="robots" content="noindex,nofollow" />
+    <meta charset="UTF-8">
+    <title>PassMake Page</title>
+    <meta name="viewport" content="width=540 user-scalable=no">
+    <link href="/stylesheets/bootstrap.min.css"  rel="stylesheet" type="text/css" />
+    <link href="/patternlock-js/patternLock.css"  rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/main.css"  rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/demo.css"  rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="scene">
+        <div class="descript" id="desc">端末認証で設定したい<br>パターンを入力してね</div>
+        <div class="meter center-absolute" id="meter">強度：<span id="value">none</span></div>
+        <div class="buttons">
+        <div class="button" id="next">次へ</div>
+        <div class="button" id="reset">クリア</div>
+        <div class="button" id="forget">忘れた</div>
+      </div>
+      </div>
+      <div id="patternContainer" class="center-absolute bottom"></div>
+    </div>
+  </body>
+
+  <script src="/scripts/jquery-3.2.1.slim.min.js"></script>
+  <script src="/scripts/bootstrap.min.js"> </script>
+  <script src="/patternlock-js/patternLock.js"></script>
+  <script src="/scripts/passwordMeasure.js"></script>
+  <script src="/scripts/cookies.js"></script>
+  <script src="/scripts/demo.js"></script>
+</html>
