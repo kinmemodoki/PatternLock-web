@@ -158,12 +158,12 @@ async function sendData(){
     .then(response => {
       return response.text();
     });
-    if(res.status==200){}else{
+    if(!res){
       if(!window.confirm("サーバ接続失敗．\n実験を記録せずにつづけますか？")){
         throw new Error("実験グループ取得失敗\nすみません！サーバエラーです...");
       }
     }
-    
+
     if(res%2==0){
       var group = "a";
     }else{
