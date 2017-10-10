@@ -154,13 +154,16 @@ async function sendData(){
     var specialist = isSpec=="specialist" ? 1 : 0;
     if(!isSpec)
       throw new Error("アンケートが選択されてないよ");
-    var res = await fetch("/log/user/"+isSpec);
+    var res = await fetch("/log/user/"+isSpec)
+    .then(response => {
+      return response.text();
+    });
     if(res.status==200){}else{
       if(!window.confirm("サーバ接続失敗．\n実験を記録せずにつづけますか？")){
         throw new Error("実験グループ取得失敗\nすみません！サーバエラーです...");
       }
     }
-      
+    
     if(res%2==0){
       var group = "a";
     }else{
@@ -173,14 +176,6 @@ async function sendData(){
       await firebase.database().ref('push/'+myToken).set({userId: myToken});
     }
 
-    console.log(res);
-    if(!myToken){
-      if(window.confirm('PUSH通知が許可されてませんが良いですか？\n(iOSは設定できません＞＜)')){
-        myToken = "";
-      }else{
-        throw new Error("送信が中断されました");
-      }
-    }
 
     //送信処理
     console.log("username="+user.id+"&edu="+education+"&specialist="+specialist+"&group="+group+"&pid="+myToken);
