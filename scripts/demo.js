@@ -41,6 +41,7 @@ const pageCtr = (function(){
   var user = context.player ? JSON.parse(context.player) : {};
   var isConfirm = 0;
   var rank,tmpPattern,pattern;
+  console.log(user);
   if(!user.prepattern && getUrlVars().status!="regist"){
     window.location.replace("/demo.html?status=regist")
   }
@@ -52,7 +53,7 @@ const pageCtr = (function(){
           //あってた
           lock.disable();
           viewCtr.setMsg("認証成功！");
-          fetch("./log/auth", {
+          fetch("/log/auth", {
             method: 'POST',
             body: new URLSearchParams("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&pretest=1'),
             mode: 'no-cors'
@@ -62,7 +63,7 @@ const pageCtr = (function(){
           }).catch(function(err){
             alert("データ収集エラー\n何度も発生する場合，管理者に一報ください @kinmemodoki");
             gameCtr.cancelConfirm();
-            location.href = "mypage.html";  
+            //location.href = "mypage.html";  
           });
           
         },function(){
@@ -94,7 +95,7 @@ const pageCtr = (function(){
         docCookies.setItem("player",JSON.stringify(user));
         console.log("atteru");
         console.log("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&pretest=1');
-        fetch("./log/regist", {
+        fetch("/log/regist", {
           method: 'POST',
           body: new URLSearchParams("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&pretest=1'),
           mode: 'no-cors'
