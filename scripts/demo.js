@@ -25,15 +25,50 @@ function getRank(patt){
     return 3;
 }
 
+/*
+?status=regist : 登録フェイズ
+?show=0 : 強度メータ表示しない
+
+regist
+（登録）：（確認）：（送信）
+
+auth
+（確認）自動送信（送信）：（わすれた）->registでリロード
+*/
 
 const pageCtr = (function(){
   var context = getUserData();
   var user = context.player ? JSON.parse(context.player) : {};
   var isConfirm = 0;
   var rank,tmpPattern,pattern;
+  if(!user.prepattern && getUrlVars().status!="regist"){
+    window.location.replace("/demo.html?status=regist")
+  }
   return {
     onDraw:()=>{
       //完了時
+      if(getUrlVars().status=="auth"){
+        lock.checkForPattern(user.prepattern,function(){
+          //あってた
+          lock.disable();
+          viewCtr.setMsg("認証成功！");
+          fetch("./log/auth", {
+            method: 'POST',
+            body: new URLSearchParams("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&pretest=1'),
+            mode: 'no-cors'
+          }).then(function(response,err) {
+            window.location = "https://docs.google.com/forms/d/e/1FAIpQLScoZxGO5nMAkyTgwoC3bG9OqOcxe4wbLlwfYSK_9RAqRwQpHQ/viewform?usp=pp_url&entry.1435948606="+user.id;
+          }).catch(function(err){
+            alert("データ収集エラー\n何度も発生する場合，管理者に一報ください @kinmemodoki");
+            gameCtr.cancelConfirm();
+            location.href = "mypage.html";  
+          });
+          
+        },function(){
+          //まちがってた
+          
+        });
+      }
     },
     onMove:(pattern)=>{
       tmpPattern = pattern.join("");
@@ -47,11 +82,15 @@ const pageCtr = (function(){
       viewCtr.setNextFunc();
       viewCtr.setMsg("もう一度同じパターンを\n入力してね");
     },
+    forget:()=>{
+      window.location.href="/demo.html?status=regist";
+    },
     submit:()=>{
-      console.log("tmpPattern : ",tmpPattern);
       console.log("pattern : ",pattern);
       if(tmpPattern == pattern){
         //確認成功時
+        user.prepattern = tmpPattern;
+        docCookies.setItem("player",JSON.stringify(user));
         console.log("atteru");
         console.log("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&pretest=1');
         fetch("./log/regist", {
@@ -59,12 +98,11 @@ const pageCtr = (function(){
           body: new URLSearchParams("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&pretest=1'),
           mode: 'no-cors'
         }).then(function(response,err) {
-          window.location = "https://docs.google.com/forms/d/e/1FAIpQLScoZxGO5nMAkyTgwoC3bG9OqOcxe4wbLlwfYSK_9RAqRwQpHQ/viewform?usp=pp_url&entry.1435948606="+user.id;
-        }).catch(function(err){
-          alert("データ収集エラー\n何度も発生する場合，管理者に一報ください @kinmemodoki");
-          gameCtr.cancelConfirm();
-          location.href = "mypage.html";  
-        });
+          viewCtr.setMsg("ページを閉じても大丈夫です");
+          lock.disable();
+          pageCtr.reset = function(){};
+          pageCtr.submit = function(){};
+        })
 
       }else{
         alert("まちがってるよ");
@@ -87,12 +125,19 @@ const viewCtr = (function(){
   var resetbtn = document.getElementById("reset");
   nextbtn.addEventListener("click",pageCtr.confirm);
   resetbtn.addEventListener("click",pageCtr.reset);
-  console.log(getUrlVars())
-  if(getUrlVars().show==1){
-    desc.innerText = "アンケートにしたがって\nパターンの強度を確認してね";
-    document.getElementById("meter").style.display = "block";
+  console.log(getUrlVars().status)
+  if(getUrlVars().show=="0"){
+    document.getElementById("meter").style.display = "none";
+  }
+  if(getUrlVars().status=="auth"){
+    desc.innerText = "設定したパターンを入力してね";
+    document.getElementById("meter").style.display = "none";
+    var forget = document.getElementById("forget");
+    forget.addEventListener("click",pageCtr.forget);
     nextbtn.style.display = "none";
     resetbtn.style.display = "none";
+  }else{
+    document.getElementById("forget").style.display = "none";
   }
 
   return {
