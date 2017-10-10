@@ -171,9 +171,13 @@ async function sendData(){
     }
 
     //token取得
-    var myToken = await messaging.getToken();
-    if(myToken){
-      await firebase.database().ref('push/'+myToken).set({userId: myToken});
+    try{
+      var myToken = await messaging.getToken();
+      if(myToken){
+        await firebase.database().ref('push/'+myToken).set({userId: myToken});
+      }
+    }catch(e){
+      console.log(e);
     }
 
 
