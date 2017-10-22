@@ -7,5 +7,5 @@
     "type": "image/png"
   }],
   "start_url": "/battle.html",
-  "display": "standalone",
+  "display": "standalone"
 }
