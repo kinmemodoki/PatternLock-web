@@ -216,7 +216,7 @@ var battleController = (function(){
       if(user.id=="notTrace"){
         window.location = "./mypage.html";
       }else{
-        fetch("./log/auth", {
+        /*fetch("./log/auth", {
           method: 'POST',
           body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&input="+input+"&strength="+user.strength+"&rank="+user.rank+"&success="+result),
           mode: 'no-cors'
@@ -227,7 +227,8 @@ var battleController = (function(){
           alert("データ収集エラー\n何度も発生する場合，管理者に一報ください @kinmemodoki");
           if(result)
             window.location = "./mypage.html";
-        });
+        });*/
+        window.location = "./mypage.html";
       }
     }
   }
@@ -262,10 +263,11 @@ var viewController = (function(){
         lock.disable();
         window.setTimeout( ()=>{
           battleController.commit();
-          battleController.send(true,pattern);
+          //battleController.send(true,pattern);
+          window.location = "./mypage.html";
         }, 800);
       },function(){
-        battleController.send(false,pattern);
+        //battleController.send(false,pattern);
       });
 
     },

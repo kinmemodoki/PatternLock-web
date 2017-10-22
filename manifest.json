@@ -1,12 +1,11 @@
 {
   "name": "PatternLockExp",
-  "short_name": "ExpApp",
+  "short_name": "PatternLockAdventure",
   "icons": [{
-    "src": "/experiment/normal.png",
+    "src": "/favicon.ico",
     "sizes": "144x144",
     "type": "image/png"
   }],
-  "start_url": "/demo.html",
+  "start_url": "/battle.html",
   "display": "standalone",
-  "gcm_sender_id": "103953800507"
 }

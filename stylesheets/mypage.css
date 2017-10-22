@@ -100,3 +100,6 @@ span.text-icon {
   border-radius: 3px;     /* アイコンの角を丸める */
 }
 
+.focused {
+  border:5px solid #f00;
+}

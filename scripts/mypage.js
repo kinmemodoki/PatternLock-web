@@ -44,6 +44,13 @@ var viewController = (function(){
         console.log(stageId)
         stage.style["background-image"] = 'url("../img/stage/'+dataSet.stage[stageId].file+'480.png")';
       }
+    },
+    forcusMenu:(pane)=>{
+      if(pane==1){
+        document.getElementById("toKajiya").classList.add('focused');
+      }else if(pane==2){
+        document.getElementById("toSekisyo").classList.add('focused');
+      }
     }
   }
 }());
@@ -62,6 +69,7 @@ window.onload = function(){
     viewController.disableButton();
     viewController.showOssan();
     viewController.changeBGI(0);
+    viewController.forcusMenu(1);
     viewController.msgType("鍛冶屋で武器を作ってくるんだ");
   }else{
     document.getElementById("toYusha").addEventListener("click",()=>{location.href="./battle.html";},false);
@@ -69,6 +77,8 @@ window.onload = function(){
       //冒険未設定 && パスワード設定後
       console.log("not set voyage : ",voyage.stage);
       viewController.changeBGI(0);
+      viewController.disableButton();
+      viewController.forcusMenu(2);
       viewController.msgType("関所で冒険先を選んでみよう");
     }else{
       //冒険設定後()

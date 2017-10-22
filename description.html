@@ -16,7 +16,6 @@
     <div class="left">ゲーム説明</div>
     <div class="right">実験説明</div>
   </div>
-  -->
 
   <div class="section">
     <div class="title dottext">Caution</div>
@@ -25,6 +24,7 @@
       <span style="color:#D22">個人の携帯端末で使用しているパターンは設定しないでください．</span>
     </div>
   </div>
+  -->
 
 
   <div class="section">
@@ -77,6 +77,7 @@
     </div>
   </div>
 
+  <!--
   <div class="section">
     
     <div class="text game-frame">
@@ -120,6 +121,10 @@
       <button onclick="allReset()" id="">データ全消し</button>
     </div>
   </div>
+-->
+  <div class="buttons" id="btns">
+      <button onclick="notAgree()" id="">マイページに戻る</button>
+    </div>
 </body>
   <script src="scripts/cookies.js"></script>
   <script type="text/javascript">
@@ -171,7 +176,6 @@
         docCookies.setItem("player",JSON.stringify(initUser));
         docCookies.setItem("vpyage",JSON.stringify({}));
         location.href="./index.html" 
-
       }
     }
 

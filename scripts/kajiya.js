@@ -114,6 +114,7 @@ var gameCtr = (function(){
       if(user.id=="notTrace"){
         window.location = "./mypage.html";
       }else{
+        /*
         fetch("./log/regist", {
           method: 'POST',
           body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&strength="+user.strength+"&rank="+user.rank+'&pretest=0'),
@@ -125,6 +126,8 @@ var gameCtr = (function(){
           gameCtr.cancelConfirm();
           window.location = "./mypage.html";
         });
+        */
+        window.location = "./mypage.html";
       }
     }
   }
