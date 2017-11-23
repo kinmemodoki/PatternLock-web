@@ -51,6 +51,9 @@ var viewController = (function(){
       }else if(pane==2){
         document.getElementById("toSekisyo").classList.add('focused');
       }
+    },
+    showMoney:(money)=>{
+      document.getElementById("money").innerText = money;
     }
   }
 }());
@@ -61,6 +64,8 @@ window.onload = function(){
   var voyage = context.voyage ? JSON.parse(context.voyage) : {};
   var drop = context.drop ? JSON.parse(context.drop) : {};
   console.log(context);
+  var myMoney = user.money ? user.money : 0;
+  viewController.showMoney(myMoney);
   if(!user.id)
     location.href = "./description.html"
   if(user.weapon === undefined){

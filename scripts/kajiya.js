@@ -7,7 +7,8 @@ const talk = [
   "この鉱石で武器をつくるのか？",
   "こんな武器じゃ\nモンスターは倒せないぜ",
   "そこそこの強さだな",
-  "かなり強くなったな！\nこの鉱石じゃこれが限界だ"
+  "かなり強くなったな！\nこの鉱石じゃこれが限界だ",
+  "前に設定したパターンを\n入力するんだ"
 ];
 
 var viewCtr = (function(){
@@ -15,7 +16,12 @@ var viewCtr = (function(){
   const confirmBtn = document.getElementById("confirmBtn");
   const confirmYes = document.getElementById("confirmYes");
   const weapon = document.getElementById("weapon");
+  const forgetBtn = document.getElementById("forgetButton");
+  //const strong = document.getElementById("strong");
   const msgCtr = new WordTyping(msgFrame);
+  var confirmFlag = false;
+
+
 
   const lock = new PatternLock("#patternContainer",{
   margin:35,
@@ -23,20 +29,36 @@ var viewCtr = (function(){
   onDraw:function(pattern){
     //finish write pattern.
     //rank = 0;
-    if(pattern.length<5){
-      msgCtr.type("これじゃ短すぎるぞ！",{speed:40});
-      lock.error();
+    if(confirmFlag){
+      if(pattern==gameCtr.getUserPtn()){
+        msgCtr.type("確認できたぞ．\n次はどんなパターンで作るんだ？",{speed:40});
+        lock.reset();
+        confirmFlag = false;
+        forgetBtn.style.display = "none";
+      }else{
+        lock.error();
+        msgCtr.type("設定したパターンが\n違うみたいだな...",{speed:40});
+      };
+
     }else{
-      msgCtr.type("これでいいのか？",{speed:40});
-      tempPattern = pattern;
-      confirmBtn.style.display="block";
+      if(pattern.length<5){
+        msgCtr.type("これじゃ短すぎるぞ！",{speed:40});
+        lock.error();
+      }else{
+        msgCtr.type("これでいいのか？",{speed:40});
+        tempPattern = pattern;
+        confirmBtn.style.display="block";
+      }
     }
   },
   onMove:function(pattern){
     //when add a node to stack.
-    confirmBtn.style.display="none";
-    gameCtr.changePattern(pattern);
-    window.navigator.vibrate(50);
+
+    if(!confirmFlag){
+      confirmBtn.style.display="none";
+      gameCtr.changePattern(pattern);
+      window.navigator.vibrate(50);
+    }
   }
   });
   return {
@@ -45,7 +67,25 @@ var viewCtr = (function(){
     showIngot:(id)=>{weapon.src = "img/ingot/ingot"+id+".png"},
     showWeapon:(id)=>{weapon.src = "img/weapon/weapon"+id+".png"},
     hideConfirm:()=>{confirmBtn.style.display="none";},
-    lockReset:()=>{lock.reset();}
+    lockReset:()=>{lock.reset();},
+    setConfirmFlag:(f)=>{confirmFlag=f;},
+    showForget:(f)=>{
+      if(f)
+        forgetBtn.style.display = "block";
+      else
+        forgetBtn.style.display = "none";
+    },
+    setForgetBtnEvent:()=>{
+      forgetBtn.addEventListener("click",()=>{
+        viewCtr.setConfirmFlag(false);
+        viewCtr.talk("次は忘れるなよ！\n次のパターンを設定しな");
+        viewCtr.showForget(false);
+        gameCtr.setForgetFlg(true);
+      },false);
+    },
+    changeStrongText:(text)=>{
+      //strong.innerText=text;
+    }
   }
 
 }());
@@ -56,6 +96,7 @@ var gameCtr = (function(){
   var tempRank;
   var ingotPow;
   var weaponId;
+  var forgetFlag = false;
 
   var context = getUserData();
   var user = context.player ? JSON.parse(context.player) : {};
@@ -77,12 +118,23 @@ var gameCtr = (function(){
   return {
     initFunc:()=>{
       ingotPow=user.ore||1;
-      console.log(ingotPow);
-
-      viewCtr.talk(talk[0]);
+      if(!user.weapon){
+        viewCtr.setConfirmFlag(false);
+        viewCtr.talk("よぉ，よくきたな\nすきなパターンで武器をつくりな");
+        viewCtr.showForget(false);
+      }else{
+        viewCtr.setConfirmFlag(true);
+        viewCtr.talk(talk[4]);
+        viewCtr.showForget(true);
+        viewCtr.setForgetBtnEvent();
+      }
       viewCtr.showIngot(ingotPow);
       document.getElementById("buki-window").addEventListener("click",()=>{location.href="./oreSelect.html";},false);
     },
+    getUserPtn:()=>{
+      return user.key;
+    },
+    setForgetFlg:(f)=>{forgetFlag = f;},
     changePattern:(pattern)=>{
       var newRank = getRank(pattern);
       tempPattern = pattern;
@@ -91,9 +143,11 @@ var gameCtr = (function(){
         tempRank = newRank;
         if(newRank==0){
           viewCtr.showIngot(ingotPow);
+          viewCtr.changeStrongText("第"+ingotPow+"鉱石");
         }else{
           weaponId = newRank + ingotPow*3 -3;
           viewCtr.showWeapon(weaponId);
+          viewCtr.changeStrongText("newRank");
         }
         viewCtr.talk(talk[newRank]);
       }
@@ -114,20 +168,25 @@ var gameCtr = (function(){
       if(user.id=="notTrace"){
         window.location = "./mypage.html";
       }else{
-        /*
-        fetch("./log/regist", {
+        console.log("isForget:",forgetFlag);
+        
+        fetch("/log/regist", {
           method: 'POST',
-          body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&strength="+user.strength+"&rank="+user.rank+'&pretest=0'),
+          body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&strength="+user.strength+"&rank="+user.rank+'&pretest=0'+'&forget='+forgetFlag),
           mode: 'no-cors'
-        }).then(function(response,err) {
-          window.location = "./mypage.html";
+        }).then(function(response){ 
+          console.log(response)
+          if (!response.ok)
+            throw Error(response.status);
+          else
+            window.location = "./mypage.html";
         }).catch(function(err){
-          alert("データ収集エラー\n何度も発生する場合，管理者に一報ください @kinmemodoki");
+          console.log(err);
+          alert("データ収集エラー("+err+")\n何度も発生する場合，管理者に一報ください @kinmemodoki");
           gameCtr.cancelConfirm();
           window.location = "./mypage.html";
         });
-        */
-        window.location = "./mypage.html";
+        
       }
     }
   }

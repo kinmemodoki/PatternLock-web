@@ -123,7 +123,7 @@
   </div>
 -->
   <div class="buttons" id="btns">
-      <button onclick="notAgree()" id="">マイページに戻る</button>
+      <button onclick="agree()" id="">マイページに戻る</button>
       <button onclick="allReset()" id="">データ全消し</button>
     </div>
 </body>
@@ -151,7 +151,7 @@
     }
 
     function agree(){
-      var checked = document.getElementById("chkbox").checked;
+      var checked = true//document.getElementById("chkbox").checked;
       if(checked){
         if(confirm("実験データを送信しながらプレイをします．\nよろしいですか？")){
           if(!user.id){

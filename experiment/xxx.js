@@ -36,26 +36,6 @@ function fetchToken() {
   alert(currentToken);
 });*/
 
-function requestPermission() {
-  console.log('Requesting permission...');
-  messaging.requestPermission()
-  .then(function() {
-    console.log('Notification permission granted.');
-    fetchToken();
-  })
-  .catch(function(err) {
-    console.log('Unable to get permission to notify.', err);
-  });
-  // [END request_permission]
-}
-
-function updateUI(currentToken) {
-  // Show token in console and UI.
-  var btn = document.getElementById("pushBtn");
-  btn.classList.add('pushed');
-  btn.innerText = "許可されました"
-}
-
 function create_privateid( n ){
   var CODE_TABLE = "0123456789"
       + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
