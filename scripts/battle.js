@@ -212,22 +212,25 @@ var battleController = (function(){
       docCookies.setItem("voyage",JSON.stringify(voyage));
     },
     send:function(result,input){
-      console.log(input);
+      console.log("username="+user.id+"&pattern="+user.key+"&input="+input+"&strength="+user.strength+"&rank="+user.rank+"&success="+result+"&istest=0");
       if(user.id=="notTrace"){
         window.location = "./mypage.html";
       }else{
-        /*fetch("./log/auth", {
+        fetch("./log/auth", {
           method: 'POST',
-          body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&input="+input+"&strength="+user.strength+"&rank="+user.rank+"&success="+result),
+          body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&input="+input+"&strength="+user.strength+"&rank="+user.rank+"&success="+result+"&istest=0"),
           mode: 'no-cors'
         }).then(function(response,err) {
-          if(result)
+          if(response.status != 200)
+            alert("データ収集サーバにアクセスできませんでした\n何度も発生する場合，管理者に一報ください @kinmemodoki");
+          if(result){
             window.location = "./mypage.html";
+          }
         }).catch(function(err){
           alert("データ収集エラー\n何度も発生する場合，管理者に一報ください @kinmemodoki");
           if(result)
             window.location = "./mypage.html";
-        });*/
+        });
         window.location = "./mypage.html";
       }
     }
@@ -263,11 +266,11 @@ var viewController = (function(){
         lock.disable();
         window.setTimeout( ()=>{
           battleController.commit();
-          //battleController.send(true,pattern);
-          window.location = "./mypage.html";
+          battleController.send(1,pattern);
+          //window.location = "./mypage.html";
         }, 800);
       },function(){
-        //battleController.send(false,pattern);
+        battleController.send(0,pattern);
       });
 
     },

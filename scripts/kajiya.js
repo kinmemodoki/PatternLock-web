@@ -172,7 +172,7 @@ var gameCtr = (function(){
         
         fetch("/log/regist", {
           method: 'POST',
-          body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&strength="+user.strength+"&rank="+user.rank+'&pretest=0'+'&forget='+forgetFlag),
+          body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&strength="+user.strength+"&rank="+user.rank+'&istest=0'+'&isforget='+forgetFlag),
           mode: 'no-cors'
         }).then(function(response){ 
           console.log(response)

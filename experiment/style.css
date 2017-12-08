@@ -60,6 +60,9 @@ body{
   line-height: 1;
   transition: .1s;
 }
+.sample label.width{
+  width: 180px;
+}
 .sample label:first-of-type{
   border-radius: 3px 0 0 3px;
 }

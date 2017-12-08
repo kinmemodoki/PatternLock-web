@@ -50,7 +50,11 @@ const pageCtr = (function(){
   var context = getUserData();
   var user = context.player ? JSON.parse(context.player) : {};
   var isConfirm = 0;
+  var isforget = 0;
   var rank,tmpPattern,pattern;
+  if(getUrlVars().forget==1){
+    isforget = 1;
+  }
   if(!user.id){
     user.id = create_privateid(24);
     docCookies.setItem("player",JSON.stringify(user));
@@ -62,6 +66,7 @@ const pageCtr = (function(){
   return {
     onDraw:()=>{
       //完了時
+      console.log("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&istest=1&success=1');
       if(getUrlVars().status=="auth"){
         lock.checkForPattern(user.prepattern,function(){
           //あってた
@@ -69,9 +74,11 @@ const pageCtr = (function(){
           viewCtr.setMsg("認証成功！");
           fetch("/log/auth", {
             method: 'POST',
-            body: new URLSearchParams("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&pretest=1'),
+            body: new URLSearchParams("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&istest=1&success=1'),
             mode: 'no-cors'
           }).then(function(response,err) {
+            if(response.status != 200)
+              alert("データ収集サーバにアクセスできませんでした\n何度も発生する場合，管理者に一報ください @kinmemodoki");
             viewCtr.setMsg("ページを閉じても大丈夫です");
             //window.location = "https://docs.google.com/forms/d/e/1FAIpQLScoZxGO5nMAkyTgwoC3bG9OqOcxe4wbLlwfYSK_9RAqRwQpHQ/viewform?usp=pp_url&entry.1435948606="+user.id;
           }).catch(function(err){
@@ -99,7 +106,7 @@ const pageCtr = (function(){
       viewCtr.setMsg("もう一度同じパターンを\n入力してね");
     },
     forget:()=>{
-      window.location.href="/demo.html?status=regist";
+      window.location.href="/demo.html?status=regist&forget=1";
     },
     submit:()=>{
       console.log("pattern : ",pattern);
@@ -107,13 +114,14 @@ const pageCtr = (function(){
         //確認成功時
         user.prepattern = tmpPattern;
         docCookies.setItem("player",JSON.stringify(user));
-        console.log("atteru");
-        console.log("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&pretest=1');
+        console.log("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&isforget='+isforget+'&istest=1');
         fetch("/log/regist", {
           method: 'POST',
-          body: new URLSearchParams("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&pretest=1'),
+          body: new URLSearchParams("username="+user.id+"&pattern="+tmpPattern+"&strength="+measure.getStrength(tmpPattern)+"&rank="+getRank(tmpPattern)+'&isforget='+isforget+'&istest=1'),
           mode: 'no-cors'
         }).then(function(response,err) {
+          if(response.status != 200)
+            alert("データ収集サーバにアクセスできませんでした\n何度も発生する場合，管理者に一報ください @kinmemodoki");
           viewCtr.setMsg("ページを閉じても大丈夫です");
           lock.disable();
           pageCtr.reset = function(){};

@@ -11,46 +11,74 @@
 <body>
   <div class="title dottext">実験準備</div> 
   <div class="section">
-    <div class="topic">アンケート</div>
-    <div>・職業を教えてください</div>
-    <form class="sample" id="education">
-      <input type="radio" name="edu" id="select1" value="0">
-      <label for="select1" class="oneline">大学生</label>
-      <input type="radio" name="edu" id="select2" value="1">
-      <label for="select2" class="oneline">大学院生</label>
-      <input type="radio" name="edu" id="select3" value="2">
-      <label for="select3">社会人<br>(学部卒)</label>
-      <input type="radio" name="edu" id="select4" value="3">
-      <label for="select4">社会人<br>(院卒以上)</label>
-      <input type="radio" name="edu" id="select5" value="4">
-      <label for="select5" class="oneline">高校生</label>
-    </form>
-    <div>・大学でセキュリティ専攻していますか？</div>
-    <form class="sample" id="isSec">
-      <input type="radio" name="sec" id="select00" value="specialist">
-      <label for="select00" class="oneline">はい</label>
-      <input type="radio" name="sec" id="select01" value="nonspecialist">
-      <label for="select01" class="oneline">いいえ</label>
-    </form>
 
     <div class="topic">通知設定</div>
-    LINEbot友達登録 or PUSH通知許可してね！<br>
-    iOSはPUSH通知を設定できません><
+    LINEbot友達登録してね！<br>
     <div class="sample">
       <input type="button" name="edu" id="push">
-      <label id="pushBtn" for="push" class="oneline btn" onclick="requestPermission()">PUSH通知を許可</label>
       <label href="" id="pushBtn" for="line" class="oneline btn" onclick="line()">LINEbot友達登録</label>
       
     </div>
-    希望ID設定
-    <div><input type="text" id="text" placeholder="空白でも可"></div>
-      
+    <div class="topic">希望ID設定</div>
+    （あなたを特定できる文字列を設定してくれると嬉しいです）
+      <div><input type="text" id="text" size="24" placeholder="匿名希望なら空白でも可"></div>
     </div>
+
+
+    <div class="topic">アンケート</div>
+    
+    <div>・性別</div>
+    <form class="sample" id="sex">
+      <input type="radio" name="sex" id="selecta" value="male">
+      <label for="selecta" class="oneline">男</label>
+      <input type="radio" name="sex" id="selectb" value="female">
+      <label for="selectb" class="oneline">女</label>
+    </form>
+
+    <div>・職業を教えてください</div>
+    <form class="sample" id="education">
+      <input type="radio" name="edu" id="select1" value="大学生">
+      <label for="select1" class="oneline">大学生</label>
+      <input type="radio" name="edu" id="select2" value="大学院生">
+      <label for="select2" class="oneline">大学院生</label>
+
+      <input type="radio" name="edu" id="select3" value="社会人(高卒)">
+      <label for="select3">社会人<br>(高卒)</label>
+
+      <input type="radio" name="edu" id="select4" value="社会人(学部卒)">
+      <label for="select4">社会人<br>(学部卒)</label>
+      <input type="radio" name="edu" id="select5" value="社会人(院卒以上)">
+      <label for="select5">社会人<br>(院卒以上)</label>
+      <input type="radio" name="edu" id="select6" value="高校・高専生">
+      <label for="select6">高校生<br>高専生</label>
+    </form>
+
+    <div>・大学でセキュリティ専攻していますか？</div>
+    <form class="sample" id="isSec">
+      <input type="radio" name="sec" id="select00" value="1">
+      <label for="select00" class="oneline">はい</label>
+      <input type="radio" name="sec" id="select01" value="0">
+      <label for="select01" class="oneline">いいえ</label>
+    </form>
+
+    <div>・一番使用する携帯端末のロック方式を教えて下さい<br>
+      （指紋認証を設定している場合は認証できなかった時用の認証を選択）
+    </div>
+    <form class="sample" id="lock">
+      <input type="radio" name="lock" id="select000" value="PIN">
+      <label for="select000" class="width">暗証番号<br>(4桁or6桁の数字)</label>
+      <input type="radio" name="lock" id="select001" value="pattern">
+      <label for="select001" class="width">パターンロック<br>（9つの点を結ぶやつ）</label>
+      <input type="radio" name="lock" id="select002" value="password">
+      <label for="select002" class="width oneline">パスワード</label>
+      <input type="radio" name="lock" id="select003" value="noLock">
+      <label for="select003" class="width oneline">ロックしていない</label>
+    </form>
 
     <br>
     <br>
     <div class="sample">
-      <input type="button" name="edu">
+      <input type="button">
       <label for="push" class="oneline btn" onclick="sendData()">設定完了</label>
     </div>
 
@@ -61,9 +89,7 @@
     つうしんちゅう...
   </div>
 </body>
-<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
 <script type="text/javascript" src="/scripts/cookies.js"></script>
 <script type="text/javascript">
 function line() {
@@ -76,16 +102,30 @@ var user = context.player ? JSON.parse(context.player) : {};
 
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyDS8ZSgmRIWZ6fEZCIIWiXCG4OjbMlSp1M",
-  authDomain: "css-pre-exp.firebaseapp.com",
-  databaseURL: "https://css-pre-exp.firebaseio.com",
-  projectId: "css-pre-exp",
-  messagingSenderId: "842556271550"
+  apiKey: "AIzaSyA0_uico4K-CdmaoHifDeYE3FVvZtCNjUs",
+  authDomain: "syuron-jikken.firebaseapp.com",
+  databaseURL: "https://syuron-jikken.firebaseio.com",
+  projectId: "syuron-jikken",
+  storageBucket: "syuron-jikken.appspot.com",
+  messagingSenderId: "438160347372"
 };
 firebase.initializeApp(config);
 
-const messaging = firebase.messaging();
-console.log(messaging); 
+function getRadioValue(name){
+  //ラジオボタンオブジェクトを取得する
+  var radios = document.getElementsByName(name);
+  //取得したラジオボタンオブジェクトから選択されたものを探し出す
+  var result;
+  for(var i=0; i<radios.length; i++){
+    if (radios[i].checked) {
+      //選択されたラジオボタンのvalue値を取得する
+      result = radios[i].value;
+      break;
+    }
+  }
+  console.log(result);
+  return result
+}
 
 function create_privateid( n ){
   var CODE_TABLE = "0123456789"
@@ -105,62 +145,36 @@ async function sendData(){
     //user.id設定
     if(!user.id){
       user.id = create_privateid(24);
-    }
-
-    //グループ取得
-    var isSpec = document.getElementById("isSec").sec.value;
-    var education = document.getElementById("education").edu.value;
-    var specialist = isSpec=="specialist" ? 1 : 0;
-    if(!isSpec)
-      throw new Error("アンケートが選択されてないよ");
-    var res = await fetch("/log/user/"+isSpec)
-    .then(response => {
-      return response.text();
-    });
-    if(!res){
-      //if(!window.confirm("サーバ接続失敗．\n実験を記録せずにつづけますか？")){
-        //throw new Error("実験グループ取得失敗\nすみません！サーバエラーです...");
-      //}
-    }
-
-    if(res%2==0){
-      var group = "a";
     }else{
-      var group = "b";
+      if(confirm("すでに実験IDが存在しています．上書きしてもよいですか？\n被験者の方は「OK」を押してください"))
+        user.id = create_privateid(24);
     }
 
-    //token取得
+    //userデータをfirebaseに登録
+    console.log(
+        user.id,
+        getRadioValue("sex"),
+        getRadioValue("edu"),
+        getRadioValue("sec"),
+        getRadioValue("lock")
+    );
+
     try{
-      var myToken = await messaging.getToken();
-      if(myToken){
-        await firebase.database().ref('push/'+myToken).set({userId: myToken});
-      }
+      await firebase.database().ref('userData/'+user.id+'/').set({
+        userId: user.id,
+        sex: getRadioValue("sex"),
+        edu: getRadioValue("edu"),
+        isSec: getRadioValue("sec"),
+        lockType: getRadioValue("lock")
+      });
     }catch(e){
       console.log(e);
+      throw "UnAccessDBException"
     }
-
-
-    //送信処理
-    console.log("username="+user.id+"&edu="+education+"&specialist="+specialist+"&group="+group+"&pid="+myToken);
-
-    await fetch("/log/user", {
-      method: 'POST',
-      body: new URLSearchParams("username="+user.id+"&edu="+user.key+"&specialist="+specialist+"&group="+group+"&pid="+myToken)
-    }).then((res,err)=>{
-      console.log(res.status);
-    });
-
-    //ページ遷移
-    if(group=="a"){
-      user.group = "a";
-      docCookies.setItem("player",JSON.stringify(user));
-    }else if(group=="b"){
-      user.group = "b";
-      docCookies.setItem("player",JSON.stringify(user));
-    }
+    docCookies.setItem("player", JSON.stringify(user),null,"/");
     window.location = "redirect.html?status=Desc&term=1"
   } catch(err){
-    alert(err);
+    console.log(err);
     document.getElementById("load-container").style.display = "none";
   }
 }
