@@ -226,12 +226,9 @@ var battleController = (function(){
           if(result){
             window.location = "./mypage.html";
           }
-        }).catch(function(err){
-          alert("データ収集エラー\n何度も発生する場合，管理者に一報ください @kinmemodoki");
-          if(result)
-            window.location = "./mypage.html";
-        });
-        window.location = "./mypage.html";
+        })
+        if(result)
+          window.location = "./mypage.html";
       }
     }
   }
