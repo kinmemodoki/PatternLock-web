@@ -21,28 +21,24 @@
     var normal = "/experiment/normal.html"
     var game = "/experiment/game.html"
     if(getUrlVars().term=="1"){
-      var a = normal; var b = game;
+      var target = normal;
     }else{ //term = "2"
-      var a = game; var b = normal;
+      var target = game;
     }
   }else if(getUrlVars().status==="Exp"){
     //実験ページ
     var normal = "/demo.html?status=auth"
     var game = "/battle.html"
     if(getUrlVars().term=="1"){
-      var a = normal; var b = game;
+      var target = normal;
     }else{ //term = "2"
-      var a = game; var b = normal;
+      var target = game;
     }
   }
   // get Cookie data
   var context = getUserData();  
   var user = context.player ? JSON.parse(context.player) : {};
   console.log(user);
-  if(user.group=="a"){
-    window.location = a;
-  }else if(user.group=="b"){
-    window.location = b;
-  }
+  window.location = target;
 </script>
 </html>
