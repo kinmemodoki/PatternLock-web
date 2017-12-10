@@ -51,6 +51,20 @@ var battleController = (function(){
   var voyage = context.voyage ? JSON.parse(context.voyage) : {stage:0};
   var drop = voyage.drop ? JSON.parse(voyage.drop) : {};
 
+  if(!user.id){
+    if(confirm("idが設定されていないブラウザを検知しました．\nはじめの実験説明にアクセスしたブラウザでアクセスしてください．\nこの実験URLをクリップボードにコピーします．")){
+      var temp = document.createElement('div');
+      temp.appendChild(document.createElement('pre')).textContent = "https://css.kinmemodoki.net/demo.html?status=auth";
+      var s = temp.style;
+      s.position = 'fixed';
+      s.left = '-100%';
+      document.body.appendChild(temp);
+      document.getSelection().selectAllChildren(temp);
+      var result = document.execCommand('copy');
+      document.body.removeChild(temp);
+    }
+  }
+
   var progress;
   if(voyage.step){
     if(voyage.step===0)

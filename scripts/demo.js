@@ -46,6 +46,11 @@ function create_privateid( n ){
       return r;
     }
 
+function execCopy(string){
+  // true なら実行できている falseなら失敗か対応していないか
+  return result;
+}
+
 const pageCtr = (function(){
   var context = getUserData();
   var user = context.player ? JSON.parse(context.player) : {};
@@ -55,13 +60,23 @@ const pageCtr = (function(){
   if(getUrlVars().forget==1){
     isforget = 1;
   }
-  if(!user.id){
+  /*if(!user.id){
     user.id = create_privateid(24);
     docCookies.setItem("player",JSON.stringify(user));
-  }
+  }*/
   console.log(user);
-  if(!user.prepattern && getUrlVars().status!="regist"){
-    window.location.replace("/demo.html?status=regist")
+  if(!user.id){
+    if(confirm("idが設定されていないブラウザを検知しました．\nはじめの実験説明にアクセスしたブラウザでアクセスしてください．\nこの実験URLをクリップボードにコピーします．")){
+      var temp = document.createElement('div');
+      temp.appendChild(document.createElement('pre')).textContent = "https://css.kinmemodoki.net/demo.html?status=auth";
+      var s = temp.style;
+      s.position = 'fixed';
+      s.left = '-100%';
+      document.body.appendChild(temp);
+      document.getSelection().selectAllChildren(temp);
+      var result = document.execCommand('copy');
+      document.body.removeChild(temp);
+    }
   }
   return {
     onDraw:()=>{
