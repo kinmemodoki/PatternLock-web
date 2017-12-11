@@ -17,7 +17,10 @@
     function go(){
       var context = getUserData();
       var user = context.player ? JSON.parse(context.player) : {};
-      if(vals["term"]==2){
+
+      if(vals["term"]==1){
+        location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSfmd_MnVQaxahcPbzMVCnLPrH2WU0F5krAUvEDnA_JlYnNRrw/viewform?usp=pp_url&entry.445937214='+user.id;
+      }else if(vals["term"]==2){
         location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdv5HDVcUJ7BZT3wLX-0JL7aEhVK0FE4-VqJo9kVIqF81EZig/viewform?usp=pp_url&entry.1344170357='+user.id;
       }else if(vals["term"]==3){
         location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdfUOwZwXOwHkoxRRIZIzA9VlqB6yleUiD8xMiBr_HmxzKPdg/viewform?usp=pp_url&entry.1609768912='+user.id;
