@@ -76,6 +76,7 @@
       <label for="select003" class="width oneline">ロックしていない</label>
     </form>
 
+    <input type="checkbox" id="botfriend"> LINEbotの友達登録をした！
     <br>
     <br>
     <div class="sample">
@@ -143,6 +144,11 @@ function create_privateid( n ){
 async function sendData(){
   try{
     document.getElementById("load-container").style.display = "block";
+
+    if(!document.getElementById("botfriend").checked){
+      alert("LINEbotの友達登録をしましたか？\n一番下のチェックボックスにチェックをしてね．");
+      throw "UnAccessDBException"
+    }
     //user.id設定
     if(!user.id){
       user.id = create_privateid(24);
