@@ -131,12 +131,13 @@
   <script type="text/javascript">
     var context = getUserData();
     var user = context.player ? JSON.parse(context.player) : {};
-
+    /*
     if(user.id){
       document.getElementById("form").style = "display:none;";
     }else{
       document.getElementById("back").style = "display:none;";
     }
+    */
 
     function create_privateid( n ){
       var CODE_TABLE = "0123456789"
@@ -146,22 +147,17 @@
       for (var i = 0, k = CODE_TABLE.length; i < n; i++){
           r += CODE_TABLE.charAt(Math.floor(k * Math.random()));
       }
-      r = document.getElementById("text").value + r;
+      //r = document.getElementById("text").value + r;
       return r;
     }
 
     function agree(){
-      var checked = true//document.getElementById("chkbox").checked;
-      if(checked){
-        if(confirm("実験データを送信しながらプレイをします．\nよろしいですか？")){
-          if(!user.id){
-            user.id = create_privateid(24);
-            docCookies.setItem("player",JSON.stringify(user));
-          }
-          location.href="./index.html"
+      if(confirm("実験データを送信しながらプレイをします．\nよろしいですか？")){
+        if(!user.id){
+          user.id = create_privateid(24);
+          docCookies.setItem("player",JSON.stringify(user));
         }
-      }else{
-        alert("チェックボックスをチェックして同意してね");
+        window.location="./mypage.html"
       }
     }
 

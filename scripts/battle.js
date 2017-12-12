@@ -69,6 +69,11 @@ var battleController = (function(){
         return result;   }
   }
 
+  if(!user.key){
+    if(confirm("パターンがまだ登録できてないみたいです\nマイページから登録してください"))
+      window.location = "./mypage.html";
+  }
+
   var progress;
   if(voyage.step){
     if(voyage.step===0)
