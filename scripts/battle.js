@@ -276,6 +276,7 @@ var viewController = (function(){
   var goldAmount = document.getElementById("goldAmount");
   var treasureAmount = document.getElementById("treasureAmount");
   var progressMarker = document.getElementById("progressMarker");
+  var forgetButton = document.getElementById("forgetButton");
   var msgCtr = new WordTyping(textWindow);
   var lock = new PatternLock("#patternContainer",{
     margin:35,
@@ -306,6 +307,9 @@ var viewController = (function(){
   //preload HTML data
   var stageId = battleController.getStage();
   frontScreen.style.backgroundImage = 'url("../img/stage/'+dataSet.stage[stageId]["file"]+'480.png")';
+  forgetButton.addEventListener('click',function(evrnt){
+    window.location = "./mypage.html"
+  });
   if(stageId==2){//forest
     dayDom.style.color = '#ddd';
     clockDom.style.color = '#ddd';
