@@ -120,6 +120,7 @@ const pageCtr = (function(){
         }).then(function(response,err) {
           if(response.status != 200)
             alert("データ収集サーバにアクセスできませんでした\n何度も発生する場合，管理者に一報ください @kinmemodoki");
+          alert("これで実験はすべて終了です！\n長い間どうもありがとうございました！\n服部夢二");
           viewCtr.setMsg("ページを閉じても大丈夫です");
           lock.disable();
           pageCtr.reset = function(){};
