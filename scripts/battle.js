@@ -234,23 +234,12 @@ var battleController = (function(){
       voyage.drop = JSON.stringify(drop);
       docCookies.setItem("voyage",JSON.stringify(voyage));
     },
-    send:function(result,input){
+    send:function(isAuthSuccess,input){
       console.log("username="+user.id+"&pattern="+user.key+"&input="+input+"&strength="+user.strength+"&rank="+user.rank+"&success="+result+"&istest=0");
       if(user.id=="notTrace"){
         window.location = "./mypage.html";
       }else{
-        fetch("./log/auth", {
-          method: 'POST',
-          body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&input="+input+"&strength="+user.strength+"&rank="+user.rank+"&success="+result+"&istest=0"),
-          mode: 'no-cors'
-        }).then(function(response,err) {
-          if(response.status != 200)
-            alert("データ収集サーバにアクセスできませんでした\n何度も発生する場合，管理者に一報ください @kinmemodoki");
-          if(result){
-            window.location = "./mypage.html";
-          }
-        })
-        if(result)
+        if(isAuthSuccess)
           window.location = "./mypage.html";
       }
     }

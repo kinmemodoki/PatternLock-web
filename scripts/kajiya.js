@@ -165,29 +165,7 @@ var gameCtr = (function(){
       user.rank = tempRank;
       user.weapon = weaponId;
       docCookies.setItem("player",JSON.stringify(user));
-      if(user.id=="notTrace"){
-        window.location = "./mypage.html";
-      }else{
-        console.log("isForget:",forgetFlag);
-        
-        fetch("/log/regist", {
-          method: 'POST',
-          body: new URLSearchParams("username="+user.id+"&pattern="+user.key+"&strength="+user.strength+"&rank="+user.rank+'&istest=0'+'&isforget='+forgetFlag),
-          mode: 'no-cors'
-        }).then(function(response){ 
-          console.log(response)
-          if (!response.ok)
-            throw Error(response.status);
-          else
-            window.location = "./mypage.html";
-        }).catch(function(err){
-          console.log(err);
-          alert("データ収集エラー("+err+")\n何度も発生する場合，管理者に一報ください @kinmemodoki");
-          gameCtr.cancelConfirm();
-          window.location = "./mypage.html";
-        });
-        
-      }
+      window.location = "./mypage.html";
     }
   }
 }());
