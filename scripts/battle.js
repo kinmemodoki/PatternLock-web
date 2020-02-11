@@ -306,7 +306,7 @@ var viewController = (function(){
 
   //preload HTML data
   var stageId = battleController.getStage();
-  frontScreen.style.backgroundImage = 'url("../img/stage/'+dataSet.stage[stageId]["file"]+'480.png")';
+  frontScreen.style.backgroundImage = 'url("./img/stage/'+dataSet.stage[stageId]["file"]+'480.png")';
   forgetButton.addEventListener('click',function(){
     window.location = "./mypage.html"
   });

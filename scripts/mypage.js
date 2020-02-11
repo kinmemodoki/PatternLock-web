@@ -42,7 +42,7 @@ var viewController = (function(){
     changeBGI:function(stageId){
       if(stageId != undefined){
         console.log(stageId)
-        stage.style["background-image"] = 'url("../img/stage/'+dataSet.stage[stageId].file+'480.png")';
+        stage.style["background-image"] = 'url("./img/stage/'+dataSet.stage[stageId].file+'480.png")';
       }
     },
     forcusMenu:(pane)=>{
